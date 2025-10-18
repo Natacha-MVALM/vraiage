@@ -2,6 +2,9 @@
 
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
+import ContactModal from '@/components/ContactModal';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const VraiAge = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -18,6 +21,8 @@ const VraiAge = () => {
   const [weightUnit, setWeightUnit] = useState('kg');
   const [showAgeError, setShowAgeError] = useState(false);
   const [showLifeExpectancyInfo, setShowLifeExpectancyInfo] = useState(false);
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   // Messages de chargement
   const loadingMessages: Record<string, string[]> = {
@@ -63,7 +68,7 @@ const VraiAge = () => {
 
   // Données races chats avec espérance de vie
   const catBreeds = [
-    { value: 'mixed', name: 'Croisé (gouttière)', lifespan: 15 },
+    { value: 'mixed', name: 'Autre race ou croisé (domestique, gouttière)', lifespan: 15 },
     { value: 'birman', name: 'Birman', lifespan: 16.1 },
     { value: 'burmese', name: 'Burmese', lifespan: 14.3 },
     { value: 'siamese', name: 'Siamois', lifespan: 14.2 },
@@ -75,13 +80,12 @@ const VraiAge = () => {
     { value: 'bengal', name: 'Bengal', lifespan: 14 },
     { value: 'sphynx', name: 'Sphynx', lifespan: 7 },
     { value: 'russian-blue', name: 'Bleu Russe', lifespan: 16 },
-    { value: 'scottish-fold', name: 'Scottish Fold', lifespan: 13 },
-    { value: 'other', name: 'Autre race', lifespan: 14 }
+    { value: 'scottish-fold', name: 'Scottish Fold', lifespan: 13 }
   ];
 
   // Données races chiens avec espérance de vie
   const dogBreeds = [
-    { value: 'mixed', name: 'Croisé', lifespan: 12.71, size: 'medium' },
+    { value: 'mixed', name: 'Croisé/Autre race', lifespan: 12.71, size: 'medium' },
     { value: 'teckel', name: 'Teckel', lifespan: 15.2, size: 'small' },
     { value: 'chihuahua', name: 'Chihuahua', lifespan: 15.01, size: 'small' },
     { value: 'shih-tzu', name: 'Shih Tzu', lifespan: 15.08, size: 'small' },
@@ -98,8 +102,7 @@ const VraiAge = () => {
     { value: 'boxer', name: 'Boxer', lifespan: 10, size: 'large' },
     { value: 'dogue-allemand', name: 'Dogue Allemand', lifespan: 9.63, size: 'giant' },
     { value: 'saint-bernard', name: 'Saint-Bernard', lifespan: 9, size: 'giant' },
-    { value: 'dogue-bordeaux', name: 'Dogue de Bordeaux', lifespan: 5.5, size: 'giant' },
-    { value: 'other', name: 'Autre race', lifespan: 12, size: 'medium' }
+    { value: 'dogue-bordeaux', name: 'Dogue de Bordeaux', lifespan: 5.5, size: 'giant' }
   ];
 
   // Intervalles de poids pour chiens
@@ -144,6 +147,32 @@ const VraiAge = () => {
       label: 'Obèse',
       description: 'Côtes non palpables, abdomen distendu',
       emoji: '🔴'
+    }
+  ];
+
+  // Types de museau (chiens uniquement)
+  const muzzleTypes = [
+    {
+      value: 'dolichocephalic',
+      label: 'Dolichocéphale',
+      description: 'Museau long et fin, plus long que le crâne',
+      examples: 'Lévrier, Colley, Berger Allemand',
+      multiplier: 1.05
+    },
+    {
+      value: 'mesocephalic',
+      label: 'Mésocéphale (Standard)',
+      description: 'Proportions équilibrées - crâne et museau de longueur à peu près égale',
+      examples: 'Labrador, Beagle, Golden Retriever',
+      multiplier: 1.00,
+      isDefault: true
+    },
+    {
+      value: 'brachycephalic',
+      label: 'Brachycéphale',
+      description: 'Museau court et écrasé, face aplatie',
+      examples: 'Bouledogue, Carlin, Boxer',
+      multiplier: 0.85
     }
   ];
 
@@ -289,11 +318,13 @@ const VraiAge = () => {
 
     let humanAge = age > 0 ? 16 * Math.log(age) + 31 : 0;
 
+    // Petits chiens vivent plus longtemps → vieillissent plus lentement (multiplicateur < 1)
+    // Grands chiens vivent moins longtemps → vieillissent plus vite (multiplicateur > 1)
     const sizeMultipliers: Record<string, number> = {
-      'small': 1.2,
-      'medium': 1.0,
-      'large': 0.85,
-      'giant': 0.75
+      'small': 0.83,    // Vieillissent 17% plus lentement
+      'medium': 1.0,    // Référence
+      'large': 1.18,    // Vieillissent 18% plus vite
+      'giant': 1.33     // Vieillissent 33% plus vite
     };
 
     humanAge = humanAge * sizeMultipliers[sizeCategory];
@@ -330,6 +361,13 @@ const VraiAge = () => {
       lifeExpectancy += 0.5;
     }
 
+    // Appliquer le coefficient de type de museau
+    const muzzleType = formData.dogMuzzle || 'mesocephalic';
+    const muzzleData = muzzleTypes.find(m => m.value === muzzleType);
+    if (muzzleData) {
+      lifeExpectancy = lifeExpectancy * muzzleData.multiplier;
+    }
+
     lifeExpectancy = Math.round(lifeExpectancy * 10) / 10;
 
     const lifePercentage = Math.min(100, Math.round((age / lifeExpectancy) * 100));
@@ -362,64 +400,60 @@ const VraiAge = () => {
   };
 
   const validateForm = () => {
+    const errors: string[] = [];
+
     if (currentPet === 'cat') {
       if (!formData.catYears && formData.catYears !== 0) {
-        alert('⚠️ Veuillez indiquer l\'âge de votre chat');
-        return false;
+        errors.push('Veuillez indiquer l\'âge de votre chat');
       }
       if (!formData.catBreed) {
-        alert('⚠️ Veuillez sélectionner une race');
-        return false;
+        errors.push('Veuillez sélectionner une race');
       }
       if (!formData.catSex) {
-        alert('⚠️ Veuillez indiquer le sexe de votre chat');
-        return false;
+        errors.push('Veuillez indiquer le sexe de votre chat');
       }
       if (!formData.catNeutered) {
-        alert('⚠️ Veuillez indiquer si votre chat est stérilisé');
-        return false;
+        errors.push('Veuillez indiquer si votre chat est stérilisé');
       }
       if (!formData.catLifestyle) {
-        alert('⚠️ Veuillez sélectionner le mode de vie');
-        return false;
+        errors.push('Veuillez sélectionner le mode de vie');
       }
       if (!formData.catBody) {
-        alert('⚠️ Veuillez sélectionner l\'état corporel');
-        return false;
+        errors.push('Veuillez sélectionner l\'état corporel');
       }
     } else {
       if (!formData.dogYears && formData.dogYears !== 0) {
-        alert('⚠️ Veuillez indiquer l\'âge de votre chien');
-        return false;
+        errors.push('Veuillez indiquer l\'âge de votre chien');
       }
       if (!formData.dogBreed) {
-        alert('⚠️ Veuillez sélectionner une race');
-        return false;
+        errors.push('Veuillez sélectionner une race');
+      }
+      if (!formData.dogMuzzle) {
+        errors.push('Veuillez sélectionner la forme du crâne et museau');
       }
       if (!formData.dogWeight && !formData.dogWeightRange) {
-        alert('⚠️ Veuillez indiquer le poids de votre chien');
-        return false;
+        errors.push('Veuillez indiquer le poids de votre chien');
       }
       if (!formData.dogSex) {
-        alert('⚠️ Veuillez indiquer le sexe de votre chien');
-        return false;
+        errors.push('Veuillez indiquer le sexe de votre chien');
       }
       if (!formData.dogNeutered) {
-        alert('⚠️ Veuillez indiquer si votre chien est stérilisé');
-        return false;
+        errors.push('Veuillez indiquer si votre chien est stérilisé');
       }
       if (!formData.dogBody) {
-        alert('⚠️ Veuillez sélectionner l\'état corporel');
-        return false;
+        errors.push('Veuillez sélectionner l\'état corporel');
       }
     }
-    return true;
+
+    setValidationErrors(errors);
+    return errors.length === 0;
   };
 
   const handleCalculate = () => {
     if (!validateForm()) return;
     if (!validateAge()) return;
 
+    setValidationErrors([]);
     setCurrentPage('loading');
     setShowDelayedContent(false);
 
@@ -471,11 +505,9 @@ const VraiAge = () => {
       case 'facebook':
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`, '_blank');
         break;
-      case 'twitter':
-        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text + ' #VraiAge')}&url=${encodeURIComponent(url)}`, '_blank');
-        break;
-      case 'whatsapp':
-        window.open(`https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`, '_blank');
+      case 'instagram':
+        navigator.clipboard.writeText(text + ' ' + url);
+        alert('📋 Texte copié ! Collez-le dans votre story ou post Instagram.');
         break;
       case 'copy':
         navigator.clipboard.writeText(url);
@@ -554,22 +586,139 @@ const VraiAge = () => {
               <p className="text-gray-600">Calcul personnalisé basé sur les données scientifiques actuelles</p>
             </div>
 
+            <style>{`
+              @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+              }
+              @keyframes wiggle {
+                0%, 100% { transform: rotate(0deg); }
+                25% { transform: rotate(-5deg); }
+                75% { transform: rotate(5deg); }
+              }
+            `}</style>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <button
                 onClick={() => {setCurrentPet('cat'); setCurrentPage('catForm');}}
-                className="p-8 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl hover:scale-105 transition-transform border-2 border-transparent hover:border-purple-400"
+                className="group p-12 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-purple-400 hover:shadow-2xl"
               >
-                <div className="text-6xl mb-4">🐱</div>
-                <div className="text-xl font-semibold">Chat</div>
+                <div className="text-8xl mb-6 group-hover:scale-110 transition-transform duration-300" style={{ animation: 'float 3s ease-in-out infinite' }}>
+                  😺
+                </div>
+                <div className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Chat</div>
+                <div className="text-sm text-gray-600 mt-2">Calculer l'âge de mon chat</div>
               </button>
 
               <button
-                onClick={() => {setCurrentPet('dog'); setCurrentPage('dogForm');}}
-                className="p-8 bg-gradient-to-br from-blue-50 to-orange-50 rounded-xl hover:scale-105 transition-transform border-2 border-transparent hover:border-orange-400"
+                onClick={() => {
+                  setCurrentPet('dog');
+                  setCurrentPage('dogForm');
+                  if (!formData.dogMuzzle) {
+                    setFormData({...formData, dogMuzzle: 'mesocephalic'});
+                  }
+                }}
+                className="group p-12 bg-gradient-to-br from-blue-50 to-orange-50 rounded-xl hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-orange-400 hover:shadow-2xl"
               >
-                <div className="text-6xl mb-4">🐕</div>
-                <div className="text-xl font-semibold">Chien</div>
+                <div className="text-8xl mb-6 group-hover:scale-110 transition-transform duration-300" style={{ animation: 'wiggle 2s ease-in-out infinite' }}>
+                  🐶
+                </div>
+                <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-orange-600 bg-clip-text text-transparent">Chien</div>
+                <div className="text-sm text-gray-600 mt-2">Calculer l'âge de mon chien</div>
               </button>
+            </div>
+
+            {/* Section À propos de moi */}
+            <div className="mt-12 bg-white/80 backdrop-blur rounded-xl p-8 border border-white/50 shadow-lg">
+              <div className="flex items-start gap-6">
+                <div className="flex-shrink-0">
+                  <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-purple-200 shadow-lg">
+                    <Image
+                      src="/natacha-barrette.jpg"
+                      alt="Dr. Natacha Barrette"
+                      width={128}
+                      height={128}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-2xl font-bold text-gray-800 mb-3">
+                    À propos de moi
+                  </h2>
+                  <p className="text-gray-700 mb-3">
+                    Je suis médecin vétérinaire depuis plus de 30 ans et j'ai accompagné des centaines de familles confrontées au vieillissement de leur compagnon. Au fil des années, j'ai constaté un manque flagrant d'outils simples et fiables pour comprendre l'âge réel d'un animal et mieux anticiper les enjeux de fin de vie.
+                  </p>
+                  <p className="text-gray-700 mb-3">
+                    Installée à Québec, accompagnée de ma fidèle complice Babette, j'ai créé VraiÂge et deux gardiens d'animaux à repère clair, accessible et fondé sur la science.
+                  </p>
+                  <p className="text-gray-700 mb-3">
+                    Parce que nos compagnons nous aiment sans condition, ils méritent qu'on prenne des décisions éclairées - au bon moment.
+                  </p>
+                  <p className="text-sm text-gray-600 italic">
+                    Dre Natacha Barrette, médecin vétérinaire<br />
+                    Créatrice de VraiÂge • Fondatrice de Mon amie Nala et de l'Écoute de Nala
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Section À propos de VraiÂge */}
+            <div className="mt-8 bg-white/80 backdrop-blur rounded-xl p-8 border border-white/50 shadow-lg">
+              <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                🐾 À propos de VraiÂge
+              </h2>
+
+              <div className="space-y-4 text-gray-700">
+                <div>
+                  <p className="font-semibold mb-2">Pourquoi VraiÂge existe :</p>
+                  <p>
+                    Trop souvent, j'ai vu des propriétaires découvrir trop tard que leur compagnon était déjà senior. La règle du "× 7" ou la simplification qu'on ne reflète pas la complexité du vieillissement animal. Un Chihuahua de 10 ans n'a pas le même âge biologique qu'un Berger Allemand du même âge.
+                  </p>
+                </div>
+
+                <div>
+                  <p className="font-semibold mb-2">L'approche scientifique :</p>
+                  <p>VraiÂge utilise des algorithmes basés sur des certaines recherches parmi les plus récentes, prenant en compte :</p>
+                  <ul className="list-disc list-inside mt-2 space-y-1 ml-4">
+                    <li>La race et sa longévité moyenne</li>
+                    <li>Le poids et la taille</li>
+                    <li>Le profil céphalique (chiens brachycéphales, mésocéphales, dolichocéphales)</li>
+                    <li>Le mode de vie et niveau d'activité physique</li>
+                    <li>L'environnement de vie</li>
+                    <li>Le sexe de l'animal</li>
+                    <li>Le statut de stérilisation</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <p className="font-semibold mb-2">Un outil ludique et éducatif, mais, surtout, pas une vérité absolue ni un diagnostic :</p>
+                  <p>
+                    VraiÂge te donne un aperçu général de l'âge biologique de ton compagnon. C'est un point de départ pour mieux comprendre où il en est dans sa vie. Pour un suivi personnalisé et des recommandations adaptées à SA situation, consulte toujours ton vétérinaire.
+                  </p>
+                </div>
+
+                <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                  <p className="italic text-blue-900">
+                    VraiÂge + ton vétérinaire = le meilleure combinaison pour prendre soin de ton compagnon à chaque étape de sa vie.
+                  </p>
+                </div>
+
+                <div>
+                  <p className="font-semibold mb-2">Et ensuite ?</p>
+                  <p className="mb-2">
+                    Une fois que tu connais le vrai âge de ton compagnon, tu voudras peut-être évaluer sa qualité de vie au quotidien. C'est pourquoi j'ai créé <strong>À l'Écoute de Nala</strong>, une application qui t'aide à suivre le bien-être de ton animal senior.
+                  </p>
+                  <a
+                    href="https://www.ecoutenala.ca"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block mt-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-blue-600 hover:to-blue-700 transition-all"
+                  >
+                    Découvrir À l'Écoute de Nala →
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -632,6 +781,7 @@ const VraiAge = () => {
 
             <div>
               <label className="block mb-2 font-semibold">Race</label>
+              <p className="text-xs text-gray-500 mb-2">💡 Seules les races avec données scientifiques spécifiques sont listées. Pour toute autre race ou pour un chat domestique, sélectionnez "Autre race".</p>
               <select
                 className="w-full p-3 border-2 rounded-lg focus:border-purple-500 outline-none"
                 onChange={(e) => setFormData({...formData, catBreed: e.target.value})}
@@ -727,6 +877,17 @@ const VraiAge = () => {
               </div>
             </div>
 
+            {validationErrors.length > 0 && (
+              <div className="bg-red-100 border-2 border-red-500 rounded-lg p-4">
+                <p className="font-bold text-red-800 mb-2">⚠️ Informations manquantes :</p>
+                <ul className="list-disc list-inside space-y-1 text-red-700">
+                  {validationErrors.map((error, index) => (
+                    <li key={index}>{error}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             <button
               onClick={handleCalculate}
               className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-lg font-bold text-lg hover:from-purple-700 hover:to-pink-700 transition-all shadow-lg"
@@ -747,33 +908,235 @@ const VraiAge = () => {
 
             <h2 className="text-2xl font-bold text-center mb-6">Mon Chien 🐕</h2>
 
-            <p className="text-center text-gray-600">
-              Formulaire chien à venir... Pour l'instant, testez avec un chat!
-            </p>
+            <div>
+              <label className="block mb-2 font-semibold">Nom de ton chien</label>
+              <input
+                type="text"
+                className="w-full p-3 border-2 rounded-lg focus:border-orange-500 outline-none"
+                placeholder="Ex: Rex"
+                onChange={(e) => setFormData({...formData, dogName: e.target.value})}
+              />
+            </div>
+
+            <div>
+              <label className="block mb-2 font-semibold">Âge</label>
+              <p className="text-sm text-gray-600 mb-2 italic">Exemple: 3 ans 6 mois</p>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block mb-2 text-sm">Année(s)</label>
+                  <input
+                    type="number"
+                    className="w-full p-3 border-2 rounded-lg focus:border-orange-500 outline-none"
+                    placeholder="0"
+                    min="0"
+                    onChange={(e) => setFormData({...formData, dogYears: e.target.value})}
+                  />
+                </div>
+                <div>
+                  <label className="block mb-2 text-sm">
+                    Mois {(formData.dogYears === undefined || formData.dogYears === '' || parseFloat(formData.dogYears) < 2) && <span className="text-red-500">*</span>}
+                  </label>
+                  <input
+                    type="number"
+                    className="w-full p-3 border-2 rounded-lg focus:border-orange-500 outline-none"
+                    placeholder="0"
+                    min="0"
+                    max="11"
+                    onChange={(e) => setFormData({...formData, dogMonths: e.target.value})}
+                  />
+                </div>
+              </div>
+              {showAgeError && (
+                <div className="mt-2 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                  ⚠️ Pour un animal de moins de 2 ans, les mois sont obligatoires pour un calcul précis.
+                </div>
+              )}
+            </div>
+
+            <div>
+              <label className="block mb-2 font-semibold">Race</label>
+              <p className="text-xs text-gray-500 mb-2">💡 Seules les races avec données scientifiques spécifiques sont listées. Pour toute autre race ou pour un chien domestique, sélectionnez "Autre race".</p>
+              <select
+                className="w-full p-3 border-2 rounded-lg focus:border-orange-500 outline-none"
+                onChange={(e) => setFormData({...formData, dogBreed: e.target.value})}
+                defaultValue=""
+              >
+                <option value="">Choisir une race</option>
+                {dogBreeds.map(breed => (
+                  <option key={breed.value} value={breed.value}>{breed.name}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block mb-2 font-semibold">Forme du crâne et museau</label>
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-3 text-xs text-blue-900">
+                <p className="font-semibold mb-1">💡 Comment identifier le type de museau ?</p>
+                <p>Observez votre chien de profil. Le type <strong>mésocéphale</strong> (le plus courant) correspond à des proportions équilibrées où le crâne et le museau ont environ la même longueur.</p>
+                <p className="mt-1 text-blue-700">⚠️ La forme du museau influence l'espérance de vie (les museaux courts peuvent causer des problèmes respiratoires)</p>
+              </div>
+              <div className="space-y-2">
+                {muzzleTypes.map(muzzle => (
+                  <button
+                    key={muzzle.value}
+                    onClick={() => setFormData({...formData, dogMuzzle: muzzle.value})}
+                    className={`w-full p-3 rounded-lg border-2 transition-all text-left ${formData.dogMuzzle === muzzle.value ? 'bg-gradient-to-r from-blue-500 to-orange-500 text-white border-transparent' : 'border-gray-300'}`}
+                  >
+                    <div className="font-semibold mb-1">{muzzle.label}</div>
+                    <div className={`text-sm ${formData.dogMuzzle === muzzle.value ? 'text-white/90' : 'text-gray-600'}`}>
+                      {muzzle.description}
+                    </div>
+                    <div className={`text-xs mt-1 ${formData.dogMuzzle === muzzle.value ? 'text-white/75' : 'text-gray-500'}`}>
+                      Ex: {muzzle.examples}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <label className="block mb-2 font-semibold">Poids</label>
+              <p className="text-xs text-gray-500 mb-2">💡 Sélectionnez l'intervalle qui correspond au poids actuel de votre chien</p>
+              <div className="space-y-2">
+                {dogWeightRanges.map(range => (
+                  <button
+                    key={range.range}
+                    onClick={() => setFormData({...formData, dogWeightRange: range.range})}
+                    className={`w-full p-3 rounded-lg border-2 transition-all text-left ${formData.dogWeightRange === range.range ? 'bg-gradient-to-r from-blue-500 to-orange-500 text-white border-transparent' : 'border-gray-300'}`}
+                  >
+                    <div className="font-semibold">{range.label}</div>
+                    <div className={`text-sm mt-1 ${formData.dogWeightRange === range.range ? 'text-white' : 'text-gray-600'}`}>
+                      {range.visual}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <label className="block mb-2 font-semibold">Sexe</label>
+              <div className="grid grid-cols-2 gap-4">
+                <button
+                  onClick={() => setFormData({...formData, dogSex: 'male'})}
+                  className={`p-3 rounded-lg border-2 transition-all ${formData.dogSex === 'male' ? 'bg-gradient-to-r from-blue-500 to-orange-500 text-white border-transparent' : 'border-gray-300'}`}
+                >
+                  Mâle
+                </button>
+                <button
+                  onClick={() => setFormData({...formData, dogSex: 'female'})}
+                  className={`p-3 rounded-lg border-2 transition-all ${formData.dogSex === 'female' ? 'bg-gradient-to-r from-blue-500 to-orange-500 text-white border-transparent' : 'border-gray-300'}`}
+                >
+                  Femelle
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="block mb-2 font-semibold">Stérilisé(e) ?</label>
+              <div className="grid grid-cols-2 gap-4">
+                <button
+                  onClick={() => setFormData({...formData, dogNeutered: 'yes'})}
+                  className={`p-3 rounded-lg border-2 transition-all ${formData.dogNeutered === 'yes' ? 'bg-gradient-to-r from-blue-500 to-orange-500 text-white border-transparent' : 'border-gray-300'}`}
+                >
+                  Oui
+                </button>
+                <button
+                  onClick={() => setFormData({...formData, dogNeutered: 'no'})}
+                  className={`p-3 rounded-lg border-2 transition-all ${formData.dogNeutered === 'no' ? 'bg-gradient-to-r from-blue-500 to-orange-500 text-white border-transparent' : 'border-gray-300'}`}
+                >
+                  Non
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="block mb-2 font-semibold">État corporel</label>
+              <div className="space-y-2">
+                {bodyScores.map(score => (
+                  <button
+                    key={score.value}
+                    onClick={() => setFormData({...formData, dogBody: score.value})}
+                    className={`w-full p-3 rounded-lg border-2 transition-all text-left ${formData.dogBody === score.value ? 'bg-gradient-to-r from-blue-500 to-orange-500 text-white border-transparent' : 'border-gray-300'}`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="mr-2">{score.emoji}</span>
+                        <span className="font-semibold">{score.label}</span>
+                      </div>
+                    </div>
+                    <div className={`text-sm mt-1 ${formData.dogBody === score.value ? 'text-white' : 'text-gray-600'}`}>
+                      {score.description}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {validationErrors.length > 0 && (
+              <div className="bg-red-100 border-2 border-red-500 rounded-lg p-4">
+                <p className="font-bold text-red-800 mb-2">⚠️ Informations manquantes :</p>
+                <ul className="list-disc list-inside space-y-1 text-red-700">
+                  {validationErrors.map((error, index) => (
+                    <li key={index}>{error}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <button
+              onClick={handleCalculate}
+              className="w-full bg-gradient-to-r from-blue-600 to-orange-600 text-white py-4 rounded-lg font-bold text-lg hover:from-blue-700 hover:to-orange-700 transition-all shadow-lg"
+            >
+              Calculer l'âge 🎉
+            </button>
           </div>
         )}
 
         {currentPage === 'loading' && (
           <div className="text-center py-12">
-            <div className="text-6xl mb-6 animate-bounce">
-              {currentPet === 'cat' ? '🐱' : '🐕'}
+            <style>{`
+              @keyframes gentle-float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-15px); }
+              }
+              @keyframes pulse-dot {
+                0%, 100% { transform: scale(0.8); opacity: 0.5; }
+                50% { transform: scale(1.2); opacity: 1; }
+              }
+            `}</style>
+
+            <div className="text-7xl mb-6" style={{ animation: 'gentle-float 2s ease-in-out infinite' }}>
+              {currentPet === 'cat' ? '😺' : '🐶'}
             </div>
-            <div className="text-xl text-gray-700 mb-4">
+
+            <div className="text-xl text-gray-700 mb-4 font-medium">
               {loadingMessage}
             </div>
-            <div className="flex justify-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+
+            <div className="flex justify-center gap-2 mt-6">
+              {[...Array(3)].map((_, i) => (
+                <div
+                  key={i}
+                  className="w-3 h-3 bg-purple-600 rounded-full"
+                  style={{
+                    animation: 'pulse-dot 1.4s ease-in-out infinite',
+                    animationDelay: `${i * 0.2}s`
+                  }}
+                />
+              ))}
             </div>
           </div>
         )}
 
         {currentPage === 'result' && result && (
           <div className="space-y-6">
-            <div className="text-center">
-              <div className="text-6xl mb-4">{currentPet === 'cat' ? '🐱' : '🐕'}</div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-2">{result.name}</h2>
-              <div className="text-lg text-gray-600">{result.lifeStage}</div>
-            </div>
+            {showDelayedContent && (
+              <div className="text-center">
+                <div className="text-6xl mb-4">{currentPet === 'cat' ? '🐱' : '🐕'}</div>
+                <h2 className="text-3xl font-bold text-gray-800 mb-2">{result.name}</h2>
+                <div className="text-lg text-gray-600">{result.lifeStage}</div>
+              </div>
+            )}
 
             <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl p-8 text-white text-center">
               <div className="text-6xl font-bold mb-2">{ageCounter}</div>
@@ -782,7 +1145,7 @@ const VraiAge = () => {
               </div>
               {showDelayedContent && (
                 <div className="mt-4 text-lg">
-                  {getFunPhrase(result.humanAge).icon} {getFunPhrase(result.humanAge).text}
+                  {getFunPhrase(result.humanAge).icon} Si {result.name} était un humain, {result.isFemale ? 'elle' : 'il'} {getFunPhrase(result.humanAge).text}
                 </div>
               )}
             </div>
@@ -798,9 +1161,19 @@ const VraiAge = () => {
                   </div>
                 </div>
 
+                <div className="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-4">
+                  <h3 className="font-bold text-blue-900 mb-2">📊 Qu'est-ce que l'espérance de vie?</h3>
+                  <p className="text-sm text-blue-800 mb-3">
+                    L'espérance de vie est une estimation du nombre d'années que votre animal pourrait vivre, basée sur des données scientifiques et les caractéristiques que vous avez fournies (race, mode de vie, stérilisation, état corporel).
+                  </p>
+                  <p className="text-xs text-blue-700 italic">
+                    💡 Cette information peut vous aider à mieux planifier les soins de santé et à profiter pleinement de chaque moment avec votre compagnon.
+                  </p>
+                </div>
+
                 <button
                   onClick={() => setShowLifeExpectancy(!showLifeExpectancy)}
-                  className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all"
+                  className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all shadow-lg"
                 >
                   {showLifeExpectancy ? 'Masquer' : 'Voir'} l'espérance de vie
                 </button>
@@ -817,55 +1190,71 @@ const VraiAge = () => {
                         style={{width: `${result.lifePercentage}%`}}
                       ></div>
                     </div>
-                    <div className="text-sm">
+                    <div className="text-sm mb-4">
                       {result.name} a vécu {result.lifePercentage}% de son espérance de vie
                     </div>
+
                     {result.age > result.lifeExpectancy && (
-                      <div className="mt-4 p-4 bg-white/20 rounded-lg">
+                      <div className="mb-4 p-4 bg-white/20 rounded-lg">
                         <div className="font-semibold mb-2">💝 Un cadeau précieux</div>
                         <div className="text-sm">
                           {result.name} a dépassé son espérance de vie moyenne. Chaque jour avec {result.isFemale ? 'elle' : 'lui'} est un cadeau précieux!
                         </div>
                       </div>
                     )}
+
+                    {(result.pet === 'chien' || (result.pet === 'chat' && (result.lifeExpectancy <= 14 || result.lifeExpectancy >= 16))) && (
+                      <div className="bg-white/10 border border-white/30 rounded-lg p-4">
+                        <button
+                          onClick={() => setShowLifeExpectancyInfo(!showLifeExpectancyInfo)}
+                          className="w-full flex items-center justify-between text-left font-semibold text-white hover:text-blue-100"
+                        >
+                          <span>💡 Pourquoi {result.pet === 'chat' ? 'pas 15 ans d\'espérance de vie' : 'cette espérance de vie'} ?</span>
+                          <span className="text-2xl">{showLifeExpectancyInfo ? '−' : '+'}</span>
+                        </button>
+
+                        {showLifeExpectancyInfo && (
+                          <div className="mt-3 text-sm text-white/90 space-y-2">
+                            {result.pet === 'chat' ? (
+                              <>
+                                <p className="font-medium">Le « 15 ans » qu'on entend souvent dire comme espérance de vie des chats correspond plutôt à la longévité typique des chats domestiques (croisés) stérilisés vivant strictement à l'intérieur et ne souffrant pas d'obésité.</p>
+                                <p>L'espérance de vie de {result.name} a été calculée en tenant compte de :</p>
+                                <ul className="list-disc list-inside space-y-1 ml-2">
+                                  <li>Sa race spécifique s'il en a une qui a été étudiée</li>
+                                  <li>Son mode de vie (intérieur/mixte/extérieur)</li>
+                                  <li>Son statut de stérilisation</li>
+                                  <li>Son état corporel actuel</li>
+                                  <li>Son sexe</li>
+                                </ul>
+                                <p className="italic text-blue-100">Ces facteurs peuvent faire varier l'espérance de vie de mois ou même années !</p>
+                              </>
+                            ) : (
+                              <>
+                                <p className="font-medium">L'espérance de vie varie énormément selon la race et la taille du chien.</p>
+                                <p>L'espérance de vie de {result.name} a été calculée en tenant compte de :</p>
+                                <ul className="list-disc list-inside space-y-1 ml-2">
+                                  <li>Sa race et sa taille (données scientifiques)</li>
+                                  <li>Son statut de stérilisation</li>
+                                  <li>Son état corporel actuel</li>
+                                </ul>
+                                <p className="italic text-blue-100">Un petit chien vit généralement plus longtemps qu'un grand chien !</p>
+                              </>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                 )}
-
-                <div className="border-t pt-6">
-                  <h3 className="font-bold text-lg mb-3 text-center">Partager le résultat</h3>
-                  <div className="grid grid-cols-2 gap-3">
-                    <button
-                      onClick={() => handleShare('facebook')}
-                      className="p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all"
-                    >
-                      Facebook
-                    </button>
-                    <button
-                      onClick={() => handleShare('twitter')}
-                      className="p-3 bg-sky-500 text-white rounded-lg hover:bg-sky-600 transition-all"
-                    >
-                      Twitter
-                    </button>
-                    <button
-                      onClick={() => handleShare('whatsapp')}
-                      className="p-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all"
-                    >
-                      WhatsApp
-                    </button>
-                    <button
-                      onClick={() => handleShare('copy')}
-                      className="p-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all"
-                    >
-                      Copier lien
-                    </button>
-                  </div>
-                </div>
 
                 {result.isSenior && (
                   <div className="bg-gradient-to-r from-blue-400 to-blue-600 rounded-xl p-6 text-white">
                     <h3 className="font-bold text-xl mb-3">🧘 Accompagnement senior</h3>
-                    <p className="mb-4">
+                    <p className="mb-3">
                       {result.name} entre dans une phase de vie qui mérite une attention particulière.
+                    </p>
+                    <p className="text-sm mb-4 bg-white/20 rounded-lg p-3">
+                      💝 <strong>Écoute Nala</strong> te permet de vérifier la qualité de vie de ton senior.
                     </p>
                     <a
                       href="https://www.ecoutenala.ca"
@@ -877,6 +1266,30 @@ const VraiAge = () => {
                     </a>
                   </div>
                 )}
+
+                <div className="border-t pt-6">
+                  <h3 className="font-bold text-lg mb-3 text-center">Partager le résultat</h3>
+                  <div className="grid grid-cols-3 gap-3">
+                    <button
+                      onClick={() => handleShare('facebook')}
+                      className="p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all"
+                    >
+                      Facebook
+                    </button>
+                    <button
+                      onClick={() => handleShare('instagram')}
+                      className="p-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all"
+                    >
+                      Instagram
+                    </button>
+                    <button
+                      onClick={() => handleShare('copy')}
+                      className="p-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all"
+                    >
+                      Copier lien
+                    </button>
+                  </div>
+                </div>
 
                 <button
                   onClick={() => {
@@ -893,7 +1306,41 @@ const VraiAge = () => {
             )}
           </div>
         )}
+
+        {/* Footer */}
+        <div className="mt-8 pt-6 border-t border-gray-200">
+          <div className="text-center space-y-4">
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Link
+                href="/faq"
+                className="text-gray-600 hover:text-purple-600 transition-colors font-medium"
+              >
+                ❓ FAQ
+              </Link>
+              <Link
+                href="/politique"
+                className="text-gray-600 hover:text-purple-600 transition-colors font-medium"
+              >
+                🔒 Politique de confidentialité
+              </Link>
+              <button
+                onClick={() => setShowContactModal(true)}
+                className="text-gray-600 hover:text-purple-600 transition-colors font-medium"
+              >
+                📧 Contact
+              </button>
+            </div>
+            <p className="text-xs text-gray-500">
+              Calculateur d'âge animal • Les résultats sont basés sur des moyennes vétérinaires
+            </p>
+            <p className="text-xs text-gray-500">
+              © 2025 Tous droits réservés • Conforme à la Loi 25 (Québec)
+            </p>
+          </div>
+        </div>
       </Card>
+
+      <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
     </div>
   );
 };
