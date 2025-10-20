@@ -122,19 +122,10 @@ const VraiAge = () => {
   ];
 
   // Score corporel avec visuels
+  // Note: Seuls les scores "positifs" (idéal à obèse) sont inclus
+  // La maigreur n'est pas prise en compte car elle peut être un symptôme de vieillissement
+  // naturel ou de maladie, rendant l'interprétation ambiguë sans examen vétérinaire
   const bodyScores = [
-    {
-      value: 'very-thin',
-      label: 'Très maigre',
-      description: 'Côtes, colonne et os du bassin très visibles',
-      emoji: '🦴'
-    },
-    {
-      value: 'thin',
-      label: 'Maigre',
-      description: 'Côtes facilement visibles, taille marquée',
-      emoji: '📏'
-    },
     {
       value: 'ideal',
       label: 'Idéal',
@@ -303,14 +294,14 @@ const VraiAge = () => {
     if (lifestyle === 'outdoor') lifeExpectancy -= 4;
     else if (lifestyle === 'mixed') lifeExpectancy -= 2;
 
+    // Seul le surpoids/obésité est pris en compte (facteurs modifiables et documentés)
+    // La maigreur n'est pas incluse car elle peut être physiologique ou pathologique
     const bodyScoreMultipliers: Record<string, number> = {
-      'very-thin': 0.85,
-      'thin': 0.90,
       'ideal': 1.0,
       'overweight': 0.90,
       'obese': 0.80
     };
-    lifeExpectancy = lifeExpectancy * bodyScoreMultipliers[bodyScore];
+    lifeExpectancy = lifeExpectancy * (bodyScoreMultipliers[bodyScore] || 1.0);
 
     if (neutered) {
       lifeExpectancy += 2;
@@ -408,14 +399,14 @@ const VraiAge = () => {
     const breedData = dogBreeds.find(b => b.value === breed);
     let lifeExpectancy = breedData ? breedData.lifespan : 12;
 
+    // Seul le surpoids/obésité est pris en compte (facteurs modifiables et documentés)
+    // La maigreur n'est pas incluse car elle peut être physiologique ou pathologique
     const bodyScoreMultipliers: Record<string, number> = {
-      'very-thin': 0.85,
-      'thin': 0.90,
       'ideal': 1.05,
       'overweight': 0.95,
       'obese': 0.80
     };
-    lifeExpectancy = lifeExpectancy * bodyScoreMultipliers[bodyScore];
+    lifeExpectancy = lifeExpectancy * (bodyScoreMultipliers[bodyScore] || 1.05);
 
     if (neutered) {
       lifeExpectancy += 1.5;
@@ -971,41 +962,23 @@ const VraiAge = () => {
 
             <div>
               <label className="block mb-2 font-semibold">État corporel</label>
-              <div className="space-y-3">
-                {/* Première ligne : 3 options */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  {bodyScores.slice(0, 3).map(score => (
-                    <button
-                      key={score.value}
-                      onClick={() => setFormData({...formData, catBody: score.value})}
-                      className={`p-3 rounded-lg border-2 transition-all text-center flex flex-col items-center ${formData.catBody === score.value ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white border-transparent' : 'border-gray-300 hover:border-purple-300'}`}
-                    >
-                      <div className="text-3xl mb-2">{score.emoji}</div>
-                      <div className="font-semibold mb-1 text-sm">{score.label}</div>
-                      <div className={`text-xs ${formData.catBody === score.value ? 'text-white/90' : 'text-gray-600'}`}>
-                        {score.description}
-                      </div>
-                    </button>
-                  ))}
-                </div>
-                {/* Deuxième ligne : 2 options centrées */}
-                <div className="grid grid-cols-1 md:grid-cols-6 gap-3">
-                  <div></div>
-                  {bodyScores.slice(3).map(score => (
-                    <button
-                      key={score.value}
-                      onClick={() => setFormData({...formData, catBody: score.value})}
-                      className={`p-3 rounded-lg border-2 transition-all text-center flex flex-col items-center md:col-span-2 ${formData.catBody === score.value ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white border-transparent' : 'border-gray-300 hover:border-purple-300'}`}
-                    >
-                      <div className="text-3xl mb-2">{score.emoji}</div>
-                      <div className="font-semibold mb-1 text-sm">{score.label}</div>
-                      <div className={`text-xs ${formData.catBody === score.value ? 'text-white/90' : 'text-gray-600'}`}>
-                        {score.description}
-                      </div>
-                    </button>
-                  ))}
-                  <div></div>
-                </div>
+              <p className="text-xs text-gray-500 mb-3 italic">
+                💡 Si ton chat est très maigre, consulte un vétérinaire pour écarter toute condition médicale.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {bodyScores.map(score => (
+                  <button
+                    key={score.value}
+                    onClick={() => setFormData({...formData, catBody: score.value})}
+                    className={`p-3 rounded-lg border-2 transition-all text-center flex flex-col items-center ${formData.catBody === score.value ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white border-transparent' : 'border-gray-300 hover:border-purple-300'}`}
+                  >
+                    <div className="text-3xl mb-2">{score.emoji}</div>
+                    <div className="font-semibold mb-1 text-sm">{score.label}</div>
+                    <div className={`text-xs ${formData.catBody === score.value ? 'text-white/90' : 'text-gray-600'}`}>
+                      {score.description}
+                    </div>
+                  </button>
+                ))}
               </div>
             </div>
 
@@ -1230,41 +1203,23 @@ const VraiAge = () => {
 
             <div>
               <label className="block mb-2 font-semibold">État corporel</label>
-              <div className="space-y-3">
-                {/* Première ligne : 3 options */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  {bodyScores.slice(0, 3).map(score => (
-                    <button
-                      key={score.value}
-                      onClick={() => setFormData({...formData, dogBody: score.value})}
-                      className={`p-3 rounded-lg border-2 transition-all text-center flex flex-col items-center ${formData.dogBody === score.value ? 'bg-gradient-to-r from-blue-500 to-orange-500 text-white border-transparent' : 'border-gray-300 hover:border-blue-300'}`}
-                    >
-                      <div className="text-3xl mb-2">{score.emoji}</div>
-                      <div className="font-semibold mb-1 text-sm">{score.label}</div>
-                      <div className={`text-xs ${formData.dogBody === score.value ? 'text-white/90' : 'text-gray-600'}`}>
-                        {score.description}
-                      </div>
-                    </button>
-                  ))}
-                </div>
-                {/* Deuxième ligne : 2 options centrées */}
-                <div className="grid grid-cols-1 md:grid-cols-6 gap-3">
-                  <div></div>
-                  {bodyScores.slice(3).map(score => (
-                    <button
-                      key={score.value}
-                      onClick={() => setFormData({...formData, dogBody: score.value})}
-                      className={`p-3 rounded-lg border-2 transition-all text-center flex flex-col items-center md:col-span-2 ${formData.dogBody === score.value ? 'bg-gradient-to-r from-blue-500 to-orange-500 text-white border-transparent' : 'border-gray-300 hover:border-blue-300'}`}
-                    >
-                      <div className="text-3xl mb-2">{score.emoji}</div>
-                      <div className="font-semibold mb-1 text-sm">{score.label}</div>
-                      <div className={`text-xs ${formData.dogBody === score.value ? 'text-white/90' : 'text-gray-600'}`}>
-                        {score.description}
-                      </div>
-                    </button>
-                  ))}
-                  <div></div>
-                </div>
+              <p className="text-xs text-gray-500 mb-3 italic">
+                💡 Si ton chien est très maigre, consulte un vétérinaire pour écarter toute condition médicale.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {bodyScores.map(score => (
+                  <button
+                    key={score.value}
+                    onClick={() => setFormData({...formData, dogBody: score.value})}
+                    className={`p-3 rounded-lg border-2 transition-all text-center flex flex-col items-center ${formData.dogBody === score.value ? 'bg-gradient-to-r from-blue-500 to-orange-500 text-white border-transparent' : 'border-gray-300 hover:border-blue-300'}`}
+                  >
+                    <div className="text-3xl mb-2">{score.emoji}</div>
+                    <div className="font-semibold mb-1 text-sm">{score.label}</div>
+                    <div className={`text-xs ${formData.dogBody === score.value ? 'text-white/90' : 'text-gray-600'}`}>
+                      {score.description}
+                    </div>
+                  </button>
+                ))}
               </div>
             </div>
 

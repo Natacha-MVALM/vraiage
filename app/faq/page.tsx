@@ -419,6 +419,44 @@ export default function FAQPage() {
             />
 
             <FAQItem
+              icon="⚖️"
+              question="Pourquoi seul le surpoids est pris en compte dans le calcul ?"
+              answer={
+                <>
+                  <p className="font-semibold mb-3">Bonne observation !</p>
+
+                  <p className="mb-3">
+                    La maigreur chez un animal peut avoir des causes très variées : vieillissement naturel, métabolisme rapide, maladie sous-jacente, ou simplement génétique.
+                    Sans examen vétérinaire, il est impossible de savoir si un poids faible est préoccupant ou normal pour cet animal.
+                  </p>
+
+                  <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded mt-3 mb-3">
+                    <p className="font-semibold mb-2 text-blue-900">Le surpoids, c'est différent :</p>
+                    <ul className="list-disc list-inside space-y-1 text-blue-900">
+                      <li>Facteur de risque modifiable (alimentation, mode de vie)</li>
+                      <li>Impact direct et mesurable sur l'espérance de vie</li>
+                      <li>Bien documenté scientifiquement, peu importe la cause</li>
+                      <li>État chronique stable qu'on peut évaluer objectivement</li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
+                    <p className="font-semibold mb-2 text-yellow-900">⚠️ Important :</p>
+                    <p className="text-yellow-900">
+                      Si ton animal est très maigre, <strong>consulte ton vétérinaire</strong> pour écarter toute condition médicale.
+                      La maigreur peut être un symptôme qui nécessite une évaluation professionnelle.
+                    </p>
+                  </div>
+
+                  <p className="mt-3 text-sm text-gray-600 italic">
+                    💡 En ne pénalisant pas la maigreur dans nos calculs, nous évitons de créer de fausses inquiétudes
+                    pour les animaux naturellement minces ou seniors en santé qui perdent du poids physiologiquement.
+                  </p>
+                </>
+              }
+            />
+
+            <FAQItem
               icon="🔒"
               question="Mes données sont-elles sauvegardées ?"
               answer={
