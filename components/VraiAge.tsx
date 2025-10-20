@@ -300,7 +300,7 @@ const VraiAge = () => {
     const breedData = catBreeds.find(b => b.value === breed);
     let lifeExpectancy = breedData ? breedData.lifespan : 15;
 
-    if (lifestyle === 'outdoor') lifeExpectancy -= 5;
+    if (lifestyle === 'outdoor') lifeExpectancy -= 4;
     else if (lifestyle === 'mixed') lifeExpectancy -= 2;
 
     const bodyScoreMultipliers: Record<string, number> = {
@@ -411,9 +411,9 @@ const VraiAge = () => {
     const bodyScoreMultipliers: Record<string, number> = {
       'very-thin': 0.85,
       'thin': 0.90,
-      'ideal': 1.15,
+      'ideal': 1.05,
       'overweight': 0.95,
-      'obese': 0.85
+      'obese': 0.80
     };
     lifeExpectancy = lifeExpectancy * bodyScoreMultipliers[bodyScore];
 
@@ -430,6 +430,11 @@ const VraiAge = () => {
     const muzzleData = muzzleTypes.find(m => m.value === muzzleType);
     if (muzzleData) {
       lifeExpectancy = lifeExpectancy * muzzleData.multiplier;
+    }
+
+    // Effet du sexe (femelles vivent ~5% plus longtemps)
+    if (sex === 'female') {
+      lifeExpectancy = lifeExpectancy * 1.05;
     }
 
     lifeExpectancy = Math.round(lifeExpectancy * 10) / 10;
