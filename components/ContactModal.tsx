@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import emailjs from '@emailjs/browser';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -15,20 +16,50 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   });
   const [isSending, setIsSending] = useState(false);
 
+  // Initialiser EmailJS avec la clé publique
+  useEffect(() => {
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+    if (publicKey) {
+      emailjs.init(publicKey);
+    }
+  }, []);
+
   if (!isOpen) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSending(true);
 
-    // TODO: Implement actual email sending logic here
-    // For now, just simulate sending
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
 
-    alert('Message envoyé ! Nous vous répondrons dans les plus brefs délais.');
-    setFormData({ name: '', email: '', message: '' });
-    setIsSending(false);
-    onClose();
+    console.log('Envoi du formulaire avec:', { serviceId, templateId });
+
+    try {
+      // Envoyer l'email via EmailJS
+      const result = await emailjs.send(
+        serviceId!,
+        templateId!,
+        {
+          from_name: formData.name,
+          user_email: formData.email,
+          message: formData.message,
+        }
+      );
+
+      console.log('Résultat EmailJS:', result);
+
+      if (result.status === 200) {
+        alert('Message envoyé ! Nous vous répondrons dans les plus brefs délais.');
+        setFormData({ name: '', email: '', message: '' });
+        onClose();
+      }
+    } catch (error) {
+      console.error('Erreur complète lors de l\'envoi:', error);
+      alert(`Une erreur est survenue lors de l'envoi. Veuillez réessayer.\n\nDétails: ${error}`);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const handleClose = () => {
