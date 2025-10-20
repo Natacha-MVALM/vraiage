@@ -60,7 +60,7 @@ export default function FAQPage() {
               question="Comment fonctionne le calculateur d'âge ?"
               answer={
                 <>
-                  <p>Notre calculateur utilise des formules scientifiques validées qui prennent en compte plusieurs facteurs biologiques :</p>
+                  <p>Notre calculateur utilise des formules qui prennent en compte plusieurs facteurs biologiques :</p>
                   <ul className="list-disc list-inside mt-2 space-y-1 ml-4">
                     <li>L'espèce (chat ou chien)</li>
                     <li>La race et la longévité moyenne</li>
@@ -80,7 +80,7 @@ export default function FAQPage() {
               answer={
                 <>
                   <p>Les résultats dépendent principalement de la qualité et l'exactitude des informations que tu fournis. Plus tu es précis dans tes réponses, plus le calcul sera juste !</p>
-                  <p className="mt-3">Nos calculs sont basés sur des données et recherches vétérinaires reconnues, notamment :</p>
+                  <p className="mt-3">Nos calculs sont basés sur des recherches scientifiques validées. Toutefois, <strong>l'outil lui-même n'a pas été formellement testé</strong> - ce sont les données et formules sous-jacentes qui proviennent de sources vétérinaires reconnues, notamment :</p>
                   <div className="bg-gray-50 rounded-lg p-4 mt-3">
                     <p className="font-semibold mb-2">Sources scientifiques :</p>
                     <ul className="list-disc list-inside space-y-1 text-sm">
@@ -94,7 +94,7 @@ export default function FAQPage() {
                   </div>
                   <p className="mt-3 font-semibold">Important :</p>
                   <p className="bg-blue-50 border-l-4 border-blue-500 p-3 rounded">
-                    Si tu n'es pas certain d'une information comme le poids exact ou la pra, fais de ton mieux pour "estimer" : le résultat restera une bonne approximation, mais pourrait varier légèrement avec des données plus précises.
+                    Si tu n'es pas certain d'une information comme le poids exact ou la race, fais de ton mieux pour "estimer" : le résultat restera une bonne approximation, mais pourrait varier légèrement avec des données plus précises.
                   </p>
                   <p className="mt-3 bg-yellow-50 border-l-4 border-yellow-500 p-3 rounded">
                     <strong>Note :</strong> Ces calculs sont basés sur des moyennes statistiques et ne remplacent pas l'avis d'un vétérinaire pour la santé de ton animal.
@@ -116,7 +116,7 @@ export default function FAQPage() {
                     <ul className="list-disc list-inside space-y-1">
                       <li>Une moyenne basée sur des milliers d'animaux du même race/type</li>
                       <li>Un indicateur général, pas un compte à rebours</li>
-                      <li>Une statistique qui n'inclut pas les animaux avec des vies très différentes</li>
+                      <li>Une statistique qui n'inclut pas les animaux avec des styles de vie très différents</li>
                     </ul>
                   </div>
 
@@ -149,6 +149,11 @@ export default function FAQPage() {
                   </div>
 
                   <p className="mt-3 italic">💡 Ton compagnon profite de ses "années bonus" - c'est magnifique!</p>
+
+                  <div className="bg-gray-50 border-l-4 border-gray-400 p-3 rounded mt-3">
+                    <p className="font-semibold mb-2">Note sur les calculs :</p>
+                    <p className="text-sm">Pour certaines races moins courantes, le calculateur doit extrapoler des données en se basant sur la taille, le poids, le style de vie et d'autres facteurs, car les études scientifiques spécifiques n'existent pas pour toutes les races. Cela permet de fournir une estimation fiable même sans données directes.</p>
+                  </div>
                 </>
               }
             />
@@ -297,7 +302,6 @@ export default function FAQPage() {
                     <ul className="list-disc list-inside space-y-1 text-sm">
                       <li>Compare-le avec des chiens de sa race que tu connais le poids (voisin, ami)</li>
                       <li>Regarde le poids moyen de sa race en ligne</li>
-                      <li>Utilise la silhouette : maigre, idéal, surpoids, obèse</li>
                       <li>En clinique vétérinaire, la plupart ont une balance - demande lors de la prochaine visite !</li>
                     </ul>
                   </div>
@@ -333,7 +337,7 @@ export default function FAQPage() {
               answer={
                 <>
                   <p className="font-semibold text-lg">Non, absolument pas.</p>
-                  <p className="mt-3">Notre calculateur est un outil éducatif pour mieux comprendre l'âge de ton animal et ses besoins selon son stade de vie.</p>
+                  <p className="mt-3">Notre calculateur est un outil éducatif pour mieux comprendre l'âge de ton animal, identifier à quel stade de vie il se trouve (junior, adulte, senior) et adapter tes soins en conséquence.</p>
 
                   <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded mt-4">
                     <p className="font-semibold mb-2">Il ne remplace pas :</p>
@@ -357,7 +361,7 @@ export default function FAQPage() {
                   <p>Tu te demandes peut-être : "Si une vétérinaire a créé cette app, pourquoi ne pas inclure les maladies ?"</p>
 
                   <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded mt-3">
-                    <p className="font-semibold mb-2">Bonne question ! Même avec ma formation vétérinaire, j'ai volontairement conçu VraiÂge comme un outil éducatif général, pas comme un outil de diagnostic médical.</p>
+                    <p className="font-semibold mb-2">Bonne question ! Malgré que je sois médecin vétérinaire, il n'est pas approprié ni légal de faire des estimations d'espérance de vie basées sur des maladies qu'un animal peut avoir.</p>
                   </div>
 
                   <div className="bg-gray-50 rounded-lg p-4 mt-3">
@@ -370,8 +374,6 @@ export default function FAQPage() {
                       <li>Une relation de confiance vétérinaire-client</li>
                     </ul>
                   </div>
-
-                  <p className="mt-3">Même sans qui sait ce, vétérinaire, je ne peux pas faire de prédictions médicales fiables pour ton animal sans l'avoir examiné. Ce serait irresponsable et contraire à l'éthique vétérinaire.</p>
 
                   <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded mt-4">
                     <p className="italic">VraiÂge te donne un point de référence général. Pour tout ce qui touche la santé spécifique de ton animal, c'est ton vétérinaire traitant qui reste la meilleure ressource. 💙</p>
@@ -406,43 +408,11 @@ export default function FAQPage() {
                   </div>
 
                   <p className="mt-3 bg-gray-50 border-l-4 border-gray-400 p-3 rounded">
-                    Si ta race spécifique n'est pas listée, choisis la race la plus proche en termes de taille et morphologie, ou sélectionne "Race inconnue". Le calcul restera très fiable ! 🐾
+                    Si ta race spécifique n'est pas listée, choisis la race la plus proche en termes de taille et morphologie, ou sélectionne "Race inconnue". Le calcul utilisera alors des catégories de poids pour estimer l'âge, ce qui reste très fiable ! 🐾
                   </p>
-                </>
-              }
-            />
-
-            <FAQItem
-              icon="📅"
-              question="Que signifie « Années qu'il lui reste (estimées) » ?"
-              answer={
-                <>
-                  <p>C'est une estimation statistique basée sur :</p>
-                  <p className="mt-2 font-semibold">Espérance de vie moyenne = Âge actuel + Années restantes estimées</p>
-
-                  <div className="bg-green-50 rounded-lg p-4 mt-3">
-                    <p className="font-semibold mb-2">Important à comprendre :</p>
-                    <ul className="space-y-2">
-                      <li>✅ C'est une approximation, pas une certitude</li>
-                      <li>✅ Ton animal peut vivre beaucoup plus ès que moins longtemps</li>
-                      <li>✅ Les soins que tu lui apportes font une énorme différence</li>
-                      <li>✅ Certains animaux dépassent largement leur espérance</li>
-                    </ul>
-                  </div>
-
-                  <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded mt-3">
-                    <p className="font-semibold mb-2">Si le résultat affiche "0 ans" ou un nombre négatif :</p>
-                    <p className="mb-2">Ton compagnon a vécu au-delà de la régression espérance moyenne de sa race - Merveilleux ! Il profite de ses "années bonus". Chaque jour est précieux 💝</p>
-                  </div>
-
-                  <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded mt-3">
-                    <p className="italic">Utilise cette info pour :</p>
-                    <ul className="list-disc list-inside mt-1 space-y-1">
-                      <li>Mieux anticiper et planifier les soins de ton animal</li>
-                      <li>Adapter son alimentation et ses soins</li>
-                      <li>Profiter de chaque moment avec lui</li>
-                      <li>PAS pour t'"inquiéter ou stresser !</li>
-                    </ul>
+                  <div className="bg-blue-50 border-l-4 border-blue-500 p-3 rounded mt-3">
+                    <p className="font-semibold mb-2">Note importante :</p>
+                    <p className="text-sm">Lorsque les données spécifiques à une race ne sont pas disponibles, notre calculateur utilise des catégories basées sur le poids et la taille pour fournir une estimation basée sur des moyennes statistiques pour des animaux similaires.</p>
                   </div>
                 </>
               }

@@ -1339,7 +1339,6 @@ const VraiAge = () => {
                   />
                 </div>
                 <h2 className="text-3xl font-bold text-gray-800 mb-2">{result.name}</h2>
-                <div className="text-lg text-gray-600">{result.lifeStage}</div>
               </div>
             )}
 
@@ -1357,12 +1356,27 @@ const VraiAge = () => {
 
             {showDelayedContent && (
               <>
+                <div className={`bg-gradient-to-r ${currentPet === 'cat' ? 'from-purple-400 to-pink-400' : 'from-blue-400 to-orange-400'} rounded-lg p-5 text-white text-center shadow-md`}>
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <span className="text-2xl">{currentPet === 'cat' ? '🐱' : '🐶'}</span>
+                    <h3 className="text-xl font-bold">Stade de vie</h3>
+                  </div>
+                  <p className="text-lg">
+                    <span className="font-semibold">{result.name}</span> est dans le stade de vie
+                  </p>
+                  <p className="text-2xl font-bold mt-2">
+                    « {result.lifeStage.split(' ').slice(1).join(' ')} »
+                  </p>
+                  <p className="text-4xl mt-2">
+                    {result.lifeStage.split(' ')[0]}
+                  </p>
+                </div>
+
                 <div className="bg-gray-50 rounded-lg p-6">
                   <h3 className="font-bold text-lg mb-3">Détails du calcul</h3>
                   <div className="space-y-2 text-gray-700">
                     <p>• Âge réel: {formatAgeWithMonths(result.age)}</p>
                     <p>• Fourchette d'âge humain: {result.interval[0]} - {result.interval[1]} ans</p>
-                    <p>• Stade de vie: {result.lifeStage}</p>
                   </div>
                 </div>
 
