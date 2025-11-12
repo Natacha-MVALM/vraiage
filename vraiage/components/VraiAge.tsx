@@ -8,12 +8,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import html2canvas from 'html2canvas';
 import {
-  Paw, Sparkles, Cat, Dog, Baby, PartyPopper, Heart, Car,
-  GraduationCap, Home, Briefcase, Smile, Radio, Palmtree,
-  User, Coins, Flag, BookOpen, Circle, Pill, Newspaper,
-  Library, Users, Crown, Trophy, CheckCircle, AlertCircle,
+  Paw, Sparkles, Cat, Dog, CheckCircle, AlertCircle,
   HelpCircle, ArrowLeft, Mail, ChevronDown, Info, Share2,
-  Facebook, Instagram, Copy, Check, Smartphone, MessageCircle,
+  Facebook, Instagram, Copy, Check, MessageCircle,
   HeartHandshake, ExternalLink, Stethoscope, Activity, Download
 } from 'lucide-react';
 
@@ -31,31 +28,158 @@ const LOADING_MESSAGES: Record<string, string[]> = {
     ]
 };
 
-const FUN_PHRASES = [
-    { max: 3, text: "serait à la garderie en train de faire des siestes", Icon: Baby },
-    { max: 6, text: "apprendrait à compter jusqu'à 10", Icon: PartyPopper },
-    { max: 10, text: "jouerait aux billes dans la cour d'école", Icon: Circle },
-    { max: 13, text: "découvrirait les joies de TikTok", Icon: Smartphone },
-    { max: 16, text: "aurait son premier crush au secondaire", Icon: Heart },
-    { max: 18, text: "étudierait pour son permis de conduire", Icon: Car },
-    { max: 21, text: "fêterait sa majorité dans tous les pays", Icon: PartyPopper },
-    { max: 25, text: "terminerait ses études universitaires", Icon: GraduationCap },
-    { max: 30, text: "penserait à s'acheter un condo", Icon: Home },
-    { max: 35, text: "jonglerait entre carrière et vie de famille", Icon: Briefcase },
-    { max: 40, text: "commencerait à avoir mal au dos", Icon: Smile },
-    { max: 45, text: "dirait 'c'était mieux dans mon temps'", Icon: Radio },
-    { max: 50, text: "planifierait déjà sa retraite anticipée", Icon: Palmtree },
-    { max: 55, text: "serait grand-parent gâteau", Icon: User },
-    { max: 60, text: "profiterait de ses REER bien mérités", Icon: Coins },
-    { max: 65, text: "jouerait au golf tous les matins", Icon: Flag },
-    { max: 70, text: "raconterait ses histoires pour la 100e fois", Icon: BookOpen },
-    { max: 75, text: "serait la vedette du bingo du jeudi", Icon: Trophy },
-    { max: 80, text: "aurait une collection impressionnante de piluliers", Icon: Pill },
-    { max: 85, text: "ferait des marathons de mots croisés", Icon: Newspaper },
-    { max: 90, text: "serait une encyclopédie vivante", Icon: Library },
-    { max: 95, text: "aurait vu passer trois générations", Icon: Users },
-    { max: 100, text: "recevrait une lettre de la Reine", Icon: Crown },
-    { max: 999, text: "entrerait dans le livre des records", Icon: Trophy }
+// VraiÂge - Paires de Phrases Comparatives Optimisées
+// Québec 🍁 vs Europe 🇪🇺
+// Version 2.0 - Novembre 2025
+
+interface FunPhrase {
+  max: number;
+  quebec: {
+    verb: string;
+    text: string;
+    icon: string; // Emoji en string
+  };
+  europe: {
+    verb: string;
+    text: string;
+    icon: string; // Emoji en string
+  };
+}
+
+const FUN_PHRASES: FunPhrase[] = [
+  // 🧒 Génération Alpha (2010+) → 0-15 ans
+  {
+    max: 3,
+    quebec: { verb: "pleurerait", text: "parce que son iPad est déchargé", icon: "👶" },
+    europe: { verb: "pleurerait", text: "parce que sa tablette n'a plus de batterie", icon: "👶" }
+  },
+  {
+    max: 6,
+    quebec: { verb: "chanterait", text: "Passe-Partout à tue-tête dans l'auto", icon: "🎵" },
+    europe: { verb: "regarderait", text: "Peppa Pig en boucle sur YouTube", icon: "🎵" }
+  },
+  {
+    max: 10,
+    quebec: { verb: "jouerait", text: "à 4 coins carré en criant 'SERVEUSE!'", icon: "⚪" },
+    europe: { verb: "jouerait", text: "à l'épervier dans la cour de récré", icon: "⚪" }
+  },
+  {
+    max: 13,
+    quebec: { verb: "scrollerait", text: "sur TikTok pendant 6h par jour", icon: "📱" },
+    europe: { verb: "oublierait", text: "ses devoirs en regardant TikTok", icon: "📱" }
+  },
+  {
+    max: 16,
+    quebec: { verb: "stresserait", text: "pour son bal de finissants dans 3 ans", icon: "❤️" },
+    europe: { verb: "passerait", text: "son brevet des collèges en transpirant", icon: "❤️" }
+  },
+
+  // 🎮 Génération Z (1997-2012) → 15-25 ans
+  {
+    max: 18,
+    quebec: { verb: "échouerait", text: "son permis de conduire 2 fois (minimum)", icon: "🚗" },
+    europe: { verb: "calerait", text: "3 fois pendant l'examen de conduite", icon: "🚗" }
+  },
+  {
+    max: 21,
+    quebec: { verb: "boirait", text: "du Caribou cheap à la Saint-Jean", icon: "🎉" },
+    europe: { verb: "ferait", text: "la fête du 14 juillet sur les Champs-Élysées", icon: "🎉" }
+  },
+  {
+    max: 25,
+    quebec: { verb: "finirait", text: "son bac avec 60K$ de dettes étudiantes", icon: "🎓" },
+    europe: { verb: "chercherait", text: "désespérément un CDI après son master", icon: "🎓" }
+  },
+
+  // 💼 Millennials (1981-1996) → 25-40 ans
+  {
+    max: 30,
+    quebec: { verb: "pleurerait", text: "en voyant le prix des condos à Montréal", icon: "🏠" },
+    europe: { verb: "abandonnerait", text: "l'idée d'acheter à Paris (1M€ le 30m²)", icon: "🏠" }
+  },
+  {
+    max: 33,
+    quebec: { verb: "attendrait", text: "3 ans pour une place en CPE", icon: "👶" },
+    europe: { verb: "mettrait", text: "son enfant sur liste d'attente avant sa naissance", icon: "👶" }
+  },
+  {
+    max: 35,
+    quebec: { verb: "commanderait", text: "sur Uber Eats 4 soirs par semaine", icon: "🍕" },
+    europe: { verb: "paierait", text: "12€ de frais Deliveroo pour une pizza", icon: "🍕" }
+  },
+  {
+    max: 40,
+    quebec: { verb: "aurait", text: "mal au dos en déneigant l'entrée", icon: "😊" },
+    europe: { verb: "gémirait", text: "en montant 3 étages sans ascenseur", icon: "😊" }
+  },
+
+  // 📻 Génération X (1965-1980) → 40-55 ans
+  {
+    max: 45,
+    quebec: { verb: "scrollerait", text: "sur Facebook en critiquant TikTok", icon: "📱" },
+    europe: { verb: "regarderait", text: "BFM TV en disant 'c'était mieux avant'", icon: "📺" }
+  },
+  {
+    max: 50,
+    quebec: { verb: "calculerait", text: "combien d'années avant la retraite (23... soupir)", icon: "🌴" },
+    europe: { verb: "rêverait", text: "de sa retraite à 64 ans (si elle existe encore)", icon: "🌴" }
+  },
+  {
+    max: 55,
+    quebec: { verb: "déneigrait", text: "l'entrée des enfants ET des petits-enfants", icon: "👤" },
+    europe: { verb: "garderait", text: "les petits-enfants tous les mercredis", icon: "👤" }
+  },
+
+  // 🏡 Baby-Boomers (1946-1964) → 55-75 ans
+  {
+    max: 60,
+    quebec: { verb: "vendrait", text: "sa maison 10x le prix payé en 1985", icon: "💰" },
+    europe: { verb: "revendrait", text: "son appartement parisien une fortune", icon: "💰" }
+  },
+  {
+    max: 65,
+    quebec: { verb: "irait", text: "au Tim Hortons à 5h du matin jaser", icon: "☕" },
+    europe: { verb: "lirait", text: "Le Figaro au café du coin chaque matin", icon: "☕" }
+  },
+  {
+    max: 70,
+    quebec: { verb: "raconterait", text: "ENCORE la tempête de verglas de '98", icon: "📖" },
+    europe: { verb: "parlerait", text: "de Mai 68 comme si c'était hier", icon: "📖" }
+  },
+  {
+    max: 75,
+    quebec: { verb: "gagnerait", text: "au bingo de la paroisse (5e fois cette année)", icon: "🏆" },
+    europe: { verb: "jouerait", text: "à la belote au club du 3e âge", icon: "🏆" }
+  },
+
+  // 🧓 Génération Silencieuse (1928-1945) → 75-95 ans
+  {
+    max: 80,
+    quebec: { verb: "aurait", text: "plus de piluliers que de verres dans l'armoire", icon: "💊" },
+    europe: { verb: "prendrait", text: "8 médicaments (en oubliant lequel)", icon: "💊" }
+  },
+  {
+    max: 85,
+    quebec: { verb: "finirait", text: "les mots croisés du JdeM en 10 minutes", icon: "📰" },
+    europe: { verb: "complèterait", text: "les mots fléchés du Figaro avant le café", icon: "📰" }
+  },
+  {
+    max: 90,
+    quebec: { verb: "refuserait", text: "d'utiliser un ordinateur (papier only)", icon: "📚" },
+    europe: { verb: "dirait", text: "'Internet? Non merci, j'ai mes livres'", icon: "📚" }
+  },
+  {
+    max: 95,
+    quebec: { verb: "se souviendrait", text: "de la crise d'Octobre 1970 comme si c'était hier", icon: "👥" },
+    europe: { verb: "se rappellerait", text: "la guerre avec une précision troublante", icon: "👥" }
+  },
+
+  // 👑 Greatest Generation (1901-1927) → 95+ ans
+  {
+    max: 999,
+    quebec: { verb: "passerait", text: "à TVA pour révéler son secret (du gin)", icon: "👑" },
+    europe: { verb: "dévoilerait", text: "à France 2 son secret (un verre de rouge/jour)", icon: "👑" }
+  }
 ];
 
 const CAT_BREEDS = [
@@ -106,10 +230,19 @@ const DOG_WEIGHT_RANGES = [
 ];
 
 // Score corporel avec visuels
-// Note: Seuls les scores "positifs" (idéal à obèse) sont inclus
-// La maigreur n'est pas prise en compte car elle peut être un symptôme de vieillissement
-// naturel ou de maladie, rendant l'interprétation ambiguë sans examen vétérinaire
 const BODY_SCORES = [
+    {
+      value: 'very_underweight',
+      label: 'Très maigre',
+      description: 'Os saillants, absence de graisse palpable, émacié',
+      Icon: AlertCircle
+    },
+    {
+      value: 'underweight',
+      label: 'Maigre',
+      description: 'Côtes, colonne vertébrale et os du bassin très visibles',
+      Icon: AlertCircle
+    },
     {
       value: 'ideal',
       label: 'Idéal',
@@ -136,7 +269,7 @@ const MUZZLE_TYPES = [
       value: 'dolichocephalic',
       label: 'Dolichocéphale',
       description: 'Museau long et fin, plus long que le crâne',
-      examples: 'Lévrier, Colley, Berger Allemand',
+      examples: 'Lévrier, Colley, Teckel',
       multiplier: 1.05,
       image: '/images/muzzle-dolichocephalic.png'
     },
@@ -162,6 +295,23 @@ const MUZZLE_TYPES = [
 // Fonctions utilitaires déplacées hors du composant
 const getFunPhrase = (age: number) => {
   return FUN_PHRASES.find(p => age <= p.max) || FUN_PHRASES[FUN_PHRASES.length - 1];
+};
+
+const getLifeStageDescription = (lifeStage: string, animalName: string): string => {
+  if (lifeStage.includes('Chaton') || lifeStage.includes('Chiot')) {
+    return `${animalName} est encore un bébé !`;
+  } else if (lifeStage.includes('Junior') || lifeStage.includes('Jeune adulte')) {
+    return `${animalName} commence tout juste à apprendre de ses erreurs !`;
+  } else if (lifeStage.includes('Adulte') && !lifeStage.includes('Jeune')) {
+    return `${animalName} a atteint la "fleur de l'âge" !`;
+  } else if (lifeStage.includes('Mature')) {
+    return `${animalName} commence déjà son déclin... mais a encore du temps pour profiter de sa vie !`;
+  } else if (lifeStage.includes('Senior')) {
+    return `${animalName} est à l'âge d'or de sa vie !`;
+  } else if (lifeStage.includes('Doyen')) {
+    return `${animalName} a dépassé son espérance de vie mais tient le coup !`;
+  }
+  return "";
 };
 
 const formatAgeWithMonths = (ageInYears: number) => {
@@ -307,9 +457,9 @@ const VraiAge = () => {
     if (lifestyle === 'outdoor') lifeExpectancy -= 4;
     else if (lifestyle === 'mixed') lifeExpectancy -= 2;
 
-    // Seul le surpoids/obésité est pris en compte (facteurs modifiables et documentés)
-    // La maigreur n'est pas incluse car elle peut être physiologique ou pathologique
     const bodyScoreMultipliers: Record<string, number> = {
+      'very_underweight': 0.90, // État critique nécessitant attention vétérinaire
+      'underweight': 0.95, // La maigreur peut indiquer une condition sous-jacente
       'ideal': 1.0,
       'overweight': 0.90,
       'obese': 0.80
@@ -412,9 +562,9 @@ const VraiAge = () => {
     const breedData = DOG_BREEDS.find(b => b.value === breed);
     let lifeExpectancy = breedData ? breedData.lifespan : 12;
 
-    // Seul le surpoids/obésité est pris en compte (facteurs modifiables et documentés)
-    // La maigreur n'est pas incluse car elle peut être physiologique ou pathologique
     const bodyScoreMultipliers: Record<string, number> = {
+      'very_underweight': 0.90, // État critique nécessitant attention vétérinaire
+      'underweight': 0.98, // La maigreur peut indiquer une condition sous-jacente
       'ideal': 1.05,
       'overweight': 0.95,
       'obese': 0.80
@@ -824,7 +974,7 @@ const VraiAge = () => {
               >
                 <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-3">
                   <span className="text-purple-600 transition-transform duration-300" style={{ transform: isAboutMeOpen ? 'rotate(0deg)' : 'rotate(-90deg)' }} aria-hidden="true">▼</span>
-                  À propos de moi
+                  À propos de Dre Natacha Barrette
                 </h2>
                 {!isAboutMeOpen && (
                   <p className="text-gray-600 mt-2 text-sm italic">
@@ -854,17 +1004,20 @@ const VraiAge = () => {
                     </div>
                     <div className="flex-1">
                       <p className="text-gray-700 mb-3">
-                        Je suis médecin vétérinaire depuis plus de 30 ans et j'ai accompagné des centaines de familles confrontées au vieillissement de leur compagnon. Au fil des années, j'ai constaté un manque flagrant d'outils simples et fiables pour comprendre l'âge réel d'un animal et mieux anticiper les enjeux de fin de vie.
+                        Je suis médecin vétérinaire depuis plus de 30 ans, et j'ai accompagné des centaines de familles à travers le vieillissement de leur compagnon.
                       </p>
                       <p className="text-gray-700 mb-3">
-                        Installée à Québec, accompagnée de ma fidèle complice Babette, j'ai créé VraiÂge et deux gardiens d'animaux à repère clair, accessible et fondé sur la science.
+                        Trop souvent, j'ai vu des propriétaires découvrir tard — parfois trop tard — que leur animal était déjà senior. Cette réalité m'a poussée à créer des outils simples et accessibles pour aider les gens à mieux comprendre où se situe leur compagnon dans sa vie.
                       </p>
                       <p className="text-gray-700 mb-3">
-                        Parce que nos compagnons nous aiment sans condition, ils méritent qu'on prenne des décisions éclairées - au bon moment.
+                        Installée à Québec avec ma fidèle Babette, je mets mon expérience au service de ceux qui, comme toi, veulent prendre soin de leur animal avec justesse et bienveillance.
+                      </p>
+                      <p className="text-gray-700 mb-3">
+                        Parce qu'ils nous aiment sans condition, ils méritent qu'on les accompagne avec soin, au bon moment.
                       </p>
                       <p className="text-sm text-gray-600 italic">
                         Dre Natacha Barrette, médecin vétérinaire<br />
-                        Créatrice de VraiÂge • Fondatrice de Mon amie Nala et de l'Écoute de Nala
+                        Créatrice de VraiÂge • Fondatrice d'À l'écoute de Nala
                       </p>
                     </div>
                   </div>
@@ -883,11 +1036,11 @@ const VraiAge = () => {
               >
                 <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-3">
                   <span className="text-blue-600 transition-transform duration-300" style={{ transform: isAboutVraiAgeOpen ? 'rotate(0deg)' : 'rotate(-90deg)' }} aria-hidden="true">▼</span>
-                  <span aria-hidden="true">🐾</span> À propos de VraiÂge
+                  C'est quoi, VraiÂge ?
                 </h2>
                 {!isAboutVraiAgeOpen && (
                   <p className="text-gray-600 mt-2 text-sm italic">
-                    Un outil ludique et éducatif, basé sur certaines données de la science...
+                    Un outil pour comprendre l'âge réel de ton compagnon...
                   </p>
                 )}
               </button>
@@ -896,43 +1049,48 @@ const VraiAge = () => {
                 <div className="px-8 pb-8">
                   <div className="space-y-4 text-gray-700">
                     <div>
-                      <p className="font-semibold mb-2">Pourquoi VraiÂge existe :</p>
-                      <p>
-                        Trop souvent, j'ai vu des propriétaires découvrir trop tard que leur compagnon était déjà senior. La règle du "× 7" ou la simplification qu'on ne reflète pas la complexité du vieillissement animal. Un Chihuahua de 10 ans n'a pas le même âge biologique qu'un Berger Allemand du même âge.
+                      <p className="font-semibold mb-2">Un outil pour comprendre l'âge réel de ton compagnon</p>
+                      <p className="mb-3">
+                        Tu as sûrement déjà entendu la fameuse règle du "× 7" pour calculer l'âge de ton chien ou de ton chat. Sauf que cette règle est beaucoup trop simpliste. Un Chihuahua de 10 ans n'a pas du tout le même âge biologique qu'un Berger Allemand du même âge. Chaque animal vieillit différemment.
                       </p>
-                    </div>
-
-                    <div>
-                      <p className="font-semibold mb-2">L'approche scientifique :</p>
-                      <p>VraiÂge utilise des algorithmes basés sur des certaines recherches parmi les plus récentes, prenant en compte :</p>
+                      <p className="mb-2">
+                        VraiÂge est un calculateur gratuit, ludique et inspiré par la science qui prend en compte les facteurs qui influencent vraiment le vieillissement de ton animal :
+                      </p>
                       <ul className="list-disc list-inside mt-2 space-y-1 ml-4">
-                        <li>La race et sa longévité moyenne</li>
-                        <li>Le poids et la taille</li>
-                        <li>Le profil céphalique (chiens brachycéphales, mésocéphales, dolichocéphales)</li>
-                        <li>Le mode de vie et niveau d'activité physique</li>
-                        <li>L'environnement de vie</li>
-                        <li>Le sexe de l'animal</li>
-                        <li>Le statut de stérilisation</li>
+                        <li>Sa race et son espérance de vie moyenne (basée sur les études disponibles — certaines races ont plus de données que d'autres, alors on fait avec ce qu'on a !)</li>
+                        <li>Son poids et sa taille</li>
+                        <li>Sa morphologie (chiens brachycéphales, mésocéphales, dolichocéphales)</li>
+                        <li>Son mode de vie et son niveau d'activité</li>
+                        <li>Son environnement (intérieur, extérieur, mixte)</li>
+                        <li>Son sexe et son statut de stérilisation</li>
                       </ul>
+                      <p className="mt-3">
+                        En quelques clics, tu obtiens une estimation de son âge humain équivalent et de son espérance de vie. C'est un repère clair pour mieux comprendre où il en est dans son parcours.
+                      </p>
                     </div>
 
                     <div>
-                      <p className="font-semibold mb-2">Un outil ludique et éducatif, mais, surtout, pas une vérité absolue ni un diagnostic :</p>
-                      <p>
-                        VraiÂge te donne un aperçu général de l'âge biologique de ton compagnon. C'est un point de départ pour mieux comprendre où il en est dans sa vie. Pour un suivi personnalisé et des recommandations adaptées à SA situation, consulte toujours ton vétérinaire.
+                      <p className="font-semibold mb-2">Un outil éducatif, pas un diagnostic</p>
+                      <p className="mb-3">
+                        VraiÂge te donne un aperçu général de l'âge biologique de ton compagnon. C'est un point de départ pour mieux anticiper ses besoins — mais ce n'est pas une vérité absolue ni un diagnostic médical.
                       </p>
-                    </div>
-
-                    <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
-                      <p className="italic text-blue-900">
-                        VraiÂge + ton vétérinaire = le meilleure combinaison pour prendre soin de ton compagnon à chaque étape de sa vie.
+                      <p className="mb-3">
+                        Pour un suivi personnalisé et des recommandations adaptées à SA situation unique, consulte toujours ton vétérinaire.
                       </p>
+                      <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                        <p className="italic text-blue-900">
+                          VraiÂge + ton vétérinaire = la meilleure combinaison pour prendre soin de ton compagnon à chaque étape.
+                        </p>
+                      </div>
                     </div>
 
                     <div>
                       <p className="font-semibold mb-2">Et ensuite ?</p>
                       <p className="mb-2">
-                        Une fois que tu connais le vrai âge de ton compagnon, tu voudras peut-être évaluer sa qualité de vie au quotidien. C'est pourquoi j'ai créé <strong>À l'Écoute de Nala</strong>, une application qui t'aide à suivre le bien-être de ton animal senior.
+                        Si ton compagnon entre dans ses années senior, tu voudras peut-être aller plus loin et évaluer sa qualité de vie au quotidien. C'est pourquoi j'ai créé <strong>À l'écoute de Nala</strong>, une application gratuite qui t'aide à suivre le bien-être de ton animal de façon objective et bienveillante.
+                      </p>
+                      <p className="mb-3">
+                        Les deux outils se complètent pour t'accompagner tout au long du parcours.
                       </p>
                       <a
                         href="https://www.ecoutenala.ca"
@@ -1090,7 +1248,7 @@ const VraiAge = () => {
               <p className="text-xs text-gray-500 mb-3 italic">
                 💡 Si ton chat est très maigre, consulte un vétérinaire pour écarter toute condition médicale.
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
                 {BODY_SCORES.map(score => (
                   <button
                     key={score.value}
@@ -1334,7 +1492,7 @@ const VraiAge = () => {
               <p className="text-xs text-gray-500 mb-3 italic">
                 💡 Si ton chien est très maigre, consulte un vétérinaire pour écarter toute condition médicale.
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
                 {BODY_SCORES.map(score => (
                   <button
                     key={score.value}
@@ -1366,10 +1524,10 @@ const VraiAge = () => {
 
             <button
               onClick={handleCalculate}
-              className="w-full bg-gradient-to-r from-blue-600 to-orange-600 text-white py-4 rounded-lg font-bold text-lg hover:from-blue-700 hover:to-orange-700 transition-all shadow-lg"
+              className="group w-full bg-gradient-to-r from-blue-600 to-orange-600 text-white py-5 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-orange-700 transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3"
             >
               <span>Calculer l'âge</span>
-              <Sparkles className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
+              <Sparkles className="w-5 h-5 group-hover:rotate-12 group-hover:scale-110 transition-all duration-200" />
             </button>
           </div>
         )}
@@ -1438,21 +1596,52 @@ const VraiAge = () => {
               <div className="text-2xl">
                 {ageCounter < 2 ? 'an' : 'ans'} en âge humain
               </div>
-              {showDelayedContent && (
-                <div className="mt-4 text-lg flex items-center justify-center gap-2">
-                  {(() => {
-                    const phrase = getFunPhrase(result.humanAge);
-                    const IconComponent = phrase.Icon;
-                    return (
-                      <>
-                        <IconComponent className="w-6 h-6 flex-shrink-0" />
-                        <span>Si {result.name} était un humain, {result.isFemale ? 'elle' : 'il'} {phrase.text}</span>
-                      </>
-                    );
-                  })()}
-                </div>
-              )}
             </div>
+
+            {showDelayedContent && (
+              <div className="space-y-3">
+                <h3 className="text-xl font-bold text-center text-gray-800 mb-4">
+                  Si {result.name} était un{result.isFemale ? 'e' : ''} humain{result.isFemale ? 'e' : ''}...
+                </h3>
+
+                {(() => {
+                  const phrase = getFunPhrase(result.humanAge);
+                  const pronoun = result.isFemale ? 'elle' : 'il';
+
+                  return (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {/* Carte Québec */}
+                      <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-5 rounded-xl border-2 border-blue-300 shadow-md hover:shadow-lg transition-shadow">
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="text-3xl">🍁</span>
+                          <h4 className="font-bold text-lg text-blue-800">Au Québec</h4>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <span className="text-2xl flex-shrink-0">{phrase.quebec.icon}</span>
+                          <p className="text-gray-800 text-base leading-relaxed">
+                            {pronoun} {phrase.quebec.verb} {phrase.quebec.text}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Carte Europe */}
+                      <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-5 rounded-xl border-2 border-purple-300 shadow-md hover:shadow-lg transition-shadow">
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="text-3xl">🇪🇺</span>
+                          <h4 className="font-bold text-lg text-purple-800">En Europe</h4>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <span className="text-2xl flex-shrink-0">{phrase.europe.icon}</span>
+                          <p className="text-gray-800 text-base leading-relaxed">
+                            {pronoun} {phrase.europe.verb} {phrase.europe.text}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
+            )}
 
             {showDelayedContent && (
               <>
@@ -1469,6 +1658,9 @@ const VraiAge = () => {
                   </p>
                   <p className="text-4xl mt-2">
                     {result.lifeStage.split(' ')[0]}
+                  </p>
+                  <p className="text-base mt-3 italic text-white/90">
+                    {getLifeStageDescription(result.lifeStage, result.name)}
                   </p>
                 </div>
 
@@ -1567,7 +1759,7 @@ const VraiAge = () => {
                 )}
 
                 {result.isSenior && (
-                  <div className="relative bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 rounded-2xl p-6 text-white shadow-xl overflow-hidden">
+                  <div className="relative bg-gradient-to-br from-indigo-600 via-blue-600 to-indigo-700 rounded-2xl p-6 text-white shadow-xl overflow-hidden">
                     {/* Overlay décoratif */}
                     <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50"></div>
 
@@ -1578,12 +1770,9 @@ const VraiAge = () => {
                           <HeartHandshake className="w-8 h-8 text-white" strokeWidth={1.5} />
                         </div>
                         <div className="flex-1">
-                          <h3 className="font-bold text-2xl mb-2 flex items-center gap-2">
+                          <h3 className="font-bold text-2xl mb-2">
                             Accompagnement senior
                           </h3>
-                          <p className="text-white/90 text-sm leading-relaxed">
-                            {result.name} a atteint {result.lifePercentage}% de son espérance de vie et entre dans une phase précieuse qui mérite une attention particulière.
-                          </p>
                         </div>
                       </div>
 
@@ -1594,7 +1783,7 @@ const VraiAge = () => {
                           <div>
                             <p className="font-bold text-lg mb-1">À l'Écoute de Nala</p>
                             <p className="text-sm text-white/95 leading-relaxed">
-                              Outil vétérinaire gratuit pour évaluer la qualité de vie des animaux seniors et prendre des décisions éclairées au bon moment.
+                              Outil vétérinaire pour évaluer la qualité de vie des animaux seniors et prendre des décisions éclairées au bon moment.
                             </p>
                           </div>
                         </div>
@@ -1602,15 +1791,15 @@ const VraiAge = () => {
                         {/* Bénéfices */}
                         <div className="space-y-2 text-sm">
                           <div className="flex items-center gap-2">
-                            <CheckCircle className="w-4 h-4 text-emerald-200 flex-shrink-0" />
-                            <span className="text-white/90">Questionnaire validé scientifiquement</span>
+                            <CheckCircle className="w-4 h-4 text-blue-200 flex-shrink-0" />
+                            <span className="text-white/90">Questionnaire inspiré par les données scientifiques</span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <Activity className="w-4 h-4 text-emerald-200 flex-shrink-0" />
+                            <Activity className="w-4 h-4 text-blue-200 flex-shrink-0" />
                             <span className="text-white/90">Suivi de l'évolution dans le temps</span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <HeartHandshake className="w-4 h-4 text-emerald-200 flex-shrink-0" />
+                            <HeartHandshake className="w-4 h-4 text-blue-200 flex-shrink-0" />
                             <span className="text-white/90">Aide à la prise de décision</span>
                           </div>
                         </div>
@@ -1621,15 +1810,11 @@ const VraiAge = () => {
                         href="https://ecoutenala.ca"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex items-center justify-center gap-3 w-full bg-white text-teal-600 py-4 rounded-xl font-bold text-lg hover:bg-teal-50 transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+                        className="group flex items-center justify-center gap-3 w-full bg-white text-indigo-700 py-4 rounded-xl font-bold text-lg hover:bg-indigo-50 transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
                       >
                         <span>Évaluer la qualité de vie</span>
                         <ExternalLink className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
                       </a>
-
-                      <p className="text-center text-xs text-white/70 mt-3">
-                        Créé par Dr. Natacha Barrette • Gratuit et sans inscription
-                      </p>
                     </div>
                   </div>
                 )}
