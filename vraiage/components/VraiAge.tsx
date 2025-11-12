@@ -1,36 +1,14 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import ContactModal from '@/components/ContactModal';
 import CookieBanner from '@/components/CookieBanner';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const VraiAge = () => {
-  const [currentPage, setCurrentPage] = useState('home');
-  const [currentPet, setCurrentPet] = useState<string | null>(null);
-  const [formData, setFormData] = useState<Record<string, any>>({});
-  const [loadingMessage, setLoadingMessage] = useState('');
-  const [result, setResult] = useState<any>(null);
-  const [showLifeExpectancy, setShowLifeExpectancy] = useState(false);
-  const [ageCounter, setAgeCounter] = useState(0);
-  const [showConfetti, setShowConfetti] = useState(false);
-  const [showDelayedContent, setShowDelayedContent] = useState(false);
-  const [showWeightHelper, setShowWeightHelper] = useState(false);
-  const [showBodyScoreHelper, setShowBodyScoreHelper] = useState(false);
-  const [weightUnit, setWeightUnit] = useState('kg');
-  const [showAgeError, setShowAgeError] = useState(false);
-  const [showLifeExpectancyInfo, setShowLifeExpectancyInfo] = useState(false);
-  const [validationErrors, setValidationErrors] = useState<string[]>([]);
-  const [showContactModal, setShowContactModal] = useState(false);
-  const [isAboutMeOpen, setIsAboutMeOpen] = useState(false);
-  const [isAboutVraiAgeOpen, setIsAboutVraiAgeOpen] = useState(false);
-  const [autoFilledDogMuzzle, setAutoFilledDogMuzzle] = useState(false);
-  const [autoFilledDogWeight, setAutoFilledDogWeight] = useState(false);
-
-  // Messages de chargement
-  const loadingMessages: Record<string, string[]> = {
+// Constantes déplacées hors du composant pour éviter les re-créations
+const LOADING_MESSAGES: Record<string, string[]> = {
     cat: [
       "Ton chat fait ses griffes pendant qu'on analyse son ADN félin... 🐾",
       "Consultation de l'oracle des moustaches en cours... 🔮",
@@ -41,10 +19,9 @@ const VraiAge = () => {
       "Analyse des pattes et de la truffe en cours... 🐾",
       "Décodage du langage canin vers l'humain... 🐶"
     ]
-  };
+};
 
-  // Phrases humoristiques originales de VraiÂge
-  const funPhrases = [
+const FUN_PHRASES = [
     { max: 3, text: "serait à la garderie en train de faire des siestes", icon: "🍼" },
     { max: 6, text: "apprendrait à compter jusqu'à 10", icon: "🎈" },
     { max: 10, text: "jouerait aux billes dans la cour d'école", icon: "⚽" },
@@ -69,10 +46,9 @@ const VraiAge = () => {
     { max: 95, text: "aurait vu passer trois générations", icon: "👨‍👩‍👧‍👦" },
     { max: 100, text: "recevrait une lettre de la Reine", icon: "👑" },
     { max: 999, text: "entrerait dans le livre des records", icon: "🏆" }
-  ];
+];
 
-  // Données races chats avec espérance de vie
-  const catBreeds = [
+const CAT_BREEDS = [
     { value: 'mixed', name: 'Autre race ou croisé (domestique, gouttière)', lifespan: 15 },
     { value: 'birman', name: 'Birman', lifespan: 16.1 },
     { value: 'burmese', name: 'Burmese', lifespan: 14.3 },
@@ -86,10 +62,9 @@ const VraiAge = () => {
     { value: 'sphynx', name: 'Sphynx', lifespan: 7 },
     { value: 'russian-blue', name: 'Bleu Russe', lifespan: 16 },
     { value: 'scottish-fold', name: 'Scottish Fold', lifespan: 13 }
-  ];
+];
 
-  // Données races chiens avec espérance de vie
-  const dogBreeds = [
+const DOG_BREEDS = [
     { value: 'mixed', name: 'Croisé/Autre race', lifespan: 12.71, size: 'medium', muzzle: 'mesocephalic', weightRange: null },
     { value: 'teckel', name: 'Teckel', lifespan: 15.2, size: 'small', muzzle: 'dolichocephalic', weightRange: '5-10' },
     { value: 'chihuahua', name: 'Chihuahua', lifespan: 15.01, size: 'small', muzzle: 'mesocephalic', weightRange: 'under-5' },
@@ -108,10 +83,9 @@ const VraiAge = () => {
     { value: 'dogue-allemand', name: 'Dogue Allemand', lifespan: 9.63, size: 'giant', muzzle: 'mesocephalic', weightRange: 'over-60' },
     { value: 'saint-bernard', name: 'Saint-Bernard', lifespan: 9, size: 'giant', muzzle: 'mesocephalic', weightRange: 'over-60' },
     { value: 'dogue-bordeaux', name: 'Dogue de Bordeaux', lifespan: 5.5, size: 'giant', muzzle: 'brachycephalic', weightRange: 'over-60' }
-  ];
+];
 
-  // Intervalles de poids pour chiens
-  const dogWeightRanges = [
+const DOG_WEIGHT_RANGES = [
     { range: 'under-5', label: 'Moins de 11 lbs (5 kg)', visual: '🐕 Très petit (Chihuahua, Yorkshire)', avgWeight: 3, size: 'small' },
     { range: '5-10', label: '11-22 lbs (5-10 kg)', visual: '🐕 Petit (Jack Russell, Teckel)', avgWeight: 7.5, size: 'small' },
     { range: '10-15', label: '22-33 lbs (10-15 kg)', visual: '🐕 Petit-Moyen (Cocker, Beagle)', avgWeight: 12.5, size: 'medium' },
@@ -119,13 +93,13 @@ const VraiAge = () => {
     { range: '25-40', label: '55-88 lbs (25-40 kg)', visual: '🐕 Grand (Labrador, Golden)', avgWeight: 32.5, size: 'large' },
     { range: '40-60', label: '88-132 lbs (40-60 kg)', visual: '🐕 Très Grand (Berger Allemand, Boxer)', avgWeight: 50, size: 'large' },
     { range: 'over-60', label: 'Plus de 132 lbs (60 kg)', visual: '🐕 Géant (Dogue Allemand, St-Bernard)', avgWeight: 70, size: 'giant' }
-  ];
+];
 
-  // Score corporel avec visuels
-  // Note: Seuls les scores "positifs" (idéal à obèse) sont inclus
-  // La maigreur n'est pas prise en compte car elle peut être un symptôme de vieillissement
-  // naturel ou de maladie, rendant l'interprétation ambiguë sans examen vétérinaire
-  const bodyScores = [
+// Score corporel avec visuels
+// Note: Seuls les scores "positifs" (idéal à obèse) sont inclus
+// La maigreur n'est pas prise en compte car elle peut être un symptôme de vieillissement
+// naturel ou de maladie, rendant l'interprétation ambiguë sans examen vétérinaire
+const BODY_SCORES = [
     {
       value: 'ideal',
       label: 'Idéal',
@@ -144,10 +118,10 @@ const VraiAge = () => {
       description: 'Côtes non palpables, abdomen distendu',
       emoji: '🔴'
     }
-  ];
+];
 
-  // Types de museau (chiens uniquement)
-  const muzzleTypes = [
+// Types de museau (chiens uniquement)
+const MUZZLE_TYPES = [
     {
       value: 'dolichocephalic',
       label: 'Dolichocéphale',
@@ -173,28 +147,52 @@ const VraiAge = () => {
       multiplier: 0.85,
       image: '/images/muzzle-brachycephalic.png'
     }
-  ];
+];
 
-  const getFunPhrase = (age: number) => {
-    return funPhrases.find(p => age <= p.max) || funPhrases[funPhrases.length - 1];
-  };
+// Fonctions utilitaires déplacées hors du composant
+const getFunPhrase = (age: number) => {
+  return FUN_PHRASES.find(p => age <= p.max) || FUN_PHRASES[FUN_PHRASES.length - 1];
+};
 
-  const formatAgeWithMonths = (ageInYears: number) => {
-    const years = Math.floor(ageInYears);
-    const months = Math.round((ageInYears - years) * 12);
+const formatAgeWithMonths = (ageInYears: number) => {
+  const years = Math.floor(ageInYears);
+  const months = Math.round((ageInYears - years) * 12);
 
-    if (months === 0) {
-      return `${years} ${years < 2 ? 'an' : 'ans'}`;
-    } else if (months === 12) {
-      return `${years + 1} ${years + 1 < 2 ? 'an' : 'ans'}`;
-    } else {
-      return `${years} ${years < 2 ? 'an' : 'ans'} ${months} mois`;
-    }
-  };
+  if (months === 0) {
+    return `${years} ${years < 2 ? 'an' : 'ans'}`;
+  } else if (months === 12) {
+    return `${years + 1} ${years + 1 < 2 ? 'an' : 'ans'}`;
+  } else {
+    return `${years} ${years < 2 ? 'an' : 'ans'} ${months} mois`;
+  }
+};
+
+// Composant principal
+const VraiAge = () => {
+  const [currentPage, setCurrentPage] = useState('home');
+  const [currentPet, setCurrentPet] = useState<string | null>(null);
+  const [formData, setFormData] = useState<Record<string, any>>({});
+  const [loadingMessage, setLoadingMessage] = useState('');
+  const [result, setResult] = useState<any>(null);
+  const [showLifeExpectancy, setShowLifeExpectancy] = useState(false);
+  const [ageCounter, setAgeCounter] = useState(0);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [showDelayedContent, setShowDelayedContent] = useState(false);
+  const [showWeightHelper, setShowWeightHelper] = useState(false);
+  const [showBodyScoreHelper, setShowBodyScoreHelper] = useState(false);
+  const [weightUnit, setWeightUnit] = useState('kg');
+  const [showAgeError, setShowAgeError] = useState(false);
+  const [showLifeExpectancyInfo, setShowLifeExpectancyInfo] = useState(false);
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
+  const [showContactModal, setShowContactModal] = useState(false);
+  const [isAboutMeOpen, setIsAboutMeOpen] = useState(false);
+  const [isAboutVraiAgeOpen, setIsAboutVraiAgeOpen] = useState(false);
+  const [autoFilledDogMuzzle, setAutoFilledDogMuzzle] = useState(false);
+  const [autoFilledDogWeight, setAutoFilledDogWeight] = useState(false);
 
   const getWeightRangeLabel = () => {
     if (!formData.dogWeightRange) return '';
-    const range = dogWeightRanges.find(r => r.range === formData.dogWeightRange);
+    const range = DOG_WEIGHT_RANGES.find(r => r.range === formData.dogWeightRange);
     return range ? range.label : '';
   };
 
@@ -207,7 +205,7 @@ const VraiAge = () => {
 
   // Gestion de la sélection de race de chien avec auto-complétion
   const handleDogBreedChange = (breedValue: string) => {
-    const selectedBreed = dogBreeds.find(b => b.value === breedValue);
+    const selectedBreed = DOG_BREEDS.find(b => b.value === breedValue);
 
     if (selectedBreed) {
       const newFormData: any = { ...formData, dogBreed: breedValue };
@@ -288,7 +286,7 @@ const VraiAge = () => {
 
     humanAge = humanAge * lifestyleMultipliers[lifestyle];
 
-    const breedData = catBreeds.find(b => b.value === breed);
+    const breedData = CAT_BREEDS.find(b => b.value === breed);
     let lifeExpectancy = breedData ? breedData.lifespan : 15;
 
     if (lifestyle === 'outdoor') lifeExpectancy -= 4;
@@ -351,7 +349,7 @@ const VraiAge = () => {
 
     let weight;
     if (formData.dogWeightRange) {
-      const range = dogWeightRanges.find(r => r.range === formData.dogWeightRange);
+      const range = DOG_WEIGHT_RANGES.find(r => r.range === formData.dogWeightRange);
       weight = range ? range.avgWeight : 20;
     } else if (formData.dogWeight) {
       weight = convertWeight(parseFloat(formData.dogWeight), weightUnit);
@@ -396,7 +394,7 @@ const VraiAge = () => {
     else if (age <= 10) lifeStage = '🧘 Senior';
     else lifeStage = '👑 Doyen';
 
-    const breedData = dogBreeds.find(b => b.value === breed);
+    const breedData = DOG_BREEDS.find(b => b.value === breed);
     let lifeExpectancy = breedData ? breedData.lifespan : 12;
 
     // Seul le surpoids/obésité est pris en compte (facteurs modifiables et documentés)
@@ -418,7 +416,7 @@ const VraiAge = () => {
 
     // Appliquer le coefficient de type de museau
     const muzzleType = formData.dogMuzzle || 'mesocephalic';
-    const muzzleData = muzzleTypes.find(m => m.value === muzzleType);
+    const muzzleData = MUZZLE_TYPES.find(m => m.value === muzzleType);
     if (muzzleData) {
       lifeExpectancy = lifeExpectancy * muzzleData.multiplier;
     }
@@ -517,7 +515,7 @@ const VraiAge = () => {
     setCurrentPage('loading');
     setShowDelayedContent(false);
 
-    const messages = loadingMessages[currentPet!];
+    const messages = LOADING_MESSAGES[currentPet!];
     let messageIndex = 0;
     setLoadingMessage(messages[0]);
 
@@ -662,14 +660,16 @@ const VraiAge = () => {
               <button
                 onClick={() => {setCurrentPet('cat'); setCurrentPage('catForm');}}
                 className="group p-6 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-purple-400 hover:shadow-2xl text-center"
+                aria-label="Calculer l'âge de mon chat"
               >
                 <div className="mb-3 group-hover:scale-110 transition-transform duration-300 flex justify-center items-center" style={{ animation: 'float 3s ease-in-out infinite' }}>
                   <Image
                     src="/images/cat-emoji.png"
-                    alt="Chat"
+                    alt="Illustration d'un chat"
                     width={192}
                     height={192}
                     className="w-48 h-48 object-contain"
+                    priority
                   />
                 </div>
                 <div className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent text-center">Chat</div>
@@ -685,14 +685,16 @@ const VraiAge = () => {
                   }
                 }}
                 className="group p-6 bg-gradient-to-br from-blue-50 to-orange-50 rounded-xl hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-orange-400 hover:shadow-2xl text-center"
+                aria-label="Calculer l'âge de mon chien"
               >
                 <div className="mb-3 group-hover:scale-110 transition-transform duration-300 flex justify-center items-center" style={{ animation: 'float 3s ease-in-out infinite' }}>
                   <Image
                     src="/images/dog-emoji.png"
-                    alt="Chien"
+                    alt="Illustration d'un chien"
                     width={192}
                     height={192}
                     className="w-48 h-48 object-contain"
+                    priority
                   />
                 </div>
                 <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-orange-600 bg-clip-text text-transparent text-center">Chien</div>
@@ -705,9 +707,12 @@ const VraiAge = () => {
               <button
                 onClick={() => setIsAboutMeOpen(!isAboutMeOpen)}
                 className="w-full p-6 text-left hover:bg-white/50 transition-colors"
+                aria-expanded={isAboutMeOpen}
+                aria-controls="about-me-content"
+                aria-label="À propos de Dr. Natacha Barrette"
               >
                 <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-3">
-                  <span className="text-purple-600 transition-transform duration-300" style={{ transform: isAboutMeOpen ? 'rotate(0deg)' : 'rotate(-90deg)' }}>▼</span>
+                  <span className="text-purple-600 transition-transform duration-300" style={{ transform: isAboutMeOpen ? 'rotate(0deg)' : 'rotate(-90deg)' }} aria-hidden="true">▼</span>
                   À propos de moi
                 </h2>
                 {!isAboutMeOpen && (
@@ -717,7 +722,12 @@ const VraiAge = () => {
                 )}
               </button>
 
-              <div className={`transition-all duration-500 ease-in-out ${isAboutMeOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+              <div
+                id="about-me-content"
+                className={`transition-all duration-500 ease-in-out ${isAboutMeOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}
+                role="region"
+                aria-labelledby="about-me-heading"
+              >
                 <div className="px-8 pb-8">
                   <div className="flex items-start gap-6">
                     <div className="flex-shrink-0">
@@ -756,10 +766,13 @@ const VraiAge = () => {
               <button
                 onClick={() => setIsAboutVraiAgeOpen(!isAboutVraiAgeOpen)}
                 className="w-full p-6 text-left hover:bg-white/50 transition-colors"
+                aria-expanded={isAboutVraiAgeOpen}
+                aria-controls="about-vraiage-content"
+                aria-label="À propos de VraiÂge"
               >
                 <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-3">
-                  <span className="text-blue-600 transition-transform duration-300" style={{ transform: isAboutVraiAgeOpen ? 'rotate(0deg)' : 'rotate(-90deg)' }}>▼</span>
-                  🐾 À propos de VraiÂge
+                  <span className="text-blue-600 transition-transform duration-300" style={{ transform: isAboutVraiAgeOpen ? 'rotate(0deg)' : 'rotate(-90deg)' }} aria-hidden="true">▼</span>
+                  <span aria-hidden="true">🐾</span> À propos de VraiÂge
                 </h2>
                 {!isAboutVraiAgeOpen && (
                   <p className="text-gray-600 mt-2 text-sm italic">
@@ -894,7 +907,7 @@ const VraiAge = () => {
                 defaultValue=""
               >
                 <option value="">Choisir une race</option>
-                {catBreeds.map(breed => (
+                {CAT_BREEDS.map(breed => (
                   <option key={breed.value} value={breed.value}>{breed.name}</option>
                 ))}
               </select>
@@ -966,7 +979,7 @@ const VraiAge = () => {
                 💡 Si ton chat est très maigre, consulte un vétérinaire pour écarter toute condition médicale.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {bodyScores.map(score => (
+                {BODY_SCORES.map(score => (
                   <button
                     key={score.value}
                     onClick={() => setFormData({...formData, catBody: score.value})}
@@ -1070,7 +1083,7 @@ const VraiAge = () => {
                 value={formData.dogBreed || ""}
               >
                 <option value="">Choisir une race</option>
-                {dogBreeds.map(breed => (
+                {DOG_BREEDS.map(breed => (
                   <option key={breed.value} value={breed.value}>{breed.name}</option>
                 ))}
               </select>
@@ -1084,7 +1097,7 @@ const VraiAge = () => {
                 <p className="mt-1 text-blue-700">⚠️ La forme du museau influence l'espérance de vie (les museaux courts peuvent causer des problèmes respiratoires)</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {muzzleTypes.map(muzzle => (
+                {MUZZLE_TYPES.map(muzzle => (
                   <button
                     key={muzzle.value}
                     onClick={() => handleDogMuzzleChange(muzzle.value)}
@@ -1117,7 +1130,7 @@ const VraiAge = () => {
               <div className="space-y-2">
                 {/* Première ligne : 3 options */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  {dogWeightRanges.slice(0, 3).map(range => (
+                  {DOG_WEIGHT_RANGES.slice(0, 3).map(range => (
                     <button
                       key={range.range}
                       onClick={() => handleDogWeightChange(range.range)}
@@ -1132,7 +1145,7 @@ const VraiAge = () => {
                 </div>
                 {/* Deuxième ligne : 3 options */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  {dogWeightRanges.slice(3, 6).map(range => (
+                  {DOG_WEIGHT_RANGES.slice(3, 6).map(range => (
                     <button
                       key={range.range}
                       onClick={() => handleDogWeightChange(range.range)}
@@ -1148,7 +1161,7 @@ const VraiAge = () => {
                 {/* Troisième ligne : 1 option centrée */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   <div></div>
-                  {dogWeightRanges.slice(6).map(range => (
+                  {DOG_WEIGHT_RANGES.slice(6).map(range => (
                     <button
                       key={range.range}
                       onClick={() => handleDogWeightChange(range.range)}
@@ -1207,7 +1220,7 @@ const VraiAge = () => {
                 💡 Si ton chien est très maigre, consulte un vétérinaire pour écarter toute condition médicale.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {bodyScores.map(score => (
+                {BODY_SCORES.map(score => (
                   <button
                     key={score.value}
                     onClick={() => setFormData({...formData, dogBody: score.value})}
