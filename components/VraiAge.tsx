@@ -31,31 +31,140 @@ const LOADING_MESSAGES: Record<string, string[]> = {
     ]
 };
 
-const FUN_PHRASES = [
-    { max: 3, text: "serait à la garderie en train de faire des siestes", Icon: Baby },
-    { max: 6, text: "apprendrait à compter jusqu'à 10", Icon: PartyPopper },
-    { max: 10, text: "jouerait aux billes dans la cour d'école", Icon: Circle },
-    { max: 13, text: "découvrirait les joies de TikTok", Icon: Smartphone },
-    { max: 16, text: "aurait son premier crush au secondaire", Icon: Heart },
-    { max: 18, text: "étudierait pour son permis de conduire", Icon: Car },
-    { max: 21, text: "fêterait sa majorité dans tous les pays", Icon: PartyPopper },
-    { max: 25, text: "terminerait ses études universitaires", Icon: GraduationCap },
-    { max: 30, text: "penserait à s'acheter un condo", Icon: Home },
-    { max: 35, text: "jonglerait entre carrière et vie de famille", Icon: Briefcase },
-    { max: 40, text: "commencerait à avoir mal au dos", Icon: Smile },
-    { max: 45, text: "dirait 'c'était mieux dans mon temps'", Icon: Radio },
-    { max: 50, text: "planifierait déjà sa retraite anticipée", Icon: Palmtree },
-    { max: 55, text: "serait grand-parent gâteau", Icon: User },
-    { max: 60, text: "profiterait de ses REER bien mérités", Icon: Coins },
-    { max: 65, text: "jouerait au golf tous les matins", Icon: Flag },
-    { max: 70, text: "raconterait ses histoires pour la 100e fois", Icon: BookOpen },
-    { max: 75, text: "serait la vedette du bingo du jeudi", Icon: Trophy },
-    { max: 80, text: "aurait une collection impressionnante de piluliers", Icon: Pill },
-    { max: 85, text: "ferait des marathons de mots croisés", Icon: Newspaper },
-    { max: 90, text: "serait une encyclopédie vivante", Icon: Library },
-    { max: 95, text: "aurait vu passer trois générations", Icon: Users },
-    { max: 100, text: "recevrait une lettre de la Reine", Icon: Crown },
-    { max: 999, text: "entrerait dans le livre des records", Icon: Trophy }
+// Interface pour phrases comparatives Québec vs Europe
+interface FunPhrase {
+  max: number;
+  quebec: {
+    text: string;
+    Icon: React.ComponentType<{ className?: string }>;
+  };
+  europe: {
+    text: string;
+    Icon: React.ComponentType<{ className?: string }>;
+  };
+}
+
+const FUN_PHRASES: FunPhrase[] = [
+  {
+    max: 3,
+    quebec: { text: "pleurerait parce que son iPad est déchargé", Icon: Baby },
+    europe: { text: "pleurerait parce que sa tablette n'a plus de batterie", Icon: Baby }
+  },
+  {
+    max: 6,
+    quebec: { text: "apprendrait à compter jusqu'à 10 en français", Icon: PartyPopper },
+    europe: { text: "apprendrait à compter jusqu'à 10 en classe", Icon: PartyPopper }
+  },
+  {
+    max: 10,
+    quebec: { text: "jouerait à 4 coins carré en criant 'SERVEUSE!'", Icon: Circle },
+    europe: { text: "jouerait à l'épervier dans la cour de récré", Icon: Circle }
+  },
+  {
+    max: 13,
+    quebec: { text: "découvrirait les joies de TikTok (et passerait 6h dessus)", Icon: Smartphone },
+    europe: { text: "découvrirait TikTok (et oublierait de faire ses devoirs)", Icon: Smartphone }
+  },
+  {
+    max: 16,
+    quebec: { text: "stresserait pour son bal de finissants dans 3 ans", Icon: Heart },
+    europe: { text: "stresserait pour son brevet des collèges", Icon: Heart }
+  },
+  {
+    max: 18,
+    quebec: { text: "étudierait pour son permis de conduire (et échouerait 2 fois)", Icon: Car },
+    europe: { text: "passerait son permis de conduire (en calant 3 fois)", Icon: Car }
+  },
+  {
+    max: 21,
+    quebec: { text: "boirait du Caribou cheap à la Saint-Jean", Icon: PartyPopper },
+    europe: { text: "ferait la fête du 14 juillet sur les Champs", Icon: PartyPopper }
+  },
+  {
+    max: 25,
+    quebec: { text: "terminerait son bac en se demandant si ça vaut vraiment 60K de dettes", Icon: GraduationCap },
+    europe: { text: "terminerait son master en se demandant où trouver un CDI", Icon: GraduationCap }
+  },
+  {
+    max: 30,
+    quebec: { text: "réaliserait qu'il/elle ne pourra JAMAIS s'acheter une maison à Montréal", Icon: Home },
+    europe: { text: "chercherait un studio à Paris à 1500€/mois (en vain)", Icon: Home }
+  },
+  {
+    max: 35,
+    quebec: { text: "se demanderait s'il/elle devrait avoir des enfants (vu le prix des CPE)", Icon: Briefcase },
+    europe: { text: "attendrait 3 ans pour une place en crèche", Icon: Briefcase }
+  },
+  {
+    max: 40,
+    quebec: { text: "commencerait à avoir mal au dos (en pellant l'entrée)", Icon: Smile },
+    europe: { text: "commencerait à avoir mal au dos (en portant les courses)", Icon: Smile }
+  },
+  {
+    max: 45,
+    quebec: { text: "se plaindrait que TikTok a ruiné la jeunesse (en scrollant sur Facebook)", Icon: Radio },
+    europe: { text: "dirait 'c'était mieux dans mon temps' en regardant BFM TV", Icon: Radio }
+  },
+  {
+    max: 50,
+    quebec: { text: "calculerait combien il lui reste à travailler (23 ans... soupir)", Icon: Palmtree },
+    europe: { text: "rêverait de sa retraite à 62 ans (si elle existe encore)", Icon: Palmtree }
+  },
+  {
+    max: 55,
+    quebec: { text: "serait grand-parent gâteau (et déneigeur officiel)", Icon: User },
+    europe: { text: "serait grand-parent gâteau (et gardien officiel le mercredi)", Icon: User }
+  },
+  {
+    max: 60,
+    quebec: { text: "vendrait sa maison 10x le prix qu'il/elle l'a payée", Icon: Coins },
+    europe: { text: "vendrait son appartement parisien une fortune", Icon: Coins }
+  },
+  {
+    max: 65,
+    quebec: { text: "se lèverait à 5h pour aller au Tim Hortons jaser avec le monde", Icon: Flag },
+    europe: { text: "irait au café du coin lire Le Figaro tous les matins", Icon: Flag }
+  },
+  {
+    max: 70,
+    quebec: { text: "raconterait encore l'histoire de la tempête de '98", Icon: BookOpen },
+    europe: { text: "raconterait encore l'histoire de Mai 68", Icon: BookOpen }
+  },
+  {
+    max: 75,
+    quebec: { text: "gagnerait ENCORE au bingo de la paroisse (5e fois cette année)", Icon: Trophy },
+    europe: { text: "jouerait à la belote au club du 3e âge", Icon: Trophy }
+  },
+  {
+    max: 80,
+    quebec: { text: "aurait plus de piluliers que de verres dans l'armoire", Icon: Pill },
+    europe: { text: "prendrait 8 médicaments différents (mais oublierait lequel)", Icon: Pill }
+  },
+  {
+    max: 85,
+    quebec: { text: "finirait ses mots croisés du Journal de Montréal en 15 minutes", Icon: Newspaper },
+    europe: { text: "finirait ses mots fléchés du Figaro en 10 minutes", Icon: Newspaper }
+  },
+  {
+    max: 90,
+    quebec: { text: "serait une encyclopédie vivante (version papier uniquement)", Icon: Library },
+    europe: { text: "serait une bibliothèque vivante (et refuserait d'apprendre l'ordinateur)", Icon: Library }
+  },
+  {
+    max: 95,
+    quebec: { text: "se souviendrait de la crise d'Octobre comme si c'était hier", Icon: Users },
+    europe: { text: "se souviendrait de Mai 68 comme si c'était hier", Icon: Users }
+  },
+  {
+    max: 100,
+    quebec: { text: "recevrait une lettre du Premier ministre (mais préférerait celle de la Reine)", Icon: Crown },
+    europe: { text: "recevrait une lettre du Président de la République", Icon: Crown }
+  },
+  {
+    max: 999,
+    quebec: { text: "passerait à TVA Nouvelles pour raconter son secret de longévité (du gin)", Icon: Trophy },
+    europe: { text: "passerait à France 2 pour raconter son secret de longévité (du vin rouge)", Icon: Trophy }
+  }
 ];
 
 const CAT_BREEDS = [
@@ -1438,21 +1547,54 @@ const VraiAge = () => {
               <div className="text-2xl">
                 {ageCounter < 2 ? 'an' : 'ans'} en âge humain
               </div>
-              {showDelayedContent && (
-                <div className="mt-4 text-lg flex items-center justify-center gap-2">
-                  {(() => {
-                    const phrase = getFunPhrase(result.humanAge);
-                    const IconComponent = phrase.Icon;
-                    return (
-                      <>
-                        <IconComponent className="w-6 h-6 flex-shrink-0" />
-                        <span>Si {result.name} était un humain, {result.isFemale ? 'elle' : 'il'} {phrase.text}</span>
-                      </>
-                    );
-                  })()}
-                </div>
-              )}
             </div>
+
+            {showDelayedContent && (
+              <div className="space-y-3">
+                <h3 className="text-xl font-bold text-center text-gray-800 mb-4">
+                  Si {result.name} était un{result.isFemale ? 'e' : ''} humain{result.isFemale ? 'e' : ''}...
+                </h3>
+
+                {(() => {
+                  const phrase = getFunPhrase(result.humanAge);
+                  const IconQC = phrase.quebec.Icon;
+                  const IconEU = phrase.europe.Icon;
+                  const pronoun = result.isFemale ? 'elle' : 'il';
+
+                  return (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {/* Carte Québec */}
+                      <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-5 rounded-xl border-2 border-blue-300 shadow-md hover:shadow-lg transition-shadow">
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="text-3xl">🍁</span>
+                          <h4 className="font-bold text-lg text-blue-800">Au Québec</h4>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <IconQC className="w-6 h-6 flex-shrink-0 mt-0.5 text-blue-600" />
+                          <p className="text-gray-800 text-base leading-relaxed">
+                            {pronoun} {phrase.quebec.text}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Carte Europe */}
+                      <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-5 rounded-xl border-2 border-purple-300 shadow-md hover:shadow-lg transition-shadow">
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="text-3xl">🇪🇺</span>
+                          <h4 className="font-bold text-lg text-purple-800">En Europe</h4>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <IconEU className="w-6 h-6 flex-shrink-0 mt-0.5 text-purple-600" />
+                          <p className="text-gray-800 text-base leading-relaxed">
+                            {pronoun} {phrase.europe.text}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
+            )}
 
             {showDelayedContent && (
               <>
