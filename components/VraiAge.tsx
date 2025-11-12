@@ -8,12 +8,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import html2canvas from 'html2canvas';
 import {
-  Paw, Sparkles, Cat, Dog, Baby, PartyPopper, Heart, Car,
-  GraduationCap, Home, Briefcase, Smile, Radio, Palmtree,
-  User, Coins, Flag, BookOpen, Circle, Pill, Newspaper,
-  Library, Users, Crown, Trophy, CheckCircle, AlertCircle,
+  Paw, Sparkles, Cat, Dog, CheckCircle, AlertCircle,
   HelpCircle, ArrowLeft, Mail, ChevronDown, Info, Share2,
-  Facebook, Instagram, Copy, Check, Smartphone, MessageCircle,
+  Facebook, Instagram, Copy, Check, MessageCircle,
   HeartHandshake, ExternalLink, Stethoscope, Activity, Download
 } from 'lucide-react';
 
@@ -31,139 +28,157 @@ const LOADING_MESSAGES: Record<string, string[]> = {
     ]
 };
 
-// Interface pour phrases comparatives Québec vs Europe
+// VraiÂge - Paires de Phrases Comparatives Optimisées
+// Québec 🍁 vs Europe 🇪🇺
+// Version 2.0 - Novembre 2025
+
 interface FunPhrase {
   max: number;
   quebec: {
+    verb: string;
     text: string;
-    Icon: React.ComponentType<{ className?: string }>;
+    icon: string; // Emoji en string
   };
   europe: {
+    verb: string;
     text: string;
-    Icon: React.ComponentType<{ className?: string }>;
+    icon: string; // Emoji en string
   };
 }
 
 const FUN_PHRASES: FunPhrase[] = [
+  // 🧒 Génération Alpha (2010+) → 0-15 ans
   {
     max: 3,
-    quebec: { text: "pleurerait parce que son iPad est déchargé", Icon: Baby },
-    europe: { text: "pleurerait parce que sa tablette n'a plus de batterie", Icon: Baby }
+    quebec: { verb: "pleurerait", text: "parce que son iPad est déchargé", icon: "👶" },
+    europe: { verb: "pleurerait", text: "parce que sa tablette n'a plus de batterie", icon: "👶" }
   },
   {
     max: 6,
-    quebec: { text: "apprendrait à compter jusqu'à 10 en français", Icon: PartyPopper },
-    europe: { text: "apprendrait à compter jusqu'à 10 en classe", Icon: PartyPopper }
+    quebec: { verb: "chanterait", text: "Passe-Partout à tue-tête dans l'auto", icon: "🎵" },
+    europe: { verb: "regarderait", text: "Peppa Pig en boucle sur YouTube", icon: "🎵" }
   },
   {
     max: 10,
-    quebec: { text: "jouerait à 4 coins carré en criant 'SERVEUSE!'", Icon: Circle },
-    europe: { text: "jouerait à l'épervier dans la cour de récré", Icon: Circle }
+    quebec: { verb: "jouerait", text: "à 4 coins carré en criant 'SERVEUSE!'", icon: "⚪" },
+    europe: { verb: "jouerait", text: "à l'épervier dans la cour de récré", icon: "⚪" }
   },
   {
     max: 13,
-    quebec: { text: "découvrirait les joies de TikTok (et passerait 6h dessus)", Icon: Smartphone },
-    europe: { text: "découvrirait TikTok (et oublierait de faire ses devoirs)", Icon: Smartphone }
+    quebec: { verb: "scrollerait", text: "sur TikTok pendant 6h par jour", icon: "📱" },
+    europe: { verb: "oublierait", text: "ses devoirs en regardant TikTok", icon: "📱" }
   },
   {
     max: 16,
-    quebec: { text: "stresserait pour son bal de finissants dans 3 ans", Icon: Heart },
-    europe: { text: "stresserait pour son brevet des collèges", Icon: Heart }
+    quebec: { verb: "stresserait", text: "pour son bal de finissants dans 3 ans", icon: "❤️" },
+    europe: { verb: "passerait", text: "son brevet des collèges en transpirant", icon: "❤️" }
   },
+
+  // 🎮 Génération Z (1997-2012) → 15-25 ans
   {
     max: 18,
-    quebec: { text: "étudierait pour son permis de conduire (et échouerait 2 fois)", Icon: Car },
-    europe: { text: "passerait son permis de conduire (en calant 3 fois)", Icon: Car }
+    quebec: { verb: "échouerait", text: "son permis de conduire 2 fois (minimum)", icon: "🚗" },
+    europe: { verb: "calerait", text: "3 fois pendant l'examen de conduite", icon: "🚗" }
   },
   {
     max: 21,
-    quebec: { text: "boirait du Caribou cheap à la Saint-Jean", Icon: PartyPopper },
-    europe: { text: "ferait la fête du 14 juillet sur les Champs", Icon: PartyPopper }
+    quebec: { verb: "boirait", text: "du Caribou cheap à la Saint-Jean", icon: "🎉" },
+    europe: { verb: "ferait", text: "la fête du 14 juillet sur les Champs-Élysées", icon: "🎉" }
   },
   {
     max: 25,
-    quebec: { text: "terminerait son bac en se demandant si ça vaut vraiment 60K de dettes", Icon: GraduationCap },
-    europe: { text: "terminerait son master en se demandant où trouver un CDI", Icon: GraduationCap }
+    quebec: { verb: "finirait", text: "son bac avec 60K$ de dettes étudiantes", icon: "🎓" },
+    europe: { verb: "chercherait", text: "désespérément un CDI après son master", icon: "🎓" }
   },
+
+  // 💼 Millennials (1981-1996) → 25-40 ans
   {
     max: 30,
-    quebec: { text: "réaliserait qu'il/elle ne pourra JAMAIS s'acheter une maison à Montréal", Icon: Home },
-    europe: { text: "chercherait un studio à Paris à 1500€/mois (en vain)", Icon: Home }
+    quebec: { verb: "pleurerait", text: "en voyant le prix des condos à Montréal", icon: "🏠" },
+    europe: { verb: "abandonnerait", text: "l'idée d'acheter à Paris (1M€ le 30m²)", icon: "🏠" }
+  },
+  {
+    max: 33,
+    quebec: { verb: "attendrait", text: "3 ans pour une place en CPE", icon: "👶" },
+    europe: { verb: "mettrait", text: "son enfant sur liste d'attente avant sa naissance", icon: "👶" }
   },
   {
     max: 35,
-    quebec: { text: "se demanderait s'il/elle devrait avoir des enfants (vu le prix des CPE)", Icon: Briefcase },
-    europe: { text: "attendrait 3 ans pour une place en crèche", Icon: Briefcase }
+    quebec: { verb: "commanderait", text: "sur Uber Eats 4 soirs par semaine", icon: "🍕" },
+    europe: { verb: "paierait", text: "12€ de frais Deliveroo pour une pizza", icon: "🍕" }
   },
   {
     max: 40,
-    quebec: { text: "commencerait à avoir mal au dos (en pellant l'entrée)", Icon: Smile },
-    europe: { text: "commencerait à avoir mal au dos (en portant les courses)", Icon: Smile }
+    quebec: { verb: "aurait", text: "mal au dos en déneigant l'entrée", icon: "😊" },
+    europe: { verb: "gémirait", text: "en montant 3 étages sans ascenseur", icon: "😊" }
   },
+
+  // 📻 Génération X (1965-1980) → 40-55 ans
   {
     max: 45,
-    quebec: { text: "se plaindrait que TikTok a ruiné la jeunesse (en scrollant sur Facebook)", Icon: Radio },
-    europe: { text: "dirait 'c'était mieux dans mon temps' en regardant BFM TV", Icon: Radio }
+    quebec: { verb: "scrollerait", text: "sur Facebook en critiquant TikTok", icon: "📱" },
+    europe: { verb: "regarderait", text: "BFM TV en disant 'c'était mieux avant'", icon: "📺" }
   },
   {
     max: 50,
-    quebec: { text: "calculerait combien il lui reste à travailler (23 ans... soupir)", Icon: Palmtree },
-    europe: { text: "rêverait de sa retraite à 62 ans (si elle existe encore)", Icon: Palmtree }
+    quebec: { verb: "calculerait", text: "combien d'années avant la retraite (23... soupir)", icon: "🌴" },
+    europe: { verb: "rêverait", text: "de sa retraite à 64 ans (si elle existe encore)", icon: "🌴" }
   },
   {
     max: 55,
-    quebec: { text: "serait grand-parent gâteau (et déneigeur officiel)", Icon: User },
-    europe: { text: "serait grand-parent gâteau (et gardien officiel le mercredi)", Icon: User }
+    quebec: { verb: "déneigrait", text: "l'entrée des enfants ET des petits-enfants", icon: "👤" },
+    europe: { verb: "garderait", text: "les petits-enfants tous les mercredis", icon: "👤" }
   },
+
+  // 🏡 Baby-Boomers (1946-1964) → 55-75 ans
   {
     max: 60,
-    quebec: { text: "vendrait sa maison 10x le prix qu'il/elle l'a payée", Icon: Coins },
-    europe: { text: "vendrait son appartement parisien une fortune", Icon: Coins }
+    quebec: { verb: "vendrait", text: "sa maison 10x le prix payé en 1985", icon: "💰" },
+    europe: { verb: "revendrait", text: "son appartement parisien une fortune", icon: "💰" }
   },
   {
     max: 65,
-    quebec: { text: "se lèverait à 5h pour aller au Tim Hortons jaser avec le monde", Icon: Flag },
-    europe: { text: "irait au café du coin lire Le Figaro tous les matins", Icon: Flag }
+    quebec: { verb: "irait", text: "au Tim Hortons à 5h du matin jaser", icon: "☕" },
+    europe: { verb: "lirait", text: "Le Figaro au café du coin chaque matin", icon: "☕" }
   },
   {
     max: 70,
-    quebec: { text: "raconterait encore l'histoire de la tempête de '98", Icon: BookOpen },
-    europe: { text: "raconterait encore l'histoire de Mai 68", Icon: BookOpen }
+    quebec: { verb: "raconterait", text: "ENCORE la tempête de verglas de '98", icon: "📖" },
+    europe: { verb: "parlerait", text: "de Mai 68 comme si c'était hier", icon: "📖" }
   },
   {
     max: 75,
-    quebec: { text: "gagnerait ENCORE au bingo de la paroisse (5e fois cette année)", Icon: Trophy },
-    europe: { text: "jouerait à la belote au club du 3e âge", Icon: Trophy }
+    quebec: { verb: "gagnerait", text: "au bingo de la paroisse (5e fois cette année)", icon: "🏆" },
+    europe: { verb: "jouerait", text: "à la belote au club du 3e âge", icon: "🏆" }
   },
+
+  // 🧓 Génération Silencieuse (1928-1945) → 75-95 ans
   {
     max: 80,
-    quebec: { text: "aurait plus de piluliers que de verres dans l'armoire", Icon: Pill },
-    europe: { text: "prendrait 8 médicaments différents (mais oublierait lequel)", Icon: Pill }
+    quebec: { verb: "aurait", text: "plus de piluliers que de verres dans l'armoire", icon: "💊" },
+    europe: { verb: "prendrait", text: "8 médicaments (en oubliant lequel)", icon: "💊" }
   },
   {
     max: 85,
-    quebec: { text: "finirait ses mots croisés du Journal de Montréal en 15 minutes", Icon: Newspaper },
-    europe: { text: "finirait ses mots fléchés du Figaro en 10 minutes", Icon: Newspaper }
+    quebec: { verb: "finirait", text: "les mots croisés du JdeM en 10 minutes", icon: "📰" },
+    europe: { verb: "complèterait", text: "les mots fléchés du Figaro avant le café", icon: "📰" }
   },
   {
     max: 90,
-    quebec: { text: "serait une encyclopédie vivante (version papier uniquement)", Icon: Library },
-    europe: { text: "serait une bibliothèque vivante (et refuserait d'apprendre l'ordinateur)", Icon: Library }
+    quebec: { verb: "refuserait", text: "d'utiliser un ordinateur (papier only)", icon: "📚" },
+    europe: { verb: "dirait", text: "'Internet? Non merci, j'ai mes livres'", icon: "📚" }
   },
   {
     max: 95,
-    quebec: { text: "se souviendrait de la crise d'Octobre comme si c'était hier", Icon: Users },
-    europe: { text: "se souviendrait de Mai 68 comme si c'était hier", Icon: Users }
+    quebec: { verb: "se souviendrait", text: "de la crise d'Octobre 1970 comme si c'était hier", icon: "👥" },
+    europe: { verb: "se rappellerait", text: "la guerre avec une précision troublante", icon: "👥" }
   },
-  {
-    max: 100,
-    quebec: { text: "recevrait une lettre du Premier ministre (mais préférerait celle de la Reine)", Icon: Crown },
-    europe: { text: "recevrait une lettre du Président de la République", Icon: Crown }
-  },
+
+  // 👑 Greatest Generation (1901-1927) → 95+ ans
   {
     max: 999,
-    quebec: { text: "passerait à TVA Nouvelles pour raconter son secret de longévité (du gin)", Icon: Trophy },
-    europe: { text: "passerait à France 2 pour raconter son secret de longévité (du vin rouge)", Icon: Trophy }
+    quebec: { verb: "passerait", text: "à TVA pour révéler son secret (du gin)", icon: "👑" },
+    europe: { verb: "dévoilerait", text: "à France 2 son secret (un verre de rouge/jour)", icon: "👑" }
   }
 ];
 
@@ -215,10 +230,19 @@ const DOG_WEIGHT_RANGES = [
 ];
 
 // Score corporel avec visuels
-// Note: Seuls les scores "positifs" (idéal à obèse) sont inclus
-// La maigreur n'est pas prise en compte car elle peut être un symptôme de vieillissement
-// naturel ou de maladie, rendant l'interprétation ambiguë sans examen vétérinaire
 const BODY_SCORES = [
+    {
+      value: 'very_underweight',
+      label: 'Très maigre',
+      description: 'Os saillants, absence de graisse palpable, émacié',
+      Icon: AlertCircle
+    },
+    {
+      value: 'underweight',
+      label: 'Maigre',
+      description: 'Côtes, colonne vertébrale et os du bassin très visibles',
+      Icon: AlertCircle
+    },
     {
       value: 'ideal',
       label: 'Idéal',
@@ -245,7 +269,7 @@ const MUZZLE_TYPES = [
       value: 'dolichocephalic',
       label: 'Dolichocéphale',
       description: 'Museau long et fin, plus long que le crâne',
-      examples: 'Lévrier, Colley, Berger Allemand',
+      examples: 'Lévrier, Colley, Teckel',
       multiplier: 1.05,
       image: '/images/muzzle-dolichocephalic.png'
     },
@@ -273,19 +297,19 @@ const getFunPhrase = (age: number) => {
   return FUN_PHRASES.find(p => age <= p.max) || FUN_PHRASES[FUN_PHRASES.length - 1];
 };
 
-const getLifeStageDescription = (lifeStage: string): string => {
+const getLifeStageDescription = (lifeStage: string, animalName: string): string => {
   if (lifeStage.includes('Chaton') || lifeStage.includes('Chiot')) {
-    return "C'est encore un bébé !";
+    return `${animalName} est encore un bébé !`;
   } else if (lifeStage.includes('Junior') || lifeStage.includes('Jeune adulte')) {
-    return "On commence à prendre de l'expérience et apprendre de nos erreurs !";
+    return `${animalName} commence tout juste à apprendre de ses erreurs !`;
   } else if (lifeStage.includes('Adulte') && !lifeStage.includes('Jeune')) {
-    return "La \"fleur de l'âge\"";
+    return `${animalName} a atteint la "fleur de l'âge" !`;
   } else if (lifeStage.includes('Mature')) {
-    return "On commence un léger déclin...";
+    return `${animalName} commence déjà son déclin... mais a encore du temps pour profiter de sa vie !`;
   } else if (lifeStage.includes('Senior')) {
-    return "L'âge d'or semble-t-il ?!";
+    return `${animalName} est à l'âge d'or de sa vie !`;
   } else if (lifeStage.includes('Doyen')) {
-    return "On a dépassé notre espérance de vie mais on tient le coup...";
+    return `${animalName} a dépassé son espérance de vie mais tient le coup !`;
   }
   return "";
 };
@@ -433,9 +457,9 @@ const VraiAge = () => {
     if (lifestyle === 'outdoor') lifeExpectancy -= 4;
     else if (lifestyle === 'mixed') lifeExpectancy -= 2;
 
-    // Seul le surpoids/obésité est pris en compte (facteurs modifiables et documentés)
-    // La maigreur n'est pas incluse car elle peut être physiologique ou pathologique
     const bodyScoreMultipliers: Record<string, number> = {
+      'very_underweight': 0.90, // État critique nécessitant attention vétérinaire
+      'underweight': 0.95, // La maigreur peut indiquer une condition sous-jacente
       'ideal': 1.0,
       'overweight': 0.90,
       'obese': 0.80
@@ -538,9 +562,9 @@ const VraiAge = () => {
     const breedData = DOG_BREEDS.find(b => b.value === breed);
     let lifeExpectancy = breedData ? breedData.lifespan : 12;
 
-    // Seul le surpoids/obésité est pris en compte (facteurs modifiables et documentés)
-    // La maigreur n'est pas incluse car elle peut être physiologique ou pathologique
     const bodyScoreMultipliers: Record<string, number> = {
+      'very_underweight': 0.90, // État critique nécessitant attention vétérinaire
+      'underweight': 0.98, // La maigreur peut indiquer une condition sous-jacente
       'ideal': 1.05,
       'overweight': 0.95,
       'obese': 0.80
@@ -1216,7 +1240,7 @@ const VraiAge = () => {
               <p className="text-xs text-gray-500 mb-3 italic">
                 💡 Si ton chat est très maigre, consulte un vétérinaire pour écarter toute condition médicale.
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
                 {BODY_SCORES.map(score => (
                   <button
                     key={score.value}
@@ -1460,7 +1484,7 @@ const VraiAge = () => {
               <p className="text-xs text-gray-500 mb-3 italic">
                 💡 Si ton chien est très maigre, consulte un vétérinaire pour écarter toute condition médicale.
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
                 {BODY_SCORES.map(score => (
                   <button
                     key={score.value}
@@ -1492,10 +1516,10 @@ const VraiAge = () => {
 
             <button
               onClick={handleCalculate}
-              className="w-full bg-gradient-to-r from-blue-600 to-orange-600 text-white py-4 rounded-lg font-bold text-lg hover:from-blue-700 hover:to-orange-700 transition-all shadow-lg"
+              className="group w-full bg-gradient-to-r from-blue-600 to-orange-600 text-white py-5 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-orange-700 transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3"
             >
               <span>Calculer l'âge</span>
-              <Sparkles className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
+              <Sparkles className="w-5 h-5 group-hover:rotate-12 group-hover:scale-110 transition-all duration-200" />
             </button>
           </div>
         )}
@@ -1574,8 +1598,6 @@ const VraiAge = () => {
 
                 {(() => {
                   const phrase = getFunPhrase(result.humanAge);
-                  const IconQC = phrase.quebec.Icon;
-                  const IconEU = phrase.europe.Icon;
                   const pronoun = result.isFemale ? 'elle' : 'il';
 
                   return (
@@ -1587,9 +1609,9 @@ const VraiAge = () => {
                           <h4 className="font-bold text-lg text-blue-800">Au Québec</h4>
                         </div>
                         <div className="flex items-start gap-3">
-                          <IconQC className="w-6 h-6 flex-shrink-0 mt-0.5 text-blue-600" />
+                          <span className="text-2xl flex-shrink-0">{phrase.quebec.icon}</span>
                           <p className="text-gray-800 text-base leading-relaxed">
-                            {pronoun} {phrase.quebec.text}
+                            {pronoun} {phrase.quebec.verb} {phrase.quebec.text}
                           </p>
                         </div>
                       </div>
@@ -1601,9 +1623,9 @@ const VraiAge = () => {
                           <h4 className="font-bold text-lg text-purple-800">En Europe</h4>
                         </div>
                         <div className="flex items-start gap-3">
-                          <IconEU className="w-6 h-6 flex-shrink-0 mt-0.5 text-purple-600" />
+                          <span className="text-2xl flex-shrink-0">{phrase.europe.icon}</span>
                           <p className="text-gray-800 text-base leading-relaxed">
-                            {pronoun} {phrase.europe.text}
+                            {pronoun} {phrase.europe.verb} {phrase.europe.text}
                           </p>
                         </div>
                       </div>
@@ -1630,7 +1652,7 @@ const VraiAge = () => {
                     {result.lifeStage.split(' ')[0]}
                   </p>
                   <p className="text-base mt-3 italic text-white/90">
-                    {getLifeStageDescription(result.lifeStage)}
+                    {getLifeStageDescription(result.lifeStage, result.name)}
                   </p>
                 </div>
 
