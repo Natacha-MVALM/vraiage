@@ -8,7 +8,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import html2canvas from 'html2canvas';
 import {
-  Paw, Sparkles, Cat, Dog, CheckCircle, AlertCircle,
+  Sparkles, Cat, Dog, CheckCircle, AlertCircle,
   HelpCircle, ArrowLeft, Mail, ChevronDown, Info, Share2,
   Facebook, Instagram, Copy, Check, MessageCircle,
   HeartHandshake, ExternalLink, Stethoscope, Activity, Download
