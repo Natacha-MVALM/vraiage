@@ -1,18 +1,20 @@
 "use client";
 
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import ContactModal from '@/components/ContactModal';
 import CookieBanner from '@/components/CookieBanner';
 import Link from 'next/link';
 import Image from 'next/image';
+import html2canvas from 'html2canvas';
 import {
   Paw, Sparkles, Cat, Dog, Baby, PartyPopper, Heart, Car,
   GraduationCap, Home, Briefcase, Smile, Radio, Palmtree,
   User, Coins, Flag, BookOpen, Circle, Pill, Newspaper,
   Library, Users, Crown, Trophy, CheckCircle, AlertCircle,
   HelpCircle, ArrowLeft, Mail, ChevronDown, Info, Share2,
-  Facebook, Instagram, Copy, Check, Smartphone, MessageCircle
+  Facebook, Instagram, Copy, Check, Smartphone, MessageCircle,
+  HeartHandshake, ExternalLink, Stethoscope, Activity, Download
 } from 'lucide-react';
 
 // Constantes déplacées hors du composant pour éviter les re-créations
@@ -197,6 +199,11 @@ const VraiAge = () => {
   const [isAboutVraiAgeOpen, setIsAboutVraiAgeOpen] = useState(false);
   const [autoFilledDogMuzzle, setAutoFilledDogMuzzle] = useState(false);
   const [autoFilledDogWeight, setAutoFilledDogWeight] = useState(false);
+
+  // Screenshot functionality
+  const resultsRef = useRef<HTMLDivElement>(null);
+  const [isCapturingScreenshot, setIsCapturingScreenshot] = useState(false);
+  const [screenshotCopied, setScreenshotCopied] = useState(false);
 
   const getWeightRangeLabel = () => {
     if (!formData.dogWeightRange) return '';
@@ -580,6 +587,110 @@ const VraiAge = () => {
         alert('Lien copié ! 📋');
         break;
     }
+  };
+
+  // Capture screenshot of results
+  const captureResultsScreenshot = async (): Promise<Blob | null> => {
+    if (!resultsRef.current) return null;
+
+    try {
+      setIsCapturingScreenshot(true);
+
+      // Capture avec html2canvas
+      const canvas = await html2canvas(resultsRef.current, {
+        backgroundColor: '#ffffff',
+        scale: 2, // Haute résolution
+        logging: false,
+        useCORS: true,
+        allowTaint: true
+      });
+
+      // Convertir en blob
+      return new Promise((resolve) => {
+        canvas.toBlob((blob) => {
+          resolve(blob);
+        }, 'image/png');
+      });
+    } catch (error) {
+      console.error('Erreur capture screenshot:', error);
+      alert('❌ Erreur lors de la capture de l\'image. Veuillez réessayer.');
+      return null;
+    } finally {
+      setIsCapturingScreenshot(false);
+    }
+  };
+
+  // Download screenshot
+  const handleDownloadScreenshot = async () => {
+    const blob = await captureResultsScreenshot();
+    if (!blob) return;
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `vraiage-${result?.name || 'resultat'}-${Date.now()}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    // Feedback visuel
+    setScreenshotCopied(true);
+    setTimeout(() => setScreenshotCopied(false), 3000);
+  };
+
+  // Share with screenshot
+  const handleShareWithScreenshot = async (platform: string) => {
+    if (!result) return;
+
+    const blob = await captureResultsScreenshot();
+    if (!blob) return;
+
+    let text = `${result.name} a ${result.humanAge} ${result.humanAge < 2 ? 'an' : 'ans'} en âge humain ! 🎉 Découvrez l'âge de votre animal sur VraiÂge !`;
+    const url = typeof window !== 'undefined' ? window.location.href : '';
+
+    // Vérifier si Web Share API est disponible (mobile)
+    if (navigator.share && navigator.canShare) {
+      try {
+        const file = new File([blob], `vraiage-${result.name}.png`, { type: 'image/png' });
+
+        if (navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            title: 'VraiÂge - Résultat',
+            text: text,
+            files: [file]
+          });
+          return;
+        }
+      } catch (error) {
+        console.log('Web Share API non disponible, fallback vers téléchargement');
+      }
+    }
+
+    // Fallback: Télécharger + ouvrir plateforme
+    const blobUrl = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.download = `vraiage-${result.name}-${Date.now()}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(blobUrl);
+
+    // Ouvrir la plateforme après téléchargement
+    setTimeout(() => {
+      switch(platform) {
+        case 'facebook':
+          alert('📸 Image téléchargée ! Ouvrez Facebook pour créer votre publication et ajoutez l\'image téléchargée.');
+          window.open('https://www.facebook.com/', '_blank');
+          break;
+        case 'instagram':
+          alert('📸 Image téléchargée ! Ouvrez Instagram sur votre téléphone pour créer un post et ajoutez l\'image de votre galerie.');
+          break;
+        default:
+          alert('📸 Image téléchargée avec succès !');
+      }
+    }, 500);
   };
 
   // Composant Confetti
@@ -1306,7 +1417,7 @@ const VraiAge = () => {
         )}
 
         {currentPage === 'result' && result && (
-          <div className="space-y-6">
+          <div ref={resultsRef} className="space-y-6">
             {showDelayedContent && (
               <div className="text-center">
                 <div className="mb-4 flex justify-center">
@@ -1456,47 +1567,134 @@ const VraiAge = () => {
                 )}
 
                 {result.isSenior && (
-                  <div className="bg-gradient-to-r from-blue-400 to-blue-600 rounded-xl p-6 text-white">
-                    <h3 className="font-bold text-xl mb-3">🧘 Accompagnement senior</h3>
-                    <p className="mb-3">
-                      {result.name} entre dans une phase de vie qui mérite une attention particulière.
-                    </p>
-                    <p className="text-sm mb-4 bg-white/20 rounded-lg p-3">
-                      💝 <strong>Écoute Nala</strong> te permet de vérifier la qualité de vie de ton senior.
-                    </p>
-                    <a
-                      href="https://www.ecoutenala.ca"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block w-full bg-white text-blue-600 py-3 rounded-lg font-semibold text-center hover:bg-blue-50 transition-all"
-                    >
-                      Découvrir Écoute Nala →
-                    </a>
+                  <div className="relative bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 rounded-2xl p-6 text-white shadow-xl overflow-hidden">
+                    {/* Overlay décoratif */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50"></div>
+
+                    <div className="relative">
+                      {/* Header avec icône */}
+                      <div className="flex items-start gap-4 mb-4">
+                        <div className="flex-shrink-0 p-3 bg-white/20 rounded-xl backdrop-blur-sm">
+                          <HeartHandshake className="w-8 h-8 text-white" strokeWidth={1.5} />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-bold text-2xl mb-2 flex items-center gap-2">
+                            Accompagnement senior
+                          </h3>
+                          <p className="text-white/90 text-sm leading-relaxed">
+                            {result.name} a atteint {result.lifePercentage}% de son espérance de vie et entre dans une phase précieuse qui mérite une attention particulière.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Encadré À l'écoute de Nala */}
+                      <div className="bg-white/15 backdrop-blur-sm border border-white/20 rounded-xl p-4 mb-4">
+                        <div className="flex items-start gap-3 mb-3">
+                          <Stethoscope className="w-5 h-5 text-white flex-shrink-0 mt-0.5" strokeWidth={2} />
+                          <div>
+                            <p className="font-bold text-lg mb-1">À l'Écoute de Nala</p>
+                            <p className="text-sm text-white/95 leading-relaxed">
+                              Outil vétérinaire gratuit pour évaluer la qualité de vie des animaux seniors et prendre des décisions éclairées au bon moment.
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Bénéfices */}
+                        <div className="space-y-2 text-sm">
+                          <div className="flex items-center gap-2">
+                            <CheckCircle className="w-4 h-4 text-emerald-200 flex-shrink-0" />
+                            <span className="text-white/90">Questionnaire validé scientifiquement</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Activity className="w-4 h-4 text-emerald-200 flex-shrink-0" />
+                            <span className="text-white/90">Suivi de l'évolution dans le temps</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <HeartHandshake className="w-4 h-4 text-emerald-200 flex-shrink-0" />
+                            <span className="text-white/90">Aide à la prise de décision</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Bouton CTA */}
+                      <a
+                        href="https://ecoutenala.ca"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center justify-center gap-3 w-full bg-white text-teal-600 py-4 rounded-xl font-bold text-lg hover:bg-teal-50 transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+                      >
+                        <span>Évaluer la qualité de vie</span>
+                        <ExternalLink className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
+                      </a>
+
+                      <p className="text-center text-xs text-white/70 mt-3">
+                        Créé par Dr. Natacha Barrette • Gratuit et sans inscription
+                      </p>
+                    </div>
                   </div>
                 )}
 
-                <div className="border-t pt-6">
-                  <h3 className="font-bold text-lg mb-3 text-center">Partager le résultat</h3>
-                  <div className="grid grid-cols-3 gap-3">
-                    <button
-                      onClick={() => handleShare('facebook')}
-                      className="p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all"
-                    >
-                      Facebook
-                    </button>
-                    <button
-                      onClick={() => handleShare('instagram')}
-                      className="p-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all"
-                    >
-                      Instagram
-                    </button>
-                    <button
-                      onClick={() => handleShare('copy')}
-                      className="p-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all"
-                    >
-                      Copier lien
-                    </button>
+                <div className="border-t pt-6 space-y-4">
+                  <h3 className="font-bold text-lg mb-3 text-center flex items-center justify-center gap-2">
+                    <Share2 className="w-5 h-5" />
+                    <span>Partager le résultat</span>
+                  </h3>
+
+                  {/* Bouton de téléchargement principal */}
+                  <button
+                    onClick={handleDownloadScreenshot}
+                    disabled={isCapturingScreenshot}
+                    className="group w-full flex items-center justify-center gap-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-4 rounded-xl font-bold text-lg hover:from-emerald-600 hover:to-teal-700 transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isCapturingScreenshot ? (
+                      <>
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                        <span>Création de l'image...</span>
+                      </>
+                    ) : screenshotCopied ? (
+                      <>
+                        <Check className="w-5 h-5" />
+                        <span>Image téléchargée !</span>
+                      </>
+                    ) : (
+                      <>
+                        <Download className="w-5 h-5 group-hover:translate-y-1 transition-transform duration-200" />
+                        <span>Télécharger l'image du résultat</span>
+                      </>
+                    )}
+                  </button>
+
+                  {/* Boutons de partage avec capture */}
+                  <div className="space-y-2">
+                    <p className="text-sm text-gray-600 text-center">Ou partager directement sur :</p>
+                    <div className="grid grid-cols-2 gap-3">
+                      <button
+                        onClick={() => handleShareWithScreenshot('facebook')}
+                        disabled={isCapturingScreenshot}
+                        className="group flex items-center justify-center gap-2 p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50"
+                      >
+                        <Facebook className="w-5 h-5" />
+                        <span className="font-medium">Facebook</span>
+                      </button>
+                      <button
+                        onClick={() => handleShareWithScreenshot('instagram')}
+                        disabled={isCapturingScreenshot}
+                        className="group flex items-center justify-center gap-2 p-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50"
+                      >
+                        <Instagram className="w-5 h-5" />
+                        <span className="font-medium">Instagram</span>
+                      </button>
+                    </div>
                   </div>
+
+                  {/* Bouton copier lien classique */}
+                  <button
+                    onClick={() => handleShare('copy')}
+                    className="group w-full flex items-center justify-center gap-2 p-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all border border-gray-300"
+                  >
+                    <Copy className="w-4 h-4" />
+                    <span className="text-sm font-medium">Copier le lien de l'application</span>
+                  </button>
                 </div>
 
                 <button
