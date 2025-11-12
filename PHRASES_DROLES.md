@@ -1,5 +1,7 @@
 # 🎭 Phrases Comparatives Québec 🍁 vs Europe 🇪🇺 - VraiÂge
 
+**Version 2.0 - Novembre 2025**
+
 Ce document compile toutes les **paires de phrases humoristiques** utilisées dans l'application VraiÂge. Chaque résultat affiche **DEUX phrases simultanément** : une version québécoise et une version européenne pour maximiser la viralité et l'engagement.
 
 ## 🚀 Concept Révolutionnaire
@@ -8,8 +10,8 @@ Ce document compile toutes les **paires de phrases humoristiques** utilisées da
 ```
 Si [NOM_ANIMAL] était un humain...
 
-🍁 Au Québec, il/elle [PHRASE_QUÉBÉCOISE]
-🇪🇺 En Europe, il/elle [PHRASE_EUROPÉENNE]
+🍁 Au Québec, il/elle [VERBE] [TEXTE]
+🇪🇺 En Europe, il/elle [VERBE] [TEXTE]
 ```
 
 **Avantages stratégiques :**
@@ -17,6 +19,13 @@ Si [NOM_ANIMAL] était un humain...
 - ✅ Viralité maximale : comparaison culturelle
 - ✅ Portée géographique : QC + FR/BE/CH
 - ✅ Effet "Laquelle te ressemble le plus?" → engagement
+
+**Nouveautés V2.0 :**
+- ✅ Structure verb + text pour flexibilité grammaticale
+- ✅ Émojis en strings (plus de composants Icon)
+- ✅ Phrases plus distinctes culturellement
+- ✅ Organisation par génération
+- ✅ 24 paires optimisées (suppression doublons)
 
 ---
 
@@ -46,435 +55,248 @@ Si [NOM_ANIMAL] était un humain...
 
 ---
 
-## 🎭 Paires de Phrases par Âge Humain
+## 🎭 Liste Complète des 24 Paires V2.0
 
-Toutes les paires sont affichées simultanément selon l'âge humain calculé. L'utilisateur voit **les DEUX versions** en même temps pour maximiser l'engagement.
+### 🧒 Génération Alpha (2010+) → 0-15 ans
 
-## 📋 Liste Complète des 25 Paires Implémentées
+#### Paire 1 : 0-3 ans (Bébé)
+- **🍁 Québec :** pleurerait parce que son iPad est déchargé
+- **🇪🇺 Europe :** pleurerait parce que sa tablette n'a plus de batterie
+- **Icône :** 👶
 
-| Âge | 🍁 Québec | 🇪🇺 Europe | Icône |
-|-----|-----------|------------|-------|
-| **0-3 ans** | pleurerait parce que son iPad est déchargé | pleurerait parce que sa tablette n'a plus de batterie | 👶 |
-| **3-6 ans** | apprendrait à compter jusqu'à 10 en français | apprendrait à compter jusqu'à 10 en classe | 🎉 |
-| **6-10 ans** | jouerait à 4 coins carré en criant 'SERVEUSE!' | jouerait à l'épervier dans la cour de récré | ⚪ |
-| **10-13 ans** | découvrirait TikTok (et passerait 6h dessus) | découvrirait TikTok (et oublierait ses devoirs) | 📱 |
-| **13-16 ans** | stresserait pour son bal de finissants dans 3 ans | stresserait pour son brevet des collèges | ❤️ |
-| **16-18 ans** | étudierait pour son permis (et échouerait 2 fois) | passerait son permis (en calant 3 fois) | 🚗 |
-| **18-21 ans** | boirait du Caribou cheap à la Saint-Jean | ferait la fête du 14 juillet sur les Champs | 🎉 |
-| **21-25 ans** | terminerait son bac (60K de dettes?) | terminerait son master (où trouver un CDI?) | 🎓 |
-| **25-30 ans** | réaliserait qu'il/elle ne pourra JAMAIS acheter à MTL | chercherait un studio à Paris 1500€/mois (en vain) | 🏠 |
-| **30-35 ans** | se demanderait s'il devrait avoir des enfants (CPE?) | attendrait 3 ans pour une place en crèche | 💼 |
-| **35-40 ans** | commencerait à avoir mal au dos (en pellant) | commencerait à avoir mal au dos (en portant courses) | 😊 |
-| **40-45 ans** | se plaindrait que TikTok a ruiné (sur Facebook) | dirait 'c'était mieux' en regardant BFM TV | 📻 |
-| **45-50 ans** | calculerait combien il reste (23 ans... soupir) | rêverait de sa retraite à 62 ans (si existe) | 🌴 |
-| **50-55 ans** | serait grand-parent gâteau (et déneigeur) | serait grand-parent gâteau (gardien mercredi) | 👤 |
-| **55-60 ans** | vendrait sa maison 10x le prix payé | vendrait son appartement parisien fortune | 💰 |
-| **60-65 ans** | se lèverait à 5h pour Tim Hortons jaser | irait au café lire Le Figaro tous matins | 🚩 |
-| **65-70 ans** | raconterait l'histoire de la tempête '98 | raconterait l'histoire de Mai 68 | 📖 |
-| **70-75 ans** | gagnerait ENCORE au bingo paroisse (5e fois!) | jouerait à la belote au club 3e âge | 🏆 |
-| **75-80 ans** | aurait plus piluliers que verres armoire | prendrait 8 médicaments (oublierait lequel) | 💊 |
-| **80-85 ans** | finirait mots croisés JdM en 15 min | finirait mots fléchés Figaro en 10 min | 📰 |
-| **85-90 ans** | serait encyclopédie vivante (papier only) | serait bibliothèque (refuserait ordinateur) | 📚 |
-| **90-95 ans** | se souviendrait crise d'Octobre (hier) | se souviendrait Mai 68 (hier) | 👥 |
-| **95-100 ans** | recevrait lettre PM (préférerait Reine) | recevrait lettre Président République | 👑 |
-| **100+ ans** | passerait TVA secret longévité (gin) | passerait France 2 secret (vin rouge) | 🏆 |
+#### Paire 2 : 3-6 ans (Passe-Partout vs Peppa Pig)
+- **🍁 Québec :** chanterait Passe-Partout à tue-tête dans l'auto
+- **🇪🇺 Europe :** regarderait Peppa Pig en boucle sur YouTube
+- **Icône :** 🎵
+
+#### Paire 3 : 6-10 ans (Jeux de récré)
+- **🍁 Québec :** jouerait à 4 coins carré en criant 'SERVEUSE!'
+- **🇪🇺 Europe :** jouerait à l'épervier dans la cour de récré
+- **Icône :** ⚪
+
+#### Paire 4 : 10-13 ans (TikTok generation)
+- **🍁 Québec :** scrollerait sur TikTok pendant 6h par jour
+- **🇪🇺 Europe :** oublierait ses devoirs en regardant TikTok
+- **Icône :** 📱
+
+#### Paire 5 : 13-16 ans (Adolescence)
+- **🍁 Québec :** stresserait pour son bal de finissants dans 3 ans
+- **🇪🇺 Europe :** passerait son brevet des collèges en transpirant
+- **Icône :** ❤️
 
 ---
 
-### 🍼 Petite enfance (0-10 ans)
+### 🎮 Génération Z (1997-2012) → 15-25 ans
 
-#### 0-3 ans
-**🍁 Québec :** "pleurerait parce que son iPad est déchargé"
-**🇪🇺 Europe :** "pleurerait parce que sa tablette n'a plus de batterie"
-**Icône :** 👶 Baby
-**Stades associés :**
-- Chat : Chaton (< 6 mois)
-- Chien : Chiot (< 6 mois)
+#### Paire 6 : 16-18 ans (Permis de conduire)
+- **🍁 Québec :** échouerait son permis de conduire 2 fois (minimum)
+- **🇪🇺 Europe :** calerait 3 fois pendant l'examen de conduite
+- **Icône :** 🚗
 
-#### 3-6 ans
-**Phrase :** "apprendrait à compter jusqu'à 10"
-**Icône :** 🎉 PartyPopper
-**Stades associés :**
-- Chat : Chaton (6 mois - 1 an)
-- Chien : Chiot (6 mois - 1 an)
+#### Paire 7 : 18-21 ans (Fête nationale)
+- **🍁 Québec :** boirait du Caribou cheap à la Saint-Jean
+- **🇪🇺 Europe :** ferait la fête du 14 juillet sur les Champs-Élysées
+- **Icône :** 🎉
 
-#### 6-10 ans
-**Phrase :** "jouerait aux billes dans la cour d'école"
-**Icône :** ⚪ Circle
-**Stades associés :**
-- Chat : Chaton/Junior (1-1.5 an)
-- Chien : Chiot (9-12 mois)
+#### Paire 8 : 21-25 ans (Études universitaires)
+- **🍁 Québec :** finirait son bac avec 60K$ de dettes étudiantes
+- **🇪🇺 Europe :** chercherait désespérément un CDI après son master
+- **Icône :** 🎓
 
 ---
 
-### 🎮 Enfance et adolescence (10-21 ans)
+### 💼 Millennials (1981-1996) → 25-40 ans
 
-#### 10-13 ans
-**Phrase :** "découvrirait les joies de TikTok"
-**Icône :** 📱 Smartphone
-**Stades associés :**
-- Chat : Junior (1.5-2 ans)
-- Chien : Jeune adulte (1-1.5 an)
+#### Paire 9 : 25-30 ans (Logement impossible)
+- **🍁 Québec :** pleurerait en voyant le prix des condos à Montréal
+- **🇪🇺 Europe :** abandonnerait l'idée d'acheter à Paris (1M€ le 30m²)
+- **Icône :** 🏠
 
-#### 13-16 ans
-**Phrase :** "aurait son premier crush au secondaire"
-**Icône :** ❤️ Heart
-**Stades associés :**
-- Chat : Junior (2 ans)
-- Chien : Jeune adulte (1.5-2 ans)
+#### Paire 10 : 30-33 ans (Enfants)
+- **🍁 Québec :** attendrait 3 ans pour une place en CPE
+- **🇪🇺 Europe :** mettrait son enfant sur liste d'attente avant sa naissance
+- **Icône :** 👶
 
-#### 16-18 ans
-**Phrase :** "étudierait pour son permis de conduire"
-**Icône :** 🚗 Car
-**Stades associés :**
-- Chat : Adulte (2-3 ans)
-- Chien : Jeune adulte (2 ans)
+#### Paire 11 : 33-35 ans (Livraison food)
+- **🍁 Québec :** commanderait sur Uber Eats 4 soirs par semaine
+- **🇪🇺 Europe :** paierait 12€ de frais Deliveroo pour une pizza
+- **Icône :** 🍕
 
-#### 18-21 ans
-**Phrase :** "fêterait sa majorité dans tous les pays"
-**Icône :** 🎉 PartyPopper
-**Stades associés :**
-- Chat : Adulte (3 ans)
-- Chien : Jeune adulte (2-3 ans)
+#### Paire 12 : 35-40 ans (Mal de dos)
+- **🍁 Québec :** aurait mal au dos en déneigant l'entrée
+- **🇪🇺 Europe :** gémirait en montant 3 étages sans ascenseur
+- **Icône :** 😊
 
 ---
 
-### 👔 Jeune adulte (21-35 ans)
+### 📻 Génération X (1965-1980) → 40-55 ans
 
-#### 21-25 ans
-**Phrase :** "terminerait ses études universitaires"
-**Icône :** 🎓 GraduationCap
-**Stades associés :**
-- Chat : Adulte (3-4 ans)
-- Chien : Jeune adulte/Adulte (3-4 ans)
+#### Paire 13 : 40-45 ans (Réseaux sociaux)
+- **🍁 Québec :** scrollerait sur Facebook en critiquant TikTok
+- **🇪🇺 Europe :** regarderait BFM TV en disant 'c'était mieux avant'
+- **Icône :** 📱 / 📺
 
-#### 25-30 ans
-**Phrase :** "penserait à s'acheter un condo"
-**Icône :** 🏠 Home
-**Stades associés :**
-- Chat : Adulte (4-5 ans)
-- Chien : Adulte (4-5 ans)
+#### Paire 14 : 45-50 ans (Retraite lointaine)
+- **🍁 Québec :** calculerait combien d'années avant la retraite (23... soupir)
+- **🇪🇺 Europe :** rêverait de sa retraite à 64 ans (si elle existe encore)
+- **Icône :** 🌴
 
-#### 30-35 ans
-**Phrase :** "jonglerait entre carrière et vie de famille"
-**Icône :** 💼 Briefcase
-**Stades associés :**
-- Chat : Adulte (5-6 ans)
-- Chien : Adulte (5-6 ans)
+#### Paire 15 : 50-55 ans (Grands-parents)
+- **🍁 Québec :** déneigrait l'entrée des enfants ET des petits-enfants
+- **🇪🇺 Europe :** garderait les petits-enfants tous les mercredis
+- **Icône :** 👤
 
 ---
 
-### 💪 Adulte mûr (35-55 ans)
+### 🏡 Baby-Boomers (1946-1964) → 55-75 ans
 
-#### 35-40 ans
-**Phrase :** "commencerait à avoir mal au dos"
-**Icône :** 😊 Smile
-**Stades associés :**
-- Chat : Adulte/Mature (6-7 ans)
-- Chien : Adulte/Mature (6-7 ans)
+#### Paire 16 : 55-60 ans (Immobilier fortune)
+- **🍁 Québec :** vendrait sa maison 10x le prix payé en 1985
+- **🇪🇺 Europe :** revendrait son appartement parisien une fortune
+- **Icône :** 💰
 
-#### 40-45 ans
-**Phrase :** "dirait 'c'était mieux dans mon temps'"
-**Icône :** 📻 Radio
-**Stades associés :**
-- Chat : Mature (7-8 ans)
-- Chien : Mature (7-8 ans)
+#### Paire 17 : 60-65 ans (Routine matinale)
+- **🍁 Québec :** irait au Tim Hortons à 5h du matin jaser
+- **🇪🇺 Europe :** lirait Le Figaro au café du coin chaque matin
+- **Icône :** ☕
 
-#### 45-50 ans
-**Phrase :** "planifierait déjà sa retraite anticipée"
-**Icône :** 🌴 Palmtree
-**Stades associés :**
-- Chat : Mature (8-9 ans)
-- Chien : Mature (8 ans)
+#### Paire 18 : 65-70 ans (Souvenirs historiques)
+- **🍁 Québec :** raconterait ENCORE la tempête de verglas de '98
+- **🇪🇺 Europe :** parlerait de Mai 68 comme si c'était hier
+- **Icône :** 📖
 
-#### 50-55 ans
-**Phrase :** "serait grand-parent gâteau"
-**Icône :** 👤 User
-**Stades associés :**
-- Chat : Mature (9-10 ans)
-- Chien : Mature/Senior (8-9 ans)
+#### Paire 19 : 70-75 ans (Loisirs seniors)
+- **🍁 Québec :** gagnerait au bingo de la paroisse (5e fois cette année)
+- **🇪🇺 Europe :** jouerait à la belote au club du 3e âge
+- **Icône :** 🏆
 
 ---
 
-### 🧘 Senior actif (55-75 ans)
+### 🧓 Génération Silencieuse (1928-1945) → 75-95 ans
 
-#### 55-60 ans
-**Phrase :** "profiterait de ses REER bien mérités"
-**Icône :** 💰 Coins
-**Stades associés :**
-- Chat : Mature/Senior (10-11 ans)
-- Chien : Senior (9 ans)
+#### Paire 20 : 75-80 ans (Médicaments)
+- **🍁 Québec :** aurait plus de piluliers que de verres dans l'armoire
+- **🇪🇺 Europe :** prendrait 8 médicaments (en oubliant lequel)
+- **Icône :** 💊
 
-#### 60-65 ans
-**Phrase :** "jouerait au golf tous les matins"
-**Icône :** 🚩 Flag
-**Stades associés :**
-- Chat : Senior (11-12 ans)
-- Chien : Senior (9-10 ans)
+#### Paire 21 : 80-85 ans (Mots croisés)
+- **🍁 Québec :** finirait les mots croisés du JdeM en 10 minutes
+- **🇪🇺 Europe :** complèterait les mots fléchés du Figaro avant le café
+- **Icône :** 📰
 
-#### 65-70 ans
-**Phrase :** "raconterait ses histoires pour la 100e fois"
-**Icône :** 📖 BookOpen
-**Stades associés :**
-- Chat : Senior (12-13 ans)
-- Chien : Senior (10 ans)
+#### Paire 22 : 85-90 ans (Refus technologie)
+- **🍁 Québec :** refuserait d'utiliser un ordinateur (papier only)
+- **🇪🇺 Europe :** dirait 'Internet? Non merci, j'ai mes livres'
+- **Icône :** 📚
 
-#### 70-75 ans
-**Phrase :** "serait la vedette du bingo du jeudi"
-**Icône :** 🏆 Trophy
-**Stades associés :**
-- Chat : Senior (13-14 ans)
-- Chien : Doyen (10-11 ans)
+#### Paire 23 : 90-95 ans (Mémoire historique)
+- **🍁 Québec :** se souviendrait de la crise d'Octobre 1970 comme si c'était hier
+- **🇪🇺 Europe :** se rappellerait la guerre avec une précision troublante
+- **Icône :** 👥
 
 ---
 
-### 👑 Grand âge (75+ ans)
+### 👑 Greatest Generation (1901-1927) → 95+ ans
 
-#### 75-80 ans
-**Phrase :** "aurait une collection impressionnante de piluliers"
-**Icône :** 💊 Pill
-**Stades associés :**
-- Chat : Senior/Doyen (14-15 ans)
-- Chien : Doyen (11-12 ans)
-
-#### 80-85 ans
-**Phrase :** "ferait des marathons de mots croisés"
-**Icône :** 📰 Newspaper
-**Stades associés :**
-- Chat : Doyen (15-16 ans)
-- Chien : Doyen (12-13 ans)
-
-#### 85-90 ans
-**Phrase :** "serait une encyclopédie vivante"
-**Icône :** 📚 Library
-**Stades associés :**
-- Chat : Doyen (16-17 ans)
-- Chien : Doyen (13-14 ans)
-
-#### 90-95 ans
-**Phrase :** "aurait vu passer trois générations"
-**Icône :** 👥 Users
-**Stades associés :**
-- Chat : Doyen (17-18 ans)
-- Chien : Doyen (14-15 ans)
-
-#### 95-100 ans
-**Phrase :** "recevrait une lettre de la Reine"
-**Icône :** 👑 Crown
-**Stades associés :**
-- Chat : Doyen (18-19 ans)
-- Chien : Doyen (15+ ans)
-
-#### 100+ ans
-**Phrase :** "entrerait dans le livre des records"
-**Icône :** 🏆 Trophy
-**Stades associés :**
-- Chat : Doyen (19+ ans)
-- Chien : Doyen (16+ ans)
+#### Paire 24 : 100+ ans (Centenaire télé)
+- **🍁 Québec :** passerait à TVA pour révéler son secret (du gin)
+- **🇪🇺 Europe :** dévoilerait à France 2 son secret (un verre de rouge/jour)
+- **Icône :** 👑
 
 ---
 
-## 🎲 Utilisation dans l'application
+## 📈 Statistiques d'utilisation
 
-Les phrases sont sélectionnées automatiquement en fonction de l'âge humain calculé via la fonction `getFunPhrase(humanAge)` :
+### Répartition par génération
+- **Alpha** (0-15 ans) : 5 phrases (20.8%)
+- **Z** (15-25 ans) : 3 phrases (12.5%)
+- **Millennials** (25-40 ans) : 4 phrases (16.7%)
+- **X** (40-55 ans) : 3 phrases (12.5%)
+- **Boomers** (55-75 ans) : 4 phrases (16.7%)
+- **Silent** (75-95 ans) : 4 phrases (16.7%)
+- **Greatest** (95+ ans) : 1 phrase (4.2%)
 
-```typescript
-const getFunPhrase = (age: number) => {
-  return FUN_PHRASES.find(p => age <= p.max) || FUN_PHRASES[FUN_PHRASES.length - 1];
-};
-```
+### Références culturelles populaires
 
-**Affichage :**
-```tsx
-Si {nom} était un humain, {il/elle} {phrase}
-```
+**Québec 🍁:**
+- Passe-Partout, 4 coins carré, Caribou à la Saint-Jean
+- Tim Hortons, CPE, déneigement
+- Tempête de verglas '98, Crise d'Octobre
+- TVA Nouvelles, Journal de Montréal
 
-**Exemples :**
-- "Si Minou était un humain, il jouerait aux billes dans la cour d'école" (8 ans humain)
-- "Si Rex était un humain, il planifierait déjà sa retraite anticipée" (47 ans humain)
-- "Si Bella était un humain, elle serait une encyclopédie vivante" (87 ans humain)
-
----
-
-## 📝 Suggestions pour futures phrases
-
-### Idées par tranche d'âge
-
-**15-18 ans :**
-- "préparerait son bal de finissants"
-- "apprendrait à conduire (en stressant ses parents)"
-- "aurait un emploi d'été au dépanneur"
-
-**25-30 ans :**
-- "comparerait les taux hypothécaires"
-- "irait au gym 3 fois par semaine (en théorie)"
-- "découvrirait Netflix et les marathons de séries"
-
-**40-50 ans :**
-- "s'inscrirait à des cours de yoga"
-- "achèterait sa première BMW d'occasion"
-- "commencerait à lire des livres de développement personnel"
-
-**60-70 ans :**
-- "ferait partie d'un club de marche"
-- "passerait ses hivers en Floride"
-- "apprendrait à ses petits-enfants ses mauvais coups"
-
-**80+ ans :**
-- "serait la mémoire vivante du quartier"
-- "aurait des histoires de guerre fascinantes"
-- "donnerait des conseils non sollicités à tout le monde"
+**Europe 🇪🇺:**
+- Peppa Pig, épervier, 14 juillet
+- Deliveroo, crèche, mercredi sans école
+- Mai 68, guerre mondiale
+- BFM TV, Le Figaro, France 2
 
 ---
 
-## 🌍 Considérations culturelles
+## 🎯 Améliorations V2.0
 
-Les phrases actuelles sont adaptées au contexte **québécois/canadien** :
-- Références aux REER (régimes d'épargne retraite)
-- "Secondaire" plutôt que "collège"
-- Références culturelles locales
+### Changements majeurs depuis V1.0
+1. **Structure verb + text** : Plus de flexibilité grammaticale
+2. **Émojis strings** : Suppression des dépendances Icon
+3. **Distinctions culturelles accrues** :
+   - Passe-Partout vs Peppa Pig (QC vs EU très distinct)
+   - Uber Eats vs Deliveroo (marques différentes)
+   - JdeM vs Le Figaro (journaux locaux)
+4. **Suppression doublons** : Mai 68 apparaissait 2 fois
+5. **Organisation générationnelle** : Meilleure logique de regroupement
 
-**Pour internationalisation :** Prévoir des variantes selon la région :
-- France : "collège", "bac", "retraite"
-- Belgique : "athénée", "pension"
-- Suisse : "gymnase", "AVS"
-
----
-
-## 📊 Statistiques d'usage
-
-**Total phrases :** 24
-**Couverture âge :** 0-100+ ans humain
-**Icônes Lucide utilisées :** 16 types différents
-
-**Distribution par stade (approximatif) :**
-- Petite enfance (0-10) : 3 phrases (12.5%)
-- Enfance/Ado (10-21) : 4 phrases (16.7%)
-- Jeune adulte (21-35) : 3 phrases (12.5%)
-- Adulte mûr (35-55) : 4 phrases (16.7%)
-- Senior actif (55-75) : 4 phrases (16.7%)
-- Grand âge (75+) : 6 phrases (25%)
-
-**Observation :** Plus de phrases pour les animaux âgés, ce qui correspond au fait que les animaux passent une grande partie de leur vie dans les stades "senior" et "doyen".
+### Phrases les plus virales attendues
+1. 🔥 "Passe-Partout vs Peppa Pig" - Nostalgie générationnelle
+2. 🔥 "CPE vs crèche" - Douleur parentale universelle
+3. 🔥 "Condos Montréal vs Paris 1M€" - Crise logement
+4. 🔥 "Tempête '98 vs Mai 68" - Marqueurs historiques
 
 ---
 
-## 💻 Implémentation Technique
+## 🚀 Évolution future
 
-### Structure TypeScript
+### Pistes d'amélioration
+- [ ] A/B testing sur les phrases avec meilleur engagement
+- [ ] Ajout d'une 3ème colonne Belgique/Suisse
+- [ ] Phrases saisonnières (Halloween, Noël, etc.)
+- [ ] Mode "Personnalisé" avec phrases locales custom
+
+### Métriques de succès
+- **Taux de partage** par phrase
+- **Temps passé** sur la carte comparative
+- **Clicks** sur boutons sociaux après affichage
+- **Mentions** de références culturelles spécifiques
+
+---
+
+## 📝 Notes techniques
+
+### Implémentation
 
 ```typescript
 interface FunPhrase {
-  max: number;
+  max: number; // Âge humain maximum
   quebec: {
-    text: string;
-    Icon: React.ComponentType<{ className?: string }>;
+    verb: string;  // "pleurerait", "chanterait", etc.
+    text: string;  // Complément du verbe
+    icon: string;  // Emoji en string
   };
   europe: {
+    verb: string;
     text: string;
-    Icon: React.ComponentType<{ className?: string }>;
+    icon: string;
   };
 }
 ```
 
-### Affichage des Cartes
-
-**Carte Québec 🍁:**
-- Background : `from-blue-50 to-blue-100`
-- Border : `border-blue-300`
-- Texte header : `text-blue-800`
-- Icône : `text-blue-600`
-
-**Carte Europe 🇪🇺:**
-- Background : `from-purple-50 to-purple-100`
-- Border : `border-purple-300`
-- Texte header : `text-purple-800`
-- Icône : `text-purple-600`
-
-### Responsive Design
-
-**Mobile (< 768px):**
-```css
-grid-cols-1  /* Vertical stacking */
-```
-
-**Desktop (≥ 768px):**
-```css
-md:grid-cols-2  /* Side by side */
-```
-
-### Fonction de Sélection
-
-```typescript
-const getFunPhrase = (age: number): FunPhrase => {
-  return FUN_PHRASES.find(p => age <= p.max) ||
-         FUN_PHRASES[FUN_PHRASES.length - 1];
-};
-```
+### Affichage UI
+- **Mobile** : 1 colonne (QC puis EU verticalement)
+- **Tablette** : 2 colonnes (QC à gauche, EU à droite)
+- **Desktop** : 2 colonnes side-by-side
 
 ---
 
-## 📈 Métriques de Succès Attendues
+**Dernière mise à jour :** 2025-11-12
+**Version :** 2.0
+**Total phrases :** 24 paires (48 variantes)
 
-### Objectifs
-
-| Métrique | Avant (Single) | Cible (Dual) | Amélioration |
-|----------|----------------|--------------|--------------|
-| Taux de partage | ~4% | 8%+ | +100% |
-| Temps sur page | 45s | 75s+ | +67% |
-| Screenshots | Bas | Élevé | +++  |
-| Commentaires | Peu | Nombreux | +++ |
-| Viralité QC | Locale | Locale++ | ++ |
-| Viralité EU | 0% | Nouvelle | NEW |
-
-### Indicateurs à Tracker
-
-1. **Engagement comparatif**
-   - "Laquelle te ressemble le plus?"
-   - Débats QC vs EU dans commentaires
-
-2. **Partages géolocalisés**
-   - Partages depuis Québec
-   - Partages depuis France/Belgique/Suisse
-
-3. **Captures d'écran**
-   - Images avec les 2 cartes visibles
-   - Partages sur Stories Instagram
-
-4. **Temps d'interaction**
-   - Lecture des 2 phrases
-   - Comparaison visuelle
-
----
-
-## 🎯 Prochaines Évolutions Possibles
-
-### Version 3.0 - Multi-régions
-
-Ajouter d'autres régions :
-- 🇺🇸 États-Unis
-- 🇲🇽 Mexique
-- 🇧🇷 Brésil
-- 🇯🇵 Japon
-- 🇦🇺 Australie
-
-### Version 4.0 - Personnalisation
-
-Permettre à l'utilisateur de choisir :
-- Quelle comparaison voir (QC vs EU, US vs UK, etc.)
-- Sauvegarder sa préférence
-- Partager seulement une des deux
-
-### Version 5.0 - Contenu Généré
-
-Utiliser IA pour :
-- Créer des variantes infinies
-- Adapter au contexte actuel (événements)
-- Personnaliser selon profil utilisateur
-
----
-
-*Document mis à jour le 2025-11-12*
-*Version : 2.0 - Système Comparatif Québec 🍁 vs Europe 🇪🇺*
-*Source : `components/VraiAge.tsx` lignes 34-168 (interface + phrases) et 1552-1597 (UI)*
-*🎨 Generated with [Claude Code](https://claude.com/claude-code)*
+🎨 *Généré avec [Claude Code](https://claude.com/claude-code)*
