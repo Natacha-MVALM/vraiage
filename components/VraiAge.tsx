@@ -273,6 +273,23 @@ const getFunPhrase = (age: number) => {
   return FUN_PHRASES.find(p => age <= p.max) || FUN_PHRASES[FUN_PHRASES.length - 1];
 };
 
+const getLifeStageDescription = (lifeStage: string): string => {
+  if (lifeStage.includes('Chaton') || lifeStage.includes('Chiot')) {
+    return "C'est encore un bébé !";
+  } else if (lifeStage.includes('Junior') || lifeStage.includes('Jeune adulte')) {
+    return "On commence à prendre de l'expérience et apprendre de nos erreurs !";
+  } else if (lifeStage.includes('Adulte') && !lifeStage.includes('Jeune')) {
+    return "La \"fleur de l'âge\"";
+  } else if (lifeStage.includes('Mature')) {
+    return "On commence un léger déclin...";
+  } else if (lifeStage.includes('Senior')) {
+    return "L'âge d'or semble-t-il ?!";
+  } else if (lifeStage.includes('Doyen')) {
+    return "On a dépassé notre espérance de vie mais on tient le coup...";
+  }
+  return "";
+};
+
 const formatAgeWithMonths = (ageInYears: number) => {
   const years = Math.floor(ageInYears);
   const months = Math.round((ageInYears - years) * 12);
@@ -1611,6 +1628,9 @@ const VraiAge = () => {
                   </p>
                   <p className="text-4xl mt-2">
                     {result.lifeStage.split(' ')[0]}
+                  </p>
+                  <p className="text-base mt-3 italic text-white/90">
+                    {getLifeStageDescription(result.lifeStage)}
                   </p>
                 </div>
 
