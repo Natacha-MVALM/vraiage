@@ -1,0 +1,1514 @@
+=== INSTRUCTIONS ===
+Instructions pour Claude Code - Projet VraiÂge
+🎯 Contexte du projet
+VraiÂge est un calculateur d'âge pour animaux domestiques (chiens et chats) basé sur des données scientifiques. Le prototype fonctionnel a été créé dans Claude.ai et est maintenant prêt pour le développement production.
+📦 Stack Technique Recommandée
+	•	Framework: Next.js 14 (App Router)
+	•	UI: React + TypeScript
+	•	Styling: Tailwind CSS
+	•	Composants: shadcn/ui
+	•	Déploiement: Vercel (recommandé pour Next.js)
+	•	Analytics: Plausible ou Google Analytics (optionnel)
+🏗️ Architecture du Projet
+/vraiage
+├── /app
+│   ├── page.tsx (page principale)
+│   ├── layout.tsx
+│   └── globals.css
+├── /components
+│   ├── VraiAge.tsx (composant principal - code dans l'artefact "vraie-age-v2")
+│   └── /ui (composants shadcn/ui)
+├── /lib
+│   └── utils.ts
+├── /public
+│   └── (assets si nécessaire)
+├── package.json
+├── tsconfig.json
+├── tailwind.config.ts
+└── next.config.js
+🚀 Tâches Prioritaires
+Phase 1: Setup Initial (Session 1)
+	•	✅ Initialiser le projet Next.js avec TypeScript
+	•	✅ Installer Tailwind CSS + shadcn/ui
+	•	✅ Créer la structure de dossiers
+	•	✅ Intégrer le code du prototype (artefact "vraie-age-v2")
+	•	✅ Tester localement
+Phase 2: Optimisations (Session 2)
+	•	SEO et métadonnées
+	•	Optimisation des performances
+	•	Responsive design parfait
+	•	Tests sur différents navigateurs
+	•	Accessibilité (ARIA, keyboard navigation)
+Phase 3: Déploiement (Session 3)
+	•	Setup GitHub repository
+	•	Configuration Vercel
+	•	Variables d'environnement si nécessaire
+	•	Déploiement production
+	•	Tests post-déploiement
+📝 Code du Composant Principal
+Le composant principal VraiAge.tsx se trouve dans l'artefact "vraie-age-v2" de cette conversation Claude.ai.
+Fonctionnalités Clés
+Calculs Scientifiques:
+	•	Formule épigénétique pour chiens: 16 * ln(âge) + 31
+	•	Formule par tranches pour chats: 1 an = 15, 2 ans = 24, puis +4/an
+	•	Facteurs d'ajustement: taille, race, stérilisation, mode de vie, état corporel
+Design:
+	•	Explosion de confettis au résultat (100 particules)
+	•	Section espérance de vie empathique avec message "Un cadeau précieux" pour les animaux dépassant l'espérance
+	•	Call-to-action vers Écoute Nala (www.ecoutenala.ca)
+Validations:
+	•	Tous champs obligatoires sauf mois si 2+ ans
+	•	Aide contextuelle pour poids et état corporel
+	•	Messages d'erreur clairs et visibles
+🎨 Design System
+Couleurs principales:
+	•	Gradient fond: purple-500, pink-500, orange-500
+	•	Section espérance de vie: blue-500, indigo-600
+	•	CTA senior: blue-400 to blue-600
+Typographie:
+	•	Titres: font-bold, text-2xl à text-4xl
+	•	Corps: text-gray-600, text-gray-700
+	•	Accent: text-gray-800
+🔗 Liens Externes
+	•	Écoute Nala: https://www.ecoutenala.ca
+	•	Partage: Facebook, Twitter, WhatsApp, Copy link
+📊 Données Scientifiques Intégrées
+Races de Chats (12 races + croisé + autre)
+Birman (16.1 ans), Burmese (14.3 ans), Siamois (14.2 ans), etc.
+Races de Chiens (18 races + croisé + autre)
+Teckel (15.2 ans), Chihuahua (15.01 ans), Labrador (13.27 ans), etc.
+Intervalles de Poids Chiens
+7 intervalles en lbs avec conversion kg entre parenthèses
+Score Corporel
+5 niveaux: Très maigre, Maigre, Idéal, Surpoids, Obèse (avec emojis et descriptions)
+⚠️ Points d'Attention
+	•	LocalStorage: Ne PAS utiliser dans le MVP actuel
+	•	Confettis: 100 particules avec explosion radiale depuis le centre
+	•	Messages empathiques: Ton chaleureux pour animaux dépassant espérance de vie
+	•	Validation: Champs obligatoires avec messages d'alerte spécifiques
+🎯 Objectifs de Conversion
+	•	Orienter les animaux seniors vers Écoute Nala
+	•	Encourager le partage sur réseaux sociaux (inclut espérance de vie si affichée)
+	•	Éduquer sur les facteurs influençant la longévité
+📱 Responsive
+	•	Mobile-first design
+	•	Breakpoints: sm, md, lg, xl
+	•	Touch-friendly (boutons min 44px)
+	•	Formulaires adaptés mobile
+♿ Accessibilité
+	•	Navigation au clavier fonctionnelle
+	•	Contraste AA minimum (AAA visé)
+	•	Messages d'erreur clairs et visibles
+	•	Labels explicites sur tous les champs
+🔄 Prochaines Fonctionnalités (Backlog)
+	•	[ ] Sauvegarde du dernier calcul
+	•	[ ] Historique des animaux
+	•	[ ] Export PDF du résultat
+	•	[ ] Version anglaise
+	•	[ ] Comparateur multi-animaux
+	•	[ ] Newsletter inscription
+📖 Documentation de Référence
+Dans cette conversation Claude.ai, voir le document "Optimizing VraiÂge Calculator: Epigenetic Formulas and Scientific Factors for Accurate Pet Age Calculation.md" pour toutes les bases scientifiques.
+🛠️ Commandes Claude Code
+Voici ce que vous direz à Claude Code pour commencer :
+Bonjour Claude Code, je viens de créer un prototype fonctionnel d'une application web appelée VraiÂge dans Claude.ai. C'est un calculateur d'âge pour animaux domestiques basé sur des données scientifiques.
+
+J'ai besoin de ton aide pour transformer ce prototype en application production-ready avec Next.js 14, TypeScript, et Tailwind CSS.
+
+Le code complet du prototype se trouve dans l'artefact "vraie-age-v2" de ma conversation Claude.ai. Je vais te le fournir.
+
+Suis le WORKBOOK MASTER pour un développement professionnel, sécurisé et maintenable.
+
+Peux-tu commencer par :
+1. Initialiser un nouveau projet Next.js 14 avec TypeScript
+2. Installer Tailwind CSS et shadcn/ui
+3. Créer la structure de dossiers recommandée
+4. Préparer l'environnement pour recevoir le code du prototype
+
+Ensuite je te fournirai le code complet pour l'intégrer.
+
+Note: Ce projet suit les principes du WORKBOOK MASTER pour un code production-ready, sécurisé et maintenable.
+
+
+=== CODE DU COMPOSANT ===
+import React, { useState } from 'react';
+import { Card } from '@/components/ui/card';
+
+const VraiAge = () => {
+  const [currentPage, setCurrentPage] = useState('home');
+  const [currentPet, setCurrentPet] = useState(null);
+  const [formData, setFormData] = useState({});
+  const [loadingMessage, setLoadingMessage] = useState('');
+  const [result, setResult] = useState(null);
+  const [showLifeExpectancy, setShowLifeExpectancy] = useState(false);
+  const [ageCounter, setAgeCounter] = useState(0);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [showDelayedContent, setShowDelayedContent] = useState(false);
+  const [showWeightHelper, setShowWeightHelper] = useState(false);
+  const [showBodyScoreHelper, setShowBodyScoreHelper] = useState(false);
+  const [weightUnit, setWeightUnit] = useState('kg');
+  const [showAgeError, setShowAgeError] = useState(false);
+  const [showLifeExpectancyInfo, setShowLifeExpectancyInfo] = useState(false);
+
+  // Messages de chargement
+  const loadingMessages = {
+    cat: [
+      "Ton chat fait ses griffes pendant qu'on analyse son ADN félin... 🐾",
+      "Consultation de l'oracle des moustaches en cours... 🔮",
+      "Traduction du langage ronron vers l'humain... 😸"
+    ],
+    dog: [
+      "Ton chien remue la queue pendant qu'on calcule son âge exact... 🐕",
+      "Analyse des pattes et de la truffe en cours... 🐾",
+      "Décodage du langage canin vers l'humain... 🐶"
+    ]
+  };
+
+  // Phrases humoristiques originales de VraiÂge
+  const funPhrases = [
+    { max: 3, text: "serait à la garderie en train de faire des siestes", icon: "🍼" },
+    { max: 6, text: "apprendrait à compter jusqu'à 10", icon: "🎈" },
+    { max: 10, text: "jouerait aux billes dans la cour d'école", icon: "⚽" },
+    { max: 13, text: "découvrirait les joies de TikTok", icon: "📱" },
+    { max: 16, text: "aurait son premier crush au secondaire", icon: "💕" },
+    { max: 18, text: "étudierait pour son permis de conduire", icon: "🚗" },
+    { max: 21, text: "fêterait sa majorité dans tous les pays", icon: "🎉" },
+    { max: 25, text: "terminerait ses études universitaires", icon: "🎓" },
+    { max: 30, text: "penserait à s'acheter un condo", icon: "🏠" },
+    { max: 35, text: "jonglerait entre carrière et vie de famille", icon: "💼" },
+    { max: 40, text: "commencerait à avoir mal au dos", icon: "😅" },
+    { max: 45, text: "dirait 'c'était mieux dans mon temps'", icon: "📻" },
+    { max: 50, text: "planifierait déjà sa retraite anticipée", icon: "🏖️" },
+    { max: 55, text: "serait grand-parent gâteau", icon: "👴" },
+    { max: 60, text: "profiterait de ses REER bien mérités", icon: "💰" },
+    { max: 65, text: "jouerait au golf tous les matins", icon: "⛳" },
+    { max: 70, text: "raconterait ses histoires pour la 100e fois", icon: "📖" },
+    { max: 75, text: "serait la vedette du bingo du jeudi", icon: "🎱" },
+    { max: 80, text: "aurait une collection impressionnante de piluliers", icon: "💊" },
+    { max: 85, text: "ferait des marathons de mots croisés", icon: "📰" },
+    { max: 90, text: "serait une encyclopédie vivante", icon: "📚" },
+    { max: 95, text: "aurait vu passer trois générations", icon: "👨‍👩‍👧‍👦" },
+    { max: 100, text: "recevrait une lettre de la Reine", icon: "👑" },
+    { max: 999, text: "entrerait dans le livre des records", icon: "🏆" }
+  ];
+
+  // Données races chats avec espérance de vie (basé sur le document scientifique)
+  const catBreeds = [
+    { value: 'mixed', name: 'Croisé (gouttière)', lifespan: 15 },
+    { value: 'birman', name: 'Birman', lifespan: 16.1 },
+    { value: 'burmese', name: 'Burmese', lifespan: 14.3 },
+    { value: 'siamese', name: 'Siamois', lifespan: 14.2 },
+    { value: 'persian', name: 'Persan', lifespan: 14.1 },
+    { value: 'british-shorthair', name: 'British Shorthair', lifespan: 11.8 },
+    { value: 'maine-coon', name: 'Maine Coon', lifespan: 11 },
+    { value: 'ragdoll', name: 'Ragdoll', lifespan: 10.1 },
+    { value: 'abyssinian', name: 'Abyssin', lifespan: 10 },
+    { value: 'bengal', name: 'Bengal', lifespan: 14 },
+    { value: 'sphynx', name: 'Sphynx', lifespan: 7 },
+    { value: 'russian-blue', name: 'Bleu Russe', lifespan: 16 },
+    { value: 'scottish-fold', name: 'Scottish Fold', lifespan: 13 },
+    { value: 'other', name: 'Autre race', lifespan: 14 }
+  ];
+
+  // Données races chiens avec espérance de vie (basé sur le document scientifique)
+  const dogBreeds = [
+    { value: 'mixed', name: 'Croisé', lifespan: 12.71, size: 'medium' },
+    { value: 'teckel', name: 'Teckel', lifespan: 15.2, size: 'small' },
+    { value: 'chihuahua', name: 'Chihuahua', lifespan: 15.01, size: 'small' },
+    { value: 'shih-tzu', name: 'Shih Tzu', lifespan: 15.08, size: 'small' },
+    { value: 'yorkshire', name: 'Yorkshire', lifespan: 15, size: 'small' },
+    { value: 'jack-russell', name: 'Jack Russell', lifespan: 15, size: 'small' },
+    { value: 'caniche', name: 'Caniche', lifespan: 14.2, size: 'medium' },
+    { value: 'beagle', name: 'Beagle', lifespan: 14, size: 'medium' },
+    { value: 'cocker', name: 'Cocker', lifespan: 13, size: 'medium' },
+    { value: 'labrador', name: 'Labrador', lifespan: 13.27, size: 'large' },
+    { value: 'golden-retriever', name: 'Golden Retriever', lifespan: 12.93, size: 'large' },
+    { value: 'berger-allemand', name: 'Berger Allemand', lifespan: 12.46, size: 'large' },
+    { value: 'husky', name: 'Husky', lifespan: 13, size: 'large' },
+    { value: 'bulldog-francais', name: 'Bouledogue Français', lifespan: 10, size: 'medium' },
+    { value: 'boxer', name: 'Boxer', lifespan: 10, size: 'large' },
+    { value: 'dogue-allemand', name: 'Dogue Allemand', lifespan: 9.63, size: 'giant' },
+    { value: 'saint-bernard', name: 'Saint-Bernard', lifespan: 9, size: 'giant' },
+    { value: 'dogue-bordeaux', name: 'Dogue de Bordeaux', lifespan: 5.5, size: 'giant' },
+    { value: 'other', name: 'Autre race', lifespan: 12, size: 'medium' }
+  ];
+
+  // Intervalles de poids pour chiens (lbs en premier, kg entre parenthèses)
+  const dogWeightRanges = [
+    { range: 'under-5', label: 'Moins de 11 lbs (5 kg)', visual: '🐕 Très petit (Chihuahua, Yorkshire)', avgWeight: 3, size: 'small' },
+    { range: '5-10', label: '11-22 lbs (5-10 kg)', visual: '🐕 Petit (Jack Russell, Teckel)', avgWeight: 7.5, size: 'small' },
+    { range: '10-15', label: '22-33 lbs (10-15 kg)', visual: '🐕 Petit-Moyen (Cocker, Beagle)', avgWeight: 12.5, size: 'medium' },
+    { range: '15-25', label: '33-55 lbs (15-25 kg)', visual: '🐕 Moyen (Bulldog, Border Collie)', avgWeight: 20, size: 'medium' },
+    { range: '25-40', label: '55-88 lbs (25-40 kg)', visual: '🐕 Grand (Labrador, Golden)', avgWeight: 32.5, size: 'large' },
+    { range: '40-60', label: '88-132 lbs (40-60 kg)', visual: '🐕 Très Grand (Berger Allemand, Boxer)', avgWeight: 50, size: 'large' },
+    { range: 'over-60', label: 'Plus de 132 lbs (60 kg)', visual: '🐕 Géant (Dogue Allemand, St-Bernard)', avgWeight: 70, size: 'giant' }
+  ];
+
+  // Score corporel avec visuels
+  const bodyScores = [
+    { 
+      value: 'very-thin', 
+      label: 'Très maigre',
+      description: 'Côtes, colonne et os du bassin très visibles',
+      emoji: '🦴'
+    },
+    { 
+      value: 'thin', 
+      label: 'Maigre',
+      description: 'Côtes facilement visibles, taille marquée',
+      emoji: '📏'
+    },
+    { 
+      value: 'ideal', 
+      label: 'Idéal',
+      description: 'Côtes palpables, taille visible de dessus',
+      emoji: '✅'
+    },
+    { 
+      value: 'overweight', 
+      label: 'Surpoids',
+      description: 'Côtes difficiles à palper, taille peu visible',
+      emoji: '🎈'
+    },
+    { 
+      value: 'obese', 
+      label: 'Obèse',
+      description: 'Côtes non palpables, abdomen distendu',
+      emoji: '🔴'
+    }
+  ];
+
+  const getFunPhrase = (age) => {
+    return funPhrases.find(p => age <= p.max) || funPhrases[funPhrases.length - 1];
+  };
+
+  const formatAgeWithMonths = (ageInYears) => {
+    const years = Math.floor(ageInYears);
+    const months = Math.round((ageInYears - years) * 12);
+    
+    if (months === 0) {
+      return `${years} ${years < 2 ? 'an' : 'ans'}`;
+    } else if (months === 12) {
+      return `${years + 1} ${years + 1 < 2 ? 'an' : 'ans'}`;
+    } else {
+      return `${years} ${years < 2 ? 'an' : 'ans'} ${months} mois`;
+    }
+  };
+
+  const getWeightRangeLabel = () => {
+    if (!formData.dogWeightRange) return '';
+    const range = dogWeightRanges.find(r => r.range === formData.dogWeightRange);
+    return range ? range.label : '';
+  };
+
+  const convertWeight = (weight, fromUnit) => {
+    if (fromUnit === 'lbs') {
+      return weight * 0.453592;
+    }
+    return weight;
+  };
+
+  const calculateCatAge = () => {
+    const years = parseFloat(formData.catYears) || 0;
+    const months = parseFloat(formData.catMonths) || 0;
+    const age = years + (months / 12);
+    const lifestyle = formData.catLifestyle || 'indoor';
+    const sex = formData.catSex || 'male';
+    const breed = formData.catBreed || 'mixed';
+    const bodyScore = formData.catBody || 'ideal';
+    const neutered = formData.catNeutered === 'yes';
+    
+    let humanAge;
+    if (age <= 1) {
+      humanAge = age * 15;
+    } else if (age <= 2) {
+      humanAge = 15 + (age - 1) * 9;
+    } else {
+      humanAge = 24 + (age - 2) * 4;
+    }
+
+    const lifestyleMultipliers = {
+      'indoor': 1.0,
+      'mixed': 1.05,
+      'outdoor': 1.15
+    };
+    
+    humanAge = humanAge * lifestyleMultipliers[lifestyle];
+    
+    const breedData = catBreeds.find(b => b.value === breed);
+    let lifeExpectancy = breedData ? breedData.lifespan : 15;
+    
+    if (lifestyle === 'outdoor') lifeExpectancy -= 5;
+    else if (lifestyle === 'mixed') lifeExpectancy -= 2;
+    
+    const bodyScoreMultipliers = {
+      'very-thin': 0.85,
+      'thin': 0.90,
+      'ideal': 1.0,
+      'overweight': 0.90,
+      'obese': 0.80
+    };
+    lifeExpectancy = lifeExpectancy * bodyScoreMultipliers[bodyScore];
+    
+    if (neutered) {
+      lifeExpectancy += 2;
+    }
+    
+    if (breed === 'mixed') {
+      lifeExpectancy += 1.5;
+    }
+    
+    if (sex === 'female') {
+      lifeExpectancy += 1;
+    }
+    
+    lifeExpectancy = Math.round(lifeExpectancy * 10) / 10;
+    humanAge = Math.round(humanAge);
+    const interval = [Math.round(humanAge * 0.9), Math.round(humanAge * 1.1)];
+    
+    let lifeStage = '';
+    if (age < 0.5) lifeStage = '🍼 Chaton';
+    else if (age <= 2) lifeStage = '⚡ Junior';
+    else if (age <= 6) lifeStage = '💪 Adulte';
+    else if (age <= 10) lifeStage = '🎯 Mature';
+    else if (age <= 14) lifeStage = '🧘 Senior';
+    else lifeStage = '👑 Doyen';
+    
+    const lifePercentage = Math.min(100, Math.round((age / lifeExpectancy) * 100));
+
+    return {
+      name: formData.catName || 'Ton chat',
+      age,
+      humanAge,
+      interval,
+      lifeStage,
+      lifeExpectancy,
+      lifePercentage,
+      isSenior: age >= 10,
+      pet: 'chat',
+      sex,
+      isFemale: sex === 'female'
+    };
+  };
+
+  const calculateDogAge = () => {
+    const years = parseFloat(formData.dogYears) || 0;
+    const months = parseFloat(formData.dogMonths) || 0;
+    const age = years + (months / 12);
+    
+    let weight;
+    if (formData.dogWeightRange) {
+      const range = dogWeightRanges.find(r => r.range === formData.dogWeightRange);
+      weight = range ? range.avgWeight : 20;
+    } else if (formData.dogWeight) {
+      weight = convertWeight(parseFloat(formData.dogWeight), weightUnit);
+    } else {
+      weight = 20;
+    }
+    
+    const sex = formData.dogSex || 'male';
+    const breed = formData.dogBreed || 'mixed';
+    const bodyScore = formData.dogBody || 'ideal';
+    const neutered = formData.dogNeutered === 'yes';
+    
+    let sizeCategory;
+    if (weight < 5) sizeCategory = 'small';
+    else if (weight < 15) sizeCategory = 'small';
+    else if (weight < 40) sizeCategory = 'medium';
+    else if (weight < 90) sizeCategory = 'large';
+    else sizeCategory = 'giant';
+
+    let humanAge = age > 0 ? 16 * Math.log(age) + 31 : 0;
+    
+    const sizeMultipliers = {
+      'small': 1.2,
+      'medium': 1.0,
+      'large': 0.85,
+      'giant': 0.75
+    };
+    
+    humanAge = humanAge * sizeMultipliers[sizeCategory];
+    
+    if (humanAge < 0) humanAge = 0;
+    humanAge = Math.round(humanAge);
+    const interval = [Math.round(humanAge * 0.85), Math.round(humanAge * 1.15)];
+    
+    let lifeStage = '';
+    if (age < 1) lifeStage = '🍼 Chiot';
+    else if (age <= 3) lifeStage = '⚡ Jeune adulte';
+    else if (age <= 6) lifeStage = '💪 Adulte';
+    else if (age <= 8) lifeStage = '🎯 Mature';
+    else if (age <= 10) lifeStage = '🧘 Senior';
+    else lifeStage = '👑 Doyen';
+
+    const breedData = dogBreeds.find(b => b.value === breed);
+    let lifeExpectancy = breedData ? breedData.lifespan : 12;
+    
+    const bodyScoreMultipliers = {
+      'very-thin': 0.85,
+      'thin': 0.90,
+      'ideal': 1.15,
+      'overweight': 0.95,
+      'obese': 0.85
+    };
+    lifeExpectancy = lifeExpectancy * bodyScoreMultipliers[bodyScore];
+    
+    if (neutered) {
+      lifeExpectancy += 1.5;
+    }
+    
+    if (breed === 'mixed') {
+      lifeExpectancy += 0.5;
+    }
+    
+    lifeExpectancy = Math.round(lifeExpectancy * 10) / 10;
+    
+    const lifePercentage = Math.min(100, Math.round((age / lifeExpectancy) * 100));
+
+    return {
+      name: formData.dogName || 'Ton chien',
+      age,
+      humanAge,
+      interval,
+      lifeStage,
+      lifeExpectancy,
+      lifePercentage,
+      isSenior: lifePercentage >= 75,
+      pet: 'chien',
+      sex,
+      isFemale: sex === 'female'
+    };
+  };
+
+  const validateAge = () => {
+    const years = parseFloat(currentPet === 'cat' ? formData.catYears : formData.dogYears) || 0;
+    const months = currentPet === 'cat' ? formData.catMonths : formData.dogMonths;
+    
+    if (years < 2 && (months === undefined || months === '' || months === null)) {
+      setShowAgeError(true);
+      setTimeout(() => setShowAgeError(false), 4000);
+      return false;
+    }
+    return true;
+  };
+
+  const validateForm = () => {
+    if (currentPet === 'cat') {
+      if (!formData.catYears && formData.catYears !== 0) {
+        alert('⚠️ Veuillez indiquer l\'âge de votre chat');
+        return false;
+      }
+      if (!formData.catBreed) {
+        alert('⚠️ Veuillez sélectionner une race');
+        return false;
+      }
+      if (!formData.catSex) {
+        alert('⚠️ Veuillez indiquer le sexe de votre chat');
+        return false;
+      }
+      if (!formData.catNeutered) {
+        alert('⚠️ Veuillez indiquer si votre chat est stérilisé');
+        return false;
+      }
+      if (!formData.catLifestyle) {
+        alert('⚠️ Veuillez sélectionner le mode de vie');
+        return false;
+      }
+      if (!formData.catBody) {
+        alert('⚠️ Veuillez sélectionner l\'état corporel');
+        return false;
+      }
+    } else {
+      if (!formData.dogYears && formData.dogYears !== 0) {
+        alert('⚠️ Veuillez indiquer l\'âge de votre chien');
+        return false;
+      }
+      if (!formData.dogBreed) {
+        alert('⚠️ Veuillez sélectionner une race');
+        return false;
+      }
+      if (!formData.dogWeight && !formData.dogWeightRange) {
+        alert('⚠️ Veuillez indiquer le poids de votre chien');
+        return false;
+      }
+      if (!formData.dogSex) {
+        alert('⚠️ Veuillez indiquer le sexe de votre chien');
+        return false;
+      }
+      if (!formData.dogNeutered) {
+        alert('⚠️ Veuillez indiquer si votre chien est stérilisé');
+        return false;
+      }
+      if (!formData.dogBody) {
+        alert('⚠️ Veuillez sélectionner l\'état corporel');
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const handleCalculate = () => {
+    if (!validateForm()) return;
+    if (!validateAge()) return;
+    
+    setCurrentPage('loading');
+    setShowDelayedContent(false);
+    
+    const messages = loadingMessages[currentPet];
+    let messageIndex = 0;
+    setLoadingMessage(messages[0]);
+    
+    const messageInterval = setInterval(() => {
+      messageIndex = (messageIndex + 1) % messages.length;
+      setLoadingMessage(messages[messageIndex]);
+    }, 2500);
+    
+    setTimeout(() => {
+      clearInterval(messageInterval);
+      const calculationResult = currentPet === 'cat' ? calculateCatAge() : calculateDogAge();
+      setResult(calculationResult);
+      setCurrentPage('result');
+      
+      let counter = 0;
+      const targetAge = calculationResult.humanAge;
+      const increment = targetAge / 50;
+      
+      const counterInterval = setInterval(() => {
+        counter += increment;
+        if (counter >= targetAge) {
+          counter = targetAge;
+          clearInterval(counterInterval);
+          setShowConfetti(true);
+          setTimeout(() => setShowConfetti(false), 2000);
+          setTimeout(() => setShowDelayedContent(true), 2000);
+        }
+        setAgeCounter(Math.round(counter));
+      }, 40);
+    }, 7000);
+  };
+
+  const handleShare = (platform) => {
+    if (!result) return;
+    
+    // Texte de base
+    let text = `${result.name} a ${result.humanAge} ${result.humanAge < 2 ? 'an' : 'ans'} en âge humain ! 🎉`;
+    
+    // Ajouter l'espérance de vie uniquement si elle est affichée
+    if (showLifeExpectancy) {
+      text += ` Son espérance de vie est de ${formatAgeWithMonths(result.lifeExpectancy)}. Découvrez l'âge de votre animal sur VraiÂge !`;
+    }
+    
+    const url = window.location.href;
+    
+    switch(platform) {
+      case 'facebook':
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`, '_blank');
+        break;
+      case 'twitter':
+        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text + ' #VraiAge')}&url=${encodeURIComponent(url)}`, '_blank');
+        break;
+      case 'whatsapp':
+        window.open(`https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`, '_blank');
+        break;
+      case 'copy':
+        navigator.clipboard.writeText(url);
+        alert('Lien copié ! 📋');
+        break;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 p-4 flex items-center justify-center">
+      <Card className="w-full max-w-2xl p-8 bg-white/95 backdrop-blur shadow-2xl">
+        {currentPage === 'home' && (
+          <div className="space-y-8">
+            <div className="text-center">
+              <h1 className="text-4xl font-bold text-gray-800 mb-2">
+                Quel est le <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">VRAI âge</span> de ton compagnon ?
+              </h1>
+              <p className="text-gray-600">Calcul personnalisé basé sur les données scientifiques actuelles</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <button
+                onClick={() => {setCurrentPet('cat'); setCurrentPage('catForm');}}
+                className="p-8 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl hover:scale-105 transition-transform border-2 border-transparent hover:border-purple-400"
+              >
+                <div className="text-6xl mb-4">🐱</div>
+                <div className="text-xl font-semibold">Chat</div>
+              </button>
+              
+              <button
+                onClick={() => {setCurrentPet('dog'); setCurrentPage('dogForm');}}
+                className="p-8 bg-gradient-to-br from-blue-50 to-orange-50 rounded-xl hover:scale-105 transition-transform border-2 border-transparent hover:border-orange-400"
+              >
+                <div className="text-6xl mb-4">🐕</div>
+                <div className="text-xl font-semibold">Chien</div>
+              </button>
+            </div>
+          </div>
+        )}
+
+        {currentPage === 'catForm' && (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-center mb-6">Mon Chat 🐱</h2>
+            
+            <div>
+              <label className="block mb-2 font-semibold">Nom de ton chat</label>
+              <input
+                type="text"
+                className="w-full p-3 border-2 rounded-lg focus:border-purple-500 outline-none"
+                placeholder="Ex: Minou"
+                onChange={(e) => setFormData({...formData, catName: e.target.value})}
+              />
+            </div>
+
+            <div>
+              <label className="block mb-2 font-semibold">Âge</label>
+              <p className="text-sm text-gray-600 mb-2 italic">Exemple: 1 an 3 mois</p>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block mb-2 text-sm">Année(s)</label>
+                  <input
+                    type="number"
+                    className="w-full p-3 border-2 rounded-lg focus:border-purple-500 outline-none"
+                    placeholder="0"
+                    min="0"
+                    onChange={(e) => setFormData({...formData, catYears: e.target.value})}
+                  />
+                </div>
+                <div>
+                  <label className="block mb-2 text-sm">
+                    Mois {(formData.catYears === undefined || formData.catYears === '' || parseFloat(formData.catYears) < 2) && <span className="text-red-500">*</span>}
+                  </label>
+                  <input
+                    type="number"
+                    className="w-full p-3 border-2 rounded-lg focus:border-purple-500 outline-none"
+                    placeholder="0"
+                    min="0"
+                    max="11"
+                    onChange={(e) => setFormData({...formData, catMonths: e.target.value})}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label className="block mb-2 font-semibold">Race</label>
+              <p className="text-xs text-gray-500 mb-2">💡 Seules les races avec données scientifiques spécifiques sont listées. Pour toute autre race ou pour un chat domestique, sélectionnez "Autre race".</p>
+              <select
+                className="w-full p-3 border-2 rounded-lg focus:border-purple-500 outline-none"
+                onChange={(e) => setFormData({...formData, catBreed: e.target.value})}
+                defaultValue=""
+              >
+                <option value="">Choisir une race</option>
+                {catBreeds.map(breed => (
+                  <option key={breed.value} value={breed.value}>{breed.name}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block mb-2 font-semibold">Sexe</label>
+              <div className="grid grid-cols-2 gap-4">
+                <button
+                  onClick={() => setFormData({...formData, catSex: 'male'})}
+                  className={`p-3 rounded-lg border-2 transition-all ${formData.catSex === 'male' ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white border-transparent' : 'border-gray-300'}`}
+                >
+                  Mâle
+                </button>
+                <button
+                  onClick={() => setFormData({...formData, catSex: 'female'})}
+                  className={`p-3 rounded-lg border-2 transition-all ${formData.catSex === 'female' ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white border-transparent' : 'border-gray-300'}`}
+                >
+                  Femelle
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="block mb-2 font-semibold">Stérilisé(e) ?</label>
+              <div className="grid grid-cols-2 gap-4">
+                <button
+                  onClick={() => setFormData({...formData, catNeutered: 'yes'})}
+                  className={`p-3 rounded-lg border-2 transition-all ${formData.catNeutered === 'yes' ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white border-transparent' : 'border-gray-300'}`}
+                >
+                  Oui
+                </button>
+                <button
+                  onClick={() => setFormData({...formData, catNeutered: 'no'})}
+                  className={`p-3 rounded-lg border-2 transition-all ${formData.catNeutered === 'no' ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white border-transparent' : 'border-gray-300'}`}
+                >
+                  Non
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="block mb-2 font-semibold">Mode de vie</label>
+              <div className="grid grid-cols-3 gap-3">
+                {['indoor', 'mixed', 'outdoor'].map((mode) => (
+                  <button
+                    key={mode}
+                    onClick={() => setFormData({...formData, catLifestyle: mode})}
+                    className={`p-3 rounded-lg border-2 transition-all ${formData.catLifestyle === mode ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white border-transparent' : 'border-gray-300'}`}
+                  >
+                    {mode === 'indoor' ? '🏠 Intérieur' : mode === 'mixed' ? '🚪 Mixte' : '🌳 Extérieur'}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <div className="flex justify-between items-center mb-2">
+                <label className="font-semibold">État corporel</label>
+                <button
+                  onClick={() => setShowBodyScoreHelper(!showBodyScoreHelper)}
+                  className="text-sm text-purple-600 hover:text-purple-800"
+                >
+                  {showBodyScoreHelper ? '✕ Fermer' : '❓ Aide'}
+                </button>
+              </div>
+              
+              {showBodyScoreHelper && (
+                <div className="mb-4 p-4 bg-purple-50 rounded-lg space-y-2 text-sm">
+                  {bodyScores.map(score => (
+                    <div key={score.value} className="flex items-start gap-2">
+                      <span className="text-2xl">{score.emoji}</span>
+                      <div>
+                        <div className="font-semibold">{score.label}</div>
+                        <div className="text-gray-600">{score.description}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              
+              <div className="grid grid-cols-2 gap-3">
+                {bodyScores.map((body) => (
+                  <button
+                    key={body.value}
+                    onClick={() => setFormData({...formData, catBody: body.value})}
+                    className={`p-3 rounded-lg border-2 transition-all ${formData.catBody === body.value ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white border-transparent' : 'border-gray-300'}`}
+                  >
+                    <div className="text-2xl mb-1">{body.emoji}</div>
+                    <div className="text-sm">{body.label}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {showAgeError && (
+              <div className="bg-red-100 border-2 border-red-500 text-red-700 p-4 rounded-lg animate-pulse">
+                <p className="font-bold">⚠️ Information manquante</p>
+                <p>Pour les animaux de moins de 2 ans, veuillez préciser les mois pour un calcul plus précis.</p>
+              </div>
+            )}
+
+            <div className="flex gap-4">
+              <button
+                onClick={handleCalculate}
+                className="flex-1 p-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-bold hover:opacity-90 transition-opacity"
+              >
+                🎯 CALCULER L'ÂGE
+              </button>
+              <button
+                onClick={() => setCurrentPage('home')}
+                className="px-6 p-4 bg-gray-500 text-white rounded-lg font-bold hover:bg-gray-600 transition-colors"
+              >
+                ← Retour
+              </button>
+            </div>
+          </div>
+        )}
+
+        {currentPage === 'dogForm' && (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-center mb-6">Mon Chien 🐕</h2>
+            
+            <div>
+              <label className="block mb-2 font-semibold">Nom de ton chien</label>
+              <input
+                type="text"
+                className="w-full p-3 border-2 rounded-lg focus:border-orange-500 outline-none"
+                placeholder="Ex: Rex"
+                onChange={(e) => setFormData({...formData, dogName: e.target.value})}
+              />
+            </div>
+
+            <div>
+              <label className="block mb-2 font-semibold">Âge</label>
+              <p className="text-sm text-gray-600 mb-2 italic">Exemple: 1 an 3 mois</p>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block mb-2 text-sm">Année(s)</label>
+                  <input
+                    type="number"
+                    className="w-full p-3 border-2 rounded-lg focus:border-orange-500 outline-none"
+                    placeholder="0"
+                    min="0"
+                    onChange={(e) => setFormData({...formData, dogYears: e.target.value})}
+                  />
+                </div>
+                <div>
+                  <label className="block mb-2 text-sm">
+                    Mois {(formData.dogYears === undefined || formData.dogYears === '' || parseFloat(formData.dogYears) < 2) && <span className="text-red-500">*</span>}
+                  </label>
+                  <input
+                    type="number"
+                    className="w-full p-3 border-2 rounded-lg focus:border-orange-500 outline-none"
+                    placeholder="0"
+                    min="0"
+                    max="11"
+                    onChange={(e) => setFormData({...formData, dogMonths: e.target.value})}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label className="block mb-2 font-semibold">Race</label>
+              <p className="text-xs text-gray-500 mb-2">💡 Seules les races avec données scientifiques spécifiques sont listées. Pour toute autre race ou pour un croisé, sélectionnez "Autre race".</p>
+              <select
+                className="w-full p-3 border-2 rounded-lg focus:border-orange-500 outline-none"
+                onChange={(e) => setFormData({...formData, dogBreed: e.target.value})}
+                defaultValue=""
+              >
+                <option value="">Choisir une race</option>
+                {dogBreeds.map(breed => (
+                  <option key={breed.value} value={breed.value}>{breed.name}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <div className="flex justify-between items-center mb-2">
+                <label className="font-semibold">Poids</label>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setWeightUnit('kg')}
+                    className={`px-3 py-1 text-sm rounded ${weightUnit === 'kg' ? 'bg-orange-500 text-white' : 'bg-gray-200'}`}
+                  >
+                    kg
+                  </button>
+                  <button
+                    onClick={() => setWeightUnit('lbs')}
+                    className={`px-3 py-1 text-sm rounded ${weightUnit === 'lbs' ? 'bg-orange-500 text-white' : 'bg-gray-200'}`}
+                  >
+                    lbs
+                  </button>
+                  <button
+                    onClick={() => setShowWeightHelper(!showWeightHelper)}
+                    className="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
+                  >
+                    {showWeightHelper ? '✕ Fermer' : '❓ Je ne sais pas'}
+                  </button>
+                </div>
+              </div>
+              
+              {!showWeightHelper ? (
+                <input
+                  type="text"
+                  className="w-full p-3 border-2 rounded-lg focus:border-orange-500 outline-none bg-white"
+                  placeholder={formData.dogWeightRange ? '' : `Ex: ${weightUnit === 'kg' ? '25' : '55'}`}
+                  value={formData.dogWeightRange ? getWeightRangeLabel() : formData.dogWeight || ''}
+                  onChange={(e) => {
+                    if (!formData.dogWeightRange) {
+                      setFormData({...formData, dogWeight: e.target.value});
+                    }
+                  }}
+                  readOnly={!!formData.dogWeightRange}
+                />
+              ) : (
+                <div className="space-y-2">
+                  {dogWeightRanges.map(range => (
+                    <button
+                      key={range.range}
+                      onClick={() => {
+                        setFormData({...formData, dogWeightRange: range.range, dogWeight: null});
+                        setShowWeightHelper(false);
+                      }}
+                      className={`w-full p-3 text-left border-2 rounded-lg hover:border-orange-400 transition-all ${formData.dogWeightRange === range.range ? 'border-orange-500 bg-orange-50' : 'border-gray-300'}`}
+                    >
+                      <div className="font-semibold">{range.label}</div>
+                      <div className="text-sm text-gray-600">{range.visual}</div>
+                    </button>
+                  ))}
+                </div>
+              )}
+              {formData.dogWeightRange && !showWeightHelper && (
+                <button
+                  onClick={() => setFormData({...formData, dogWeightRange: null, dogWeight: ''})}
+                  className="mt-2 text-sm text-orange-600 hover:text-orange-800"
+                >
+                  ✕ Effacer la sélection
+                </button>
+              )}
+            </div>
+
+            <div>
+              <label className="block mb-2 font-semibold">Sexe</label>
+              <div className="grid grid-cols-2 gap-4">
+                <button
+                  onClick={() => setFormData({...formData, dogSex: 'male'})}
+                  className={`p-3 rounded-lg border-2 transition-all ${formData.dogSex === 'male' ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white border-transparent' : 'border-gray-300'}`}
+                >
+                  Mâle
+                </button>
+                <button
+                  onClick={() => setFormData({...formData, dogSex: 'female'})}
+                  className={`p-3 rounded-lg border-2 transition-all ${formData.dogSex === 'female' ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white border-transparent' : 'border-gray-300'}`}
+                >
+                  Femelle
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="block mb-2 font-semibold">Stérilisé(e) ?</label>
+              <div className="grid grid-cols-2 gap-4">
+                <button
+                  onClick={() => setFormData({...formData, dogNeutered: 'yes'})}
+                  className={`p-3 rounded-lg border-2 transition-all ${formData.dogNeutered === 'yes' ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white border-transparent' : 'border-gray-300'}`}
+                >
+                  Oui
+                </button>
+                <button
+                  onClick={() => setFormData({...formData, dogNeutered: 'no'})}
+                  className={`p-3 rounded-lg border-2 transition-all ${formData.dogNeutered === 'no' ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white border-transparent' : 'border-gray-300'}`}
+                >
+                  Non
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <div className="flex justify-between items-center mb-2">
+                <label className="font-semibold">État corporel</label>
+                <button
+                  onClick={() => setShowBodyScoreHelper(!showBodyScoreHelper)}
+                  className="text-sm text-orange-600 hover:text-orange-800"
+                >
+                  {showBodyScoreHelper ? '✕ Fermer' : '❓ Aide'}
+                </button>
+              </div>
+              
+              {showBodyScoreHelper && (
+                <div className="mb-4 p-4 bg-orange-50 rounded-lg space-y-2 text-sm">
+                  {bodyScores.map(score => (
+                    <div key={score.value} className="flex items-start gap-2">
+                      <span className="text-2xl">{score.emoji}</span>
+                      <div>
+                        <div className="font-semibold">{score.label}</div>
+                        <div className="text-gray-600">{score.description}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              
+              <div className="grid grid-cols-2 gap-3">
+                {bodyScores.map((body) => (
+                  <button
+                    key={body.value}
+                    onClick={() => setFormData({...formData, dogBody: body.value})}
+                    className={`p-3 rounded-lg border-2 transition-all ${formData.dogBody === body.value ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white border-transparent' : 'border-gray-300'}`}
+                  >
+                    <div className="text-2xl mb-1">{body.emoji}</div>
+                    <div className="text-sm">{body.label}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {showAgeError && (
+              <div className="bg-red-100 border-2 border-red-500 text-red-700 p-4 rounded-lg animate-pulse">
+                <p className="font-bold">⚠️ Information manquante</p>
+                <p>Pour les animaux de moins de 2 ans, veuillez préciser les mois pour un calcul plus précis.</p>
+              </div>
+            )}
+
+            <div className="flex gap-4">
+              <button
+                onClick={handleCalculate}
+                className="flex-1 p-4 bg-gradient-to-r from-orange-600 to-pink-600 text-white rounded-lg font-bold hover:opacity-90 transition-opacity"
+              >
+                🎯 CALCULER L'ÂGE
+              </button>
+              <button
+                onClick={() => setCurrentPage('home')}
+                className="px-6 p-4 bg-gray-500 text-white rounded-lg font-bold hover:bg-gray-600 transition-colors"
+              >
+                ← Retour
+              </button>
+            </div>
+          </div>
+        )}
+
+        {currentPage === 'loading' && (
+          <div className="text-center py-16 space-y-8">
+            <div className="text-8xl animate-bounce">
+              {currentPet === 'cat' ? '😸' : '🐕'}
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold mb-4">Calcul en cours...</h2>
+              <p className="text-gray-600 italic">{loadingMessage}</p>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+              <div className="bg-gradient-to-r from-purple-500 to-pink-500 h-full animate-[progress_7s_ease-out]" style={{animation: 'progress 7s ease-out forwards'}}></div>
+            </div>
+          </div>
+        )}
+
+        {currentPage === 'result' && result && (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-center">{result.name}</h2>
+            
+            <div className="bg-gradient-to-r from-orange-500 to-amber-600 text-white p-8 rounded-xl text-center">
+              <div className="text-6xl font-bold mb-2">{ageCounter} {ageCounter < 2 ? 'an' : 'ans'}</div>
+              <div className="text-lg opacity-90">Intervalle : {result.interval[0]}-{result.interval[1]} ans</div>
+            </div>
+
+            {showDelayedContent && (
+              <>
+                <div className="bg-gradient-to-r from-purple-100 to-pink-100 p-6 rounded-lg">
+                  <p className="text-lg">
+                    <span className="text-2xl mr-3">{getFunPhrase(result.humanAge).icon}</span>
+                    Si {result.name} était humain{result.isFemale ? 'e' : ''}, {result.isFemale ? 'elle' : 'il'} {getFunPhrase(result.humanAge).text}
+                  </p>
+                </div>
+
+                <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 space-y-4">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-3xl">💙</span>
+                    <h3 className="text-xl font-bold text-gray-800">Espérance de vie : un indicateur, pas une prédiction</h3>
+                  </div>
+                  
+                  <p className="text-gray-600 leading-relaxed">
+                    L'espérance de vie est une moyenne statistique basée sur des milliers d'animaux. Elle ne prédit pas la longévité de {result.name} en particulier.
+                  </p>
+                  
+                  <p className="text-gray-600 leading-relaxed">
+                    Beaucoup d'animaux vivent bien au-delà de cette moyenne grâce aux soins qu'ils reçoivent. Cette information t'aidera simplement à adapter tes soins selon son stade de vie.
+                  </p>
+
+                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-5 my-4">
+                    <p className="text-center font-semibold text-gray-700 mb-3">Prêt·e à découvrir ces données ?</p>
+                    <button
+                      onClick={() => setShowLifeExpectancy(true)}
+                      className="w-full p-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl font-bold hover:opacity-90 transition-all hover:scale-105 flex items-center justify-center gap-2"
+                    >
+                      <span>💙</span> Je veux savoir
+                    </button>
+                  </div>
+                </div>
+
+                {showLifeExpectancy && (
+                  <>
+                    <div className="bg-white border-2 border-blue-200 rounded-2xl p-6 space-y-4">
+                      <div className="flex justify-between bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-xl">
+                        <div>
+                          <div className="text-2xl font-bold text-blue-600">{formatAgeWithMonths(result.lifeExpectancy)}</div>
+                          <div className="text-sm text-gray-600">Espérance moyenne</div>
+                        </div>
+                        <div>
+                          <div className="text-2xl font-bold text-blue-600">{formatAgeWithMonths(result.age)}</div>
+                          <div className="text-sm text-gray-600">Âge de {result.name}</div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <div className="flex justify-between text-sm font-semibold mb-2 text-gray-600">
+                          <span>0 an</span>
+                          <span>{formatAgeWithMonths(result.lifeExpectancy)}</span>
+                        </div>
+                        <div className="w-full bg-gray-200 rounded-full h-10 overflow-hidden relative">
+                          <div 
+                            className="bg-gradient-to-r from-blue-500 to-indigo-600 h-full flex items-center transition-all duration-1000"
+                            style={{width: `${Math.min(100, result.lifePercentage)}%`}}
+                          ></div>
+                          <div 
+                            className="absolute inset-0 flex items-center justify-center text-sm font-bold"
+                            style={{
+                              color: result.lifePercentage < 30 || result.lifePercentage > 70 ? '#1f2937' : 'white',
+                              left: result.lifePercentage < 15 ? '15%' : result.lifePercentage > 85 ? 'auto' : '50%',
+                              right: result.lifePercentage > 85 ? '15%' : 'auto',
+                              transform: result.lifePercentage < 15 || result.lifePercentage > 85 ? 'none' : 'translateX(-50%)'
+                            }}
+                          >
+                            {Math.min(100, result.lifePercentage)}%
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="text-center">
+                        <span className="inline-block px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full font-bold">
+                          {result.lifeStage}
+                        </span>
+                      </div>
+
+                      {result.lifePercentage >= 100 && (
+                        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-300 rounded-xl p-5 mt-4">
+                          <div className="flex items-center gap-2 mb-3">
+                            <span className="text-3xl">💙</span>
+                            <h4 className="text-lg font-bold text-gray-800">Un cadeau précieux</h4>
+                            <span className="text-3xl">💙</span>
+                          </div>
+                          <p className="text-gray-700 leading-relaxed">
+                            {result.name} a atteint ou dépassé l'espérance de vie moyenne. Chaque jour de plus est un cadeau précieux. Continue de {result.isFemale ? 'lui' : 'lui'} offrir ton amour et tes soins !
+                          </p>
+                        </div>
+                      )}
+                    </div>
+
+                    {result.isSenior && result.lifePercentage < 100 && (
+                      <div className="bg-white border-2 border-blue-200 rounded-2xl p-6 space-y-4">
+                        <h3 className="text-2xl font-bold text-center text-gray-800 mb-4">
+                          {result.name} est {result.isFemale ? 'une compagne' : 'un compagnon'} senior
+                        </h3>
+                        
+                        <a 
+                          href="https://www.ecoutenala.ca" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="block w-full"
+                        >
+                          <div className="bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white rounded-2xl p-6 transition-all hover:scale-[1.02] cursor-pointer">
+                            <div className="flex items-center justify-center gap-3 text-xl font-bold mb-2">
+                              <span className="text-2xl">🎯</span>
+                              <span>Évaluer sa qualité de vie</span>
+                            </div>
+                          </div>
+                        </a>
+                        
+                        <p className="text-center text-gray-600 text-sm">
+                          Évaluation gratuite • Rapport détaillé disponible
+                        </p>
+                      </div>
+                    )}
+
+                    <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4">
+                      <button
+                        onClick={() => setShowLifeExpectancyInfo(!showLifeExpectancyInfo)}
+                        className="w-full flex items-center justify-between text-left font-semibold text-blue-900 hover:text-blue-700"
+                      >
+                        <span>💡 Pourquoi {result.pet === 'chat' ? 'pas 15 ans' : 'cette espérance'} ?</span>
+                        <span className="text-2xl">{showLifeExpectancyInfo ? '−' : '+'}</span>
+                      </button>
+                      
+                      {showLifeExpectancyInfo && (
+                        <div className="mt-3 text-sm text-gray-700 space-y-2">
+                          {result.pet === 'chat' ? (
+                            <>
+                              <p className="font-medium">Le « 15 ans » qu'on entend souvent dire comme référence correspond plutôt à la longévité typique des chats stérilisés vivant strictement à l'intérieur et ne souffrant pas d'obésité.</p>
+                              <p>L'espérance de vie de {result.name} a été calculée en tenant compte de :</p>
+                              <ul className="list-disc list-inside space-y-1 ml-2">
+                                <li>Sa race spécifique s'il en a une qui a été étudiée</li>
+                                <li>Son mode de vie (intérieur/mixte/extérieur)</li>
+                                <li>Son statut de stérilisation</li>
+                                <li>Son état corporel actuel</li>
+                                <li>Son sexe</li>
+                              </ul>
+                              <p className="italic text-blue-800">Ces facteurs peuvent faire varier l'espérance de vie de mois ou même années !</p>
+                            </>
+                          ) : (
+                            <>
+                              <p className="font-medium">L'espérance de vie varie énormément selon la race et la taille du chien.</p>
+                              <p>L'espérance de vie de {result.name} a été calculée en tenant compte de :</p>
+                              <ul className="list-disc list-inside space-y-1 ml-2">
+                                <li>Sa race et sa taille (données scientifiques)</li>
+                                <li>Son état corporel (impact majeur sur la longévité)</li>
+                                <li>Son statut de stérilisation</li>
+                                <li>S'il est croisé ou de race pure</li>
+                              </ul>
+                              <p className="italic text-blue-800">Les petits chiens peuvent parfois vivre jusqu'à 15-16 ans et plus, tandis que les races géantes vivent rarement plus de 10 ans.</p>
+                            </>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </>
+                )}
+
+                <div className="border-t pt-6">
+                  <h3 className="text-center font-bold mb-4">Partagez ce moment !</h3>
+                  <div className="flex justify-center gap-3">
+                    <button onClick={() => handleShare('facebook')} className="w-12 h-12 bg-blue-600 text-white rounded-full hover:scale-110 transition-transform">f</button>
+                    <button onClick={() => handleShare('twitter')} className="w-12 h-12 bg-sky-500 text-white rounded-full hover:scale-110 transition-transform">𝕏</button>
+                    <button onClick={() => handleShare('whatsapp')} className="w-12 h-12 bg-green-500 text-white rounded-full hover:scale-110 transition-transform">📱</button>
+                    <button onClick={() => handleShare('copy')} className="w-12 h-12 bg-gray-600 text-white rounded-full hover:scale-110 transition-transform">🔗</button>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => {setCurrentPage('home'); setResult(null); setFormData({}); setShowLifeExpectancy(false); setShowDelayedContent(false);}}
+                  className="w-full p-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-bold hover:opacity-90 transition-opacity"
+                >
+                  🔄 Nouveau calcul
+                </button>
+              </>
+            )}
+          </div>
+        )}
+
+        {showConfetti && (
+          <div className="fixed inset-0 pointer-events-none z-50 flex items-center justify-center">
+            {[...Array(100)].map((_, i) => {
+              const angle = (i / 100) * Math.PI * 2;
+              const distance = 150 + Math.random() * 350;
+              const duration = 0.6 + Math.random() * 0.4;
+              const delay = Math.random() * 0.15;
+              const endX = Math.cos(angle) * distance;
+              const endY = Math.sin(angle) * distance;
+              
+              return (
+                <div
+                  key={i}
+                  className="absolute"
+                  style={{
+                    animation: `explode-${i} ${duration}s cubic-bezier(0.4, 0, 0.6, 1) ${delay}s forwards`,
+                    animationName: `explode-${i}`
+                  }}
+                >
+                  <div 
+                    className="w-4 h-4 rounded-full"
+                    style={{
+                      backgroundColor: ['#a855f7', '#ec4899', '#f97316', '#fbbf24', '#22c55e', '#3b82f6', '#ef4444'][Math.floor(Math.random() * 7)],
+                      boxShadow: '0 0 10px rgba(255,255,255,0.6)'
+                    }}
+                  ></div>
+                  <style dangerouslySetInnerHTML={{__html: `
+                    @keyframes explode-${i} {
+                      0% {
+                        transform: translate(0, 0) scale(1) rotate(0deg);
+                        opacity: 1;
+                      }
+                      50% {
+                        opacity: 1;
+                      }
+                      100% {
+                        transform: translate(${endX}px, ${endY}px) scale(0.2) rotate(${720 + Math.random() * 360}deg);
+                        opacity: 0;
+                      }
+                    }
+                  `}} />
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </Card>
+
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes progress {
+          from { width: 0%; }
+          to { width: 100%; }
+        }
+      `}} />
+    </div>
+  );
+};
+
+export default VraiAge;
+
+
+=== DOCUMENT SCIENTIFIQUE ===
+
+Référence Scientifique - VraiÂge
+🔬 Formules de Calcul
+Chiens - Formule Épigénétique Logarithmique
+Formule de base : Âge humain = 16 × ln(âge_chien) + 31
+Source : Étude de Tina Wang et Trey Ideker (Université de Californie San Diego, 2019-2020), publiée dans Cell Systems après prépublication sur bioRxiv en novembre 2019.
+Méthodologie : Analyse de la méthylation de l'ADN chez 104 Labrador Retrievers âgés de 4 semaines à 16 ans, comparés à 320 humains et 133 souris.
+Exemples de correspondances :
+	•	1 an → 31 ans humains
+	•	2 ans → 42 ans humains
+	•	5 ans → 57 ans humains
+	•	10 ans → 68 ans humains
+	•	12 ans → 71 ans humains
+Chats - Formule par Tranches d'Âge
+Formule validée par les études Purina :
+	•	Première année : 1 an = 15 ans humains
+	•	Deuxième année : 2 ans = 24 ans humains (ajout de 9 ans)
+	•	Années suivantes : +4 ans humains par année féline
+Exemples :
+	•	6 ans → 41 ans humains
+	•	10 ans → 56 ans humains
+	•	15 ans → 76 ans humains
+📏 Coefficients d'Ajustement Scientifiques
+Taille des Chiens (Impact majeur)
+Multiplicateurs de la formule de base :
+	•	Petits (< 15 kg) : × 1.2
+	•	Moyens (15-40 kg) : × 1.0 (référence)
+	•	Grands (40-90 kg) : × 0.85
+	•	Géants (> 90 kg) : × 0.75
+Principe : Les grands chiens vieillissent plus vite en raison de leur croissance rapide et du stress métabolique.
+État Corporel (Impact 15-20%)
+Multiplicateurs d'espérance de vie :
+	•	Très maigre : × 0.85
+	•	Maigre : × 0.90
+	•	Idéal : × 1.15 (chiens) / × 1.0 (chats)
+	•	Surpoids : × 0.90-0.95
+	•	Obèse : × 0.75-0.85
+Source : Étude Purina de 14 ans sur 48 Labrador Retrievers (1987-2001) montrant que le poids idéal prolonge l'espérance de vie de 15% (+1.8 ans).
+Stérilisation (Impact significatif)
+	•	Chats : +2 ans d'espérance de vie moyenne
+	•	Chiens : +1.5 an d'espérance de vie moyenne
+Mécanisme : Réduction des cancers mammaires, infections utérines, problèmes de prostate, et comportements à risque.
+Sexe
+	•	Chats : Femelles vivent ~2 ans de plus que les mâles (15 ans vs 13 ans)
+	•	Chiens : Différence moins marquée mais les femelles ont un léger avantage
+Mode de Vie (Chats uniquement)
+Impact sur l'espérance de vie :
+	•	Intérieur : Référence (16-18 ans possibles)
+	•	Mixte : -2 ans
+	•	Extérieur : -5 ans
+Cause principale : Accidents routiers (~50% des décès avant 5 ans chez les chats d'extérieur)
+Race Pure vs Croisé
+Avantage génétique des croisés :
+	•	Chats croisés : +1.5 an (14 ans vs 12.5 ans pour races pures)
+	•	Chiens croisés : +0.5 an (robustesse hybride)
+📊 Espérances de Vie par Race
+Chats (Données scientifiques)
+Race
+Espérance (ans)
+Birman
+16.1
+Bleu Russe
+16
+Croisé (gouttière)
+15
+Burmese
+14.3
+Siamois
+14.2
+Persan
+14.1
+Bengal
+14
+British Shorthair
+11.8
+Maine Coon
+11
+Ragdoll
+10.1
+Abyssin
+10
+Sphynx
+7
+Chiens (Données scientifiques)
+Race
+Espérance (ans)
+Taille
+Teckel
+15.2
+Small
+Shih Tzu
+15.08
+Small
+Chihuahua
+15.01
+Small
+Yorkshire
+15
+Small
+Jack Russell
+15
+Small
+Caniche
+14.2
+Medium
+Beagle
+14
+Medium
+Labrador
+13.27
+Large
+Cocker
+13
+Medium
+Husky
+13
+Large
+Golden Retriever
+12.93
+Large
+Croisé
+12.71
+Medium
+Berger Allemand
+12.46
+Large
+Bouledogue Français
+10
+Medium
+Boxer
+10
+Large
+Dogue Allemand
+9.63
+Giant
+Saint-Bernard
+9
+Giant
+Dogue de Bordeaux
+5.5
+Giant
+Règle générale : Chaque augmentation de 2 kg entre races réduit l'espérance de vie d'environ 1 mois.
+🎯 Stades de Vie
+Chiens
+	•	Chiot : < 1 an
+	•	Jeune adulte : 1-3 ans
+	•	Adulte : 3-6 ans
+	•	Mature : 6-8 ans
+	•	Senior : 8-10 ans
+	•	Doyen : > 10 ans
+Chats
+	•	Chaton : < 0.5 an
+	•	Junior : 0.5-2 ans
+	•	Adulte : 2-6 ans
+	•	Mature : 6-10 ans
+	•	Senior : 10-14 ans
+	•	Doyen : > 14 ans
+🔬 Mécanismes Biologiques
+Paradoxe de la Taille (Chiens)
+Contrairement à la règle inter-espèces (grands mammifères vivent plus longtemps), au sein des chiens, les grands individus meurent plus jeunes. Explications :
+	•	Croissance rapide : Un chien géant gagne 45+ kg en un an (vs 5 kg pour petite race)
+	•	Stress métabolique : Cœur, articulations et tissus fragilisés précocement
+	•	IGF-1 élevé : Facteur de croissance corrélé à durée de vie réduite
+Télomères
+	•	Les télomères canins se raccourcissent 10× plus vite que chez les humains
+	•	Longueur des télomères corrèle avec l'espérance de vie raciale
+	•	Lorsque critiquement courts : perte de capacité de division cellulaire
+Stress Oxydatif
+	•	Chiens : Métabolisme rapide → plus de radicaux libres → dommages cellulaires
+	•	Chats : Métabolisme plus lent + 18h de sommeil/jour → moins de stress oxydatif
+📈 Points Clés pour le Calcul
+	•	Base scientifique solide : Formules validées par études peer-reviewed
+	•	Personnalisation : Multiples facteurs pris en compte simultanément
+	•	Limitations :
+	•	Formule logarithmique développée sur Labrador Retrievers
+	•	Variations raciales significatives
+	•	Espérance vs Prédiction :
+	•	Moyenne statistique sur milliers d'animaux
+	•	Ne prédit pas la longévité individuelle
+	•	Beaucoup d'animaux dépassent largement la moyenne
+🎓 Sources Principales
+	•	Wang & Ideker (2019-2020) - Cell Systems - Formule épigénétique
+	•	Étude Purina (1987-2001) - 14 ans, 48 Labradors - Impact poids optimal
+	•	Étude Purina chats (9 ans) - 90 chats - Impact nutrition
+	•	Étude Banfield - 13.3 millions de chiens - Données épidémiologiques
+	•	Urfer et al. (2019) - 169,000+ chiens - Espérances par race
+	•	O'Neill et al. (2015) - 120,000 chats - Espérances par race
+⚠️ Limitations et Évolutions Futures
+Limitations actuelles :
+	•	Formule chiens basée uniquement sur Labradors
+	•	Données épigénétiques félines moins développées
+	•	Variabilité individuelle importante
+Projets en cours :
+	•	Dog Aging Project (10,000 chiens, 10 ans) - Affinage coefficients raciaux
+	•	Recherche épigénétique féline équivalente
+Précision actuelle : Marge d'erreur réduite de 50% comparée aux méthodes traditionnelles (×7)
+
+Note importante : Ces données sont issues de publications scientifiques peer-reviewed et représentent l'état actuel des connaissances. Les calculs VraiÂge intègrent ces données pour fournir une estimation personnalisée plus précise que les règles simplistes traditionnelles.
+

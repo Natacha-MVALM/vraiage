@@ -1,0 +1,94 @@
+﻿Voici le résumé de la révision du contenu de l'application « Vrai Âge ».
+✅ Points Clés & Statut
+Révision détaillée du texte de la Foire Aux Questions (FAQ) de l'application « Vrai Âge ». L'objectif principal est d'améliorer la clarté, de gérer les attentes des utilisateurs et de renforcer les aspects juridiques et éthiques de l'outil.
+* Ce qui a été fait : Une analyse complète du contenu existant de la FAQ a été effectuée, identifiant plusieurs sections nécessitant des modifications pour plus de précision et de transparence.
+* Plans : Je dois mettre en œuvre une série de modifications textuelles. Celles-ci visent à clarifier que le calculateur utilise des données basées sur le poids lorsque les informations spécifiques à la race sont manquantes, à renforcer le message que l'outil est éducatif et non médical, et à ajuster la formulation pour indiquer que l'outil lui-même n'a pas été formellement validé, bien qu'il soit basé sur des recherches scientifiques.
+* Bloqueurs : Un acronyme non identifié (« PRA ») dans une note importante doit être élucidé avant que la correction puisse être finalisée.
+📣 Citations Clés
+"La recherche scientifique a mené au développement du calculateur, mais que l'outil en soi n'a pas été testé." 
+"Ces calculs sont basés sur des moyennes statistiques et ne remplacent pas l'avis d'un vétérinaire pour la santé de ton animal. Ça, je veux qu'on le fasse apparaître aussi souvent que possible." 
+🎯 Éléments d'Action
+Tâche
+	
+
+	
+
+	Notes
+	Modifier la section "L'application fonctionne-t-elle pour toutes les races ?".
+	
+
+	
+
+	Clarifier que les catégories de poids sont utilisées en l'absence de données spécifiques à la race.
+	Supprimer des phrases dans la section "Un outil éducatif, pas médical".
+	
+
+	
+
+	Retirer la phrase commençant par "Même quand..." et celle commençant par "ce serait irresponsable".
+	Mettre à jour la section "Les résultats remplacent-ils l'avis d'un vétérinaire ?".
+	
+
+	
+
+	Ajouter que l'outil aide à comprendre le stade de vie de l'animal et ses besoins spécifiques.
+	Modifier la FAQ "Si je ne connais pas le poids exact...".
+	
+
+	
+
+	Supprimer la phrase sur l'utilisation de la silhouette pour estimer le poids du chien.
+	Reformuler la section "La réalité" dans la FAQ sur l'espérance de vie.
+	
+
+	
+
+	Changer la phrase pour "beaucoup d'autres facteurs influencent la longévité".
+	Clarifier la FAQ "Mon animal a dépassé son espérance de vie moyenne".
+	
+
+	
+
+	Remplacer "des vies très différentes" par "des styles de vie très différents".
+	Reformuler la FAQ "Les résultats sont-ils fiables ?".
+	
+
+	
+
+	Souligner que la fiabilité dépend des données fournies et que l'outil lui-même n'a pas été validé, contrairement à la recherche sous-jacente.
+	Mettre à jour la liste des sources scientifiques.
+	
+
+	
+
+	Ajouter les nouvelles sources qui ne sont pas actuellement listées.
+	Enquêter et corriger l'acronyme "PRA" dans l'encadré informatif.
+	
+
+	
+
+	L'acronyme est inconnu et doit être identifié et corrigé.
+	Ajouter des clarifications à la FAQ "Mon animal a dépassé son espérance de vie...".
+	
+
+	
+
+	Expliquer que le calculateur doit parfois extrapoler des données (en se basant sur la taille, le style de vie, etc.) car les études pour chaque race n'existent pas.
+	Modifier la FAQ "Comment fonctionne le calculateur d'âge ?".
+	
+
+	
+
+	Supprimer le mot "validées" de la première phrase pour éviter de sous-entendre une validation formelle de l'outil.
+	⚖️ Décisions Prises
+* L'application indiquera explicitement qu'elle utilise des catégories de poids pour les chiens lorsque les données spécifiques à la race sont manquantes.
+* La distinction entre les formules scientifiquement fondées et le statut non validé de l'outil lui-même doit être clairement communiquée dans la FAQ.
+* L'avertissement indiquant que l'outil ne remplace pas l'avis d'un vétérinaire sera affiché plus fréquemment dans l'application.
+* Plusieurs phrases spécifiques seront supprimées ou reformulées dans la FAQ pour améliorer la clarté et réduire les risques d'interprétation erronée.
+➡️ Actions de Suivi
+* Trouver une manière subtile mais claire d'intégrer dans la FAQ le fait que l'outil n'a pas été validé, même si les données sur lesquelles il se base le sont.
+* Assurer une implémentation globale de l'avertissement sur le non-remplacement de l'avis vétérinaire à travers l'application.
+❗️ Éléments en Suspens & Risques
+* Risques Potentiels : Le principal risque est d'ordre juridique et éthique. Si les utilisateurs interprètent l'outil comme un dispositif de diagnostic médical, cela pourrait entraîner des problèmes. Les modifications demandées visent à atténuer ce risque. Un autre risque est que les utilisateurs perçoivent l'outil comme inexact s'ils ne comprennent pas les limites des données (par exemple, l'extrapolation).
+* Discussions Inachevées : La signification de l'acronyme "PRA" reste un point non résolu qui nécessite une investigation.
+* Discussions sans Action : La discussion sur la manière de communiquer le statut non validé de l'outil ("on est peut-être pas obligé de le dire clairement") indique une réflexion stratégique sur le niveau de transparence à adopter, qui servira de guide à l'équipe de rédaction plutôt que de constituer une action unique et concrète.

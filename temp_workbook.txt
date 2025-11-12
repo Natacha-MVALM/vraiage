@@ -1,0 +1,511 @@
+📚 WORKBOOK MASTER - Unified Development System
+Version 2.0 - October 2025 For use with both Claude.ai and Claude Code
+🎯 CORE PRINCIPLES
+Hierarchy of Priorities
+	•	Performance - Fast, responsive, optimized
+	•	Security - Production-grade, unhackable
+	•	Simplicity - KISS principle, clean code
+	•	Accessibility - Usable by everyone
+	•	Maintainability - Easy to update and debug
+	•	Scalability - Ready for growth
+Development Philosophy
+	•	NO CODE BEFORE PLANNING - Always plan first
+	•	TEST BEFORE PROGRESS - Never move forward with broken features
+	•	ONE FEATURE AT A TIME - Complete before starting new
+	•	DOCUMENT EVERYTHING - Future-proof the project
+🔄 TRANSITION PROTOCOL: CLAUDE.AI → CLAUDE CODE
+Migration Checklist
+When moving from Claude.ai to Claude Code:
+1. Export from Claude.ai
+	•	[ ] All artifacts saved locally
+	•	[ ] PLANNING.md finalized
+	•	[ ] CONTEXT.md complete
+	•	[ ] UI components documented
+	•	[ ] Business logic defined
+	•	[ ] Test cases written
+2. Import to Claude Code
+## First Message to Claude Code:
+"I'm migrating a project from Claude.ai. Here's the context:
+
+1. WORKBOOK MASTER: [paste]
+2. PLANNING.md: [paste]
+3. CONTEXT.md: [paste]
+4. Prototype code: [paste/attach]
+
+Please:
+1. Review all documentation
+2. Setup the development environment
+3. Import the prototype code
+4. Initialize Git repository
+5. Confirm understanding of project goals"
+3. Verify Continuity
+	•	[ ] Claude Code acknowledges all documentation
+	•	[ ] Project structure matches plan
+	•	[ ] Prototype code integrated
+	•	[ ] Git history started
+	•	[ ] Ready for development
+
+🎯 WORKFLOW: CLAUDE.AI → CLAUDE CODE
+Tool Usage Strategy
+Use Claude.ai for:
+	•	Planning & Architecture - WORKBOOK documentation
+	•	Prototyping - Quick UI/UX iterations with artifacts
+	•	Concept Validation - Test ideas rapidly
+	•	Documentation - Create all project docs
+	•	Visual Design - Mockups and components
+	•	Business Logic - Define rules and flows
+Migrate to Claude Code when:
+	•	Architecture is validated
+	•	UI/UX prototype is approved
+	•	Need real development environment
+	•	Require backend implementation
+	•	Ready for GitHub/version control
+	•	Time to deploy
+
+📋 PROJECT INITIALIZATION PROTOCOL
+Phase 1: Discovery & Planning [CLAUDE.AI]
+	•	Project Brief Collection 
+	•	What is the core purpose?
+	•	Who are the users?
+	•	What problem does it solve?
+	•	Revenue model (if commercial)?
+	•	Expected scale (users/traffic)?
+	•	Technical Architecture Decision 
+	•	Present 2-3 stack options with pros/cons
+	•	Database strategy (managed cloud preferred)
+	•	Hosting approach
+	•	Security requirements assessment
+	•	Create Initial Documentation 
+/project-root
+├── docs/
+│   ├── PLANNING.md      (Project roadmap & phases)
+│   ├── CONTEXT.md       (Permanent project context)
+│   ├── DECISIONS.md     (Technical choices & rationale)
+│   ├── TESTING.md       (Validation criteria)
+│   ├── SECURITY.md      (Security measures)
+│   └── ERRORS.md        (Error log & solutions)
+Phase 2: Prototyping [CLAUDE.AI]
+	•	Create Interactive Prototype 
+	•	Build UI components with React artifacts
+	•	Test user flows
+	•	Validate business logic
+	•	Iterate based on feedback
+	•	Document Everything 
+	•	Export all artifacts
+	•	Save component code
+	•	Document design decisions
+	•	Create style guide
+	•	Prepare for Migration 
+	•	Final prototype approval
+	•	Code structure ready
+	•	Dependencies identified
+	•	GitHub repo created
+Phase 3: Development Setup [CLAUDE CODE]
+# Standard project initialization
+1. Initialize Git repository
+2. Create .gitignore (sensitive files)
+3. Setup branch structure:
+   - main (production)
+   - develop (active development)
+   - feature/* (individual features)
+4. Initialize chosen framework
+5. Setup environment variables (.env.local)
+6. Configure ESLint/Prettier
+7. Setup testing framework
+
+🏗️ DEVELOPMENT WORKFLOW
+Claude.ai Workflow (Prototyping Phase)
+Artifact Development Rules
+	•	Single Artifact per Response - Claude.ai limitation
+	•	Save Everything - Export artifacts immediately
+	•	Test in Browser - Validate all interactions
+	•	Document Issues - Note what needs backend
+	•	Iterate Quickly - UI/UX refinements
+Prototype Components Checklist
+	•	[ ] Landing page
+	•	[ ] Authentication UI
+	•	[ ] Main dashboard
+	•	[ ] Core feature screens
+	•	[ ] Settings/profile
+	•	[ ] Payment flow UI
+	•	[ ] Error states
+	•	[ ] Loading states
+	•	[ ] Empty states
+	•	[ ] Mobile responsive
+Claude Code Workflow (Production Phase)
+Implementation from Prototype
+1. FEATURE PLANNING
+## Feature: [Name]
+### Requirements
+- [ ] User story
+- [ ] Acceptance criteria
+- [ ] Security considerations
+- [ ] Performance targets
+### Technical Approach
+- Architecture decision
+- Dependencies needed
+- Potential risks
+2. IMPLEMENTATION PROTOCOL
+1. Create feature branch: feature/feature-name
+2. Write minimal viable code
+3. Implement security measures
+4. Add error handling
+5. Optimize performance
+6. Add accessibility features
+7. Write tests
+8. Document changes
+3. VALIDATION CHECKLIST
+	•	[ ] Functionality works as expected
+	•	[ ] No console errors
+	•	[ ] Security measures implemented
+	•	[ ] Performance metrics met
+	•	[ ] Accessible (keyboard nav, screen readers)
+	•	[ ] Responsive on all devices
+	•	[ ] Tests passing
+	•	[ ] Code reviewed and cleaned
+4. COMPLETION PROTOCOL
+# Automatic actions by Claude
+1. Run final tests
+2. Update documentation
+3. Commit with descriptive message
+4. Merge to develop branch
+5. Update DECISIONS.md
+6. Log in session summary
+
+🔒 SECURITY STANDARDS
+Mandatory Security Measures
+Authentication & Authorization
+	•	[ ] Implement proper authentication (JWT/Session)
+	•	[ ] Role-based access control (RBAC)
+	•	[ ] Secure password requirements
+	•	[ ] 2FA option for sensitive apps
+	•	[ ] Session timeout mechanisms
+Data Protection
+	•	[ ] HTTPS everywhere (SSL/TLS)
+	•	[ ] Encrypt sensitive data at rest
+	•	[ ] Encrypt data in transit
+	•	[ ] SQL injection prevention
+	•	[ ] XSS protection
+	•	[ ] CSRF tokens
+	•	[ ] Rate limiting
+	•	[ ] Input validation & sanitization
+Payment Security (Stripe)
+	•	[ ] PCI compliance
+	•	[ ] Never store card details
+	•	[ ] Webhook signature verification
+	•	[ ] Idempotency keys
+	•	[ ] Test mode before production
+API Security
+	•	[ ] API key authentication
+	•	[ ] Rate limiting per user
+	•	[ ] Request size limits
+	•	[ ] CORS properly configured
+	•	[ ] API versioning
+
+💻 CODING STANDARDS
+General Rules
+// GOOD: Simple, clear, performant
+const getUserById = async (id) => {
+  if (!id) throw new Error('ID required');
+  return await db.users.findUnique({ where: { id } });
+};
+
+// BAD: Complex, nested, unclear
+const getUser = async (identifier) => {
+  if (identifier) {
+    if (typeof identifier === 'string') {
+      const user = await db.users.findFirst({
+        where: { 
+          OR: [{ id: identifier }, { email: identifier }]
+        }
+      });
+      if (user) {
+        return user;
+      }
+    }
+  }
+  return null;
+};
+Naming Conventions
+	•	Variables/Functions: camelCase
+	•	Components: PascalCase
+	•	Files: kebab-case
+	•	Constants: UPPER_SNAKE_CASE
+	•	CSS Classes: kebab-case
+	•	Database: snake_case
+Code Organization
+/src
+├── components/     (Reusable UI)
+├── pages/         (Route pages)
+├── lib/           (Utilities)
+├── hooks/         (Custom React hooks)
+├── services/      (API/External services)
+├── stores/        (State management)
+├── styles/        (Global styles)
+└── types/         (TypeScript types)
+
+📊 SESSION MANAGEMENT
+Start of Session
+	•	Context Check 
+	•	Review CONTEXT.md
+	•	Check last session summary
+	•	Verify current branch
+	•	Review pending tasks
+	•	Session Planning 
+	•	Define session goals
+	•	Estimate time per task
+	•	Identify potential blockers
+During Session
+	•	Auto-save every 30 minutes
+	•	Test after each component
+	•	Commit after each feature milestone
+	•	Update docs in real-time
+End of Session (3-4 hours)
+## SESSION SUMMARY - [Date/Time]
+
+### ✅ Completed
+- Feature X implemented
+- Bug Y fixed
+- Performance improved by Z%
+
+### 🧪 Tests Performed
+- Unit tests: X/Y passing
+- Integration tests: Status
+- Manual testing: Checklist
+
+### 📝 Changes Made
+- Files modified: [list]
+- Dependencies added: [list]
+- Database changes: [list]
+
+### 🚨 Issues Encountered
+- Problem: [description]
+- Solution: [what was done]
+- Follow-up needed: [if any]
+
+### 📅 Next Session Priorities
+1. Top priority task
+2. Secondary task
+3. Nice-to-have
+
+### 💡 Notes & Observations
+- Performance insights
+- Refactoring opportunities
+- Technical debt identified
+
+🚀 DEPLOYMENT CHECKLIST
+Pre-Deployment
+	•	[ ] All tests passing
+	•	[ ] Security audit complete
+	•	[ ] Performance benchmarks met
+	•	[ ] Accessibility audit passed
+	•	[ ] SEO meta tags added
+	•	[ ] Error tracking setup (Sentry)
+	•	[ ] Analytics configured
+	•	[ ] Environment variables secured
+	•	[ ] Database migrations ready
+	•	[ ] Backup strategy in place
+Deployment Process
+	•	Staging Environment 
+	•	Deploy to staging
+	•	Run smoke tests
+	•	Check monitoring
+	•	Verify payments (test mode)
+	•	Production 
+	•	Create production build
+	•	Database backup
+	•	Deploy with zero downtime
+	•	Monitor for 30 minutes
+	•	Check error logs
+Post-Deployment
+	•	[ ] Verify all features working
+	•	[ ] Check performance metrics
+	•	[ ] Monitor error rates
+	•	[ ] Test payment flow
+	•	[ ] Update status page
+	•	[ ] Notify stakeholders
+
+🛠️ TOOLS & INTEGRATIONS
+Required Tools
+	•	Version Control: Git/GitHub
+	•	Package Manager: npm/yarn/pnpm
+	•	Testing: Jest/Vitest + Playwright
+	•	Linting: ESLint + Prettier
+	•	Security: Snyk/npm audit
+	•	Monitoring: Sentry
+	•	Analytics: Plausible/Google Analytics
+Recommended Services
+	•	Hosting: Vercel/Netlify (auto-deploy)
+	•	Database: Supabase/Firebase (managed)
+	•	Auth: NextAuth/Auth0
+	•	Payments: Stripe
+	•	Email: Resend/SendGrid
+	•	Storage: Cloudinary/S3
+
+🔄 ERROR HANDLING PROTOCOL
+When Errors Occur
+	•	Immediate Actions 
+	•	Log full error with context
+	•	Attempt auto-fix if simple
+	•	Document in ERRORS.md
+	•	Decision Tree 
+Is it blocking progress?
+├─ YES → Requires user decision?
+│   ├─ YES → Present options with recommendations
+│   └─ NO → Fix and continue
+└─ NO → Log and continue, fix in next session
+	•	 Error Documentation Format 
+## Error: [Error Name]
+**Date**: [Timestamp]
+**Context**: What was being done
+**Error Message**: Full error
+**Solution**: How it was fixed
+**Prevention**: How to avoid in future
+
+📈 PERFORMANCE STANDARDS
+Target Metrics
+	•	First Contentful Paint: < 1.8s
+	•	Time to Interactive: < 3.8s
+	•	Largest Contentful Paint: < 2.5s
+	•	Cumulative Layout Shift: < 0.1
+	•	First Input Delay: < 100ms
+	•	Bundle Size: < 200KB (JS)
+	•	API Response: < 200ms
+Optimization Checklist
+	•	[ ] Code splitting implemented
+	•	[ ] Images optimized (WebP/AVIF)
+	•	[ ] Lazy loading for images
+	•	[ ] Database queries optimized
+	•	[ ] Caching strategy implemented
+	•	[ ] CDN configured
+	•	[ ] Compression enabled (gzip/brotli)
+
+🎨 UI/UX STANDARDS
+Accessibility Requirements
+	•	[ ] Keyboard navigation complete
+	•	[ ] Screen reader compatible
+	•	[ ] ARIA labels proper
+	•	[ ] Color contrast AAA
+	•	[ ] Focus indicators visible
+	•	[ ] Error messages clear
+	•	[ ] Loading states indicated
+	•	[ ] Mobile-first responsive
+User Experience
+	•	[ ] Loading time < 3 seconds
+	•	[ ] Intuitive navigation
+	•	[ ] Clear CTAs
+	•	[ ] Consistent design system
+	•	[ ] Helpful error messages
+	•	[ ] Undo/confirmation for destructive actions
+	•	[ ] Offline capability (when relevant)
+
+📝 DOCUMENTATION TEMPLATES
+PLANNING.md Template
+# Project: [Name]
+
+## Overview
+[Brief description]
+
+## Phases
+### Phase 1: Foundation (Week 1-2)
+- [ ] Setup and configuration
+- [ ] Basic authentication
+- [ ] Core data models
+
+### Phase 2: Core Features (Week 3-4)
+- [ ] Feature A
+- [ ] Feature B
+- [ ] Feature C
+
+### Phase 3: Polish (Week 5)
+- [ ] Performance optimization
+- [ ] Security hardening
+- [ ] UI/UX refinement
+
+### Phase 4: Launch (Week 6)
+- [ ] Deployment setup
+- [ ] Monitoring
+- [ ] Documentation
+
+## Success Criteria
+- Metric 1: Target
+- Metric 2: Target
+CONTEXT.md Template
+# Project Context
+
+## Business Context
+- Purpose: [Why this exists]
+- Users: [Who uses this]
+- Competition: [Market analysis]
+- Revenue Model: [How it makes money]
+
+## Technical Context
+- Stack: [Technologies used]
+- Architecture: [High-level design]
+- Integrations: [External services]
+- Constraints: [Limitations]
+
+## Current State
+- Version: X.Y.Z
+- Last Updated: [Date]
+- Active Feature: [What's being worked on]
+- Known Issues: [List]
+
+## Key Decisions
+- [Link to DECISIONS.md entries]
+
+🔄 CONTINUOUS IMPROVEMENT
+Weekly Review Checklist
+	•	[ ] Review error logs
+	•	[ ] Check performance metrics
+	•	[ ] Security updates needed?
+	•	[ ] Dependencies outdated?
+	•	[ ] Technical debt assessment
+	•	[ ] User feedback review
+	•	[ ] Code refactoring opportunities
+Monthly Audit
+	•	[ ] Full security scan
+	•	[ ] Accessibility audit
+	•	[ ] Performance profiling
+	•	[ ] Database optimization
+	•	[ ] Cost analysis (hosting/services)
+	•	[ ] Documentation update
+	•	[ ] Backup verification
+
+🚨 EMERGENCY PROTOCOLS
+Production Down
+	•	Check monitoring dashboards
+	•	Review recent deployments
+	•	Check external service status
+	•	Rollback if needed
+	•	Communicate status
+	•	Post-mortem after fix
+Security Breach
+	•	Isolate affected systems
+	•	Assess damage scope
+	•	Patch vulnerability
+	•	Reset all credentials
+	•	Audit logs
+	•	Notify users if needed
+	•	Document incident
+Data Loss
+	•	Stop writes to database
+	•	Assess last good backup
+	•	Restore from backup
+	•	Verify data integrity
+	•	Investigate cause
+	•	Implement prevention
+
+✅ FINAL NOTES
+This workbook is your constitution. Claude must:
+	•	Always follow these rules unless explicitly overridden
+	•	Be autonomous within these guidelines
+	•	Ask for decisions only when critical
+	•	Document everything for continuity
+	•	Prioritize security & performance always
+	•	Complete features fully before moving on
+	•	Maintain clean, simple code at all times
+Remember: The goal is professional-grade, sellable applications with minimal friction and maximum reliability.
+
+Last Updated: October 2025 Version: 1.0
+

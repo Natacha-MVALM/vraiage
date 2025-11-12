@@ -1,0 +1,61 @@
+﻿{
+  "name": "Labrador Condition 1 - Side View",
+  "description": "High-fidelity studio render of a very lean blond Labrador, side profile, in the clean-white softbox style with transparent background.",
+  "metadata": {
+    "image_type": "3D rendered illustration",
+    "aspect_ratio": "1:1",
+    "resolution": "2048x2048",
+    "color_mode": "sRGB",
+    "background": {
+      "color": "transparent",
+      "shadow": {
+        "style": "soft drop",
+        "blur_radius": 25,
+        "opacity": 0.18,
+        "color": "#DADADA"
+      }
+    },
+    "camera": {
+      "lens": "50mm",
+      "angle": "side view",
+      "distance": "frame subject with 10% margin"
+    },
+    "lighting": {
+      "setup": "3-point softbox",
+      "key_position": "left 45°, above",
+      "fill_position": "right 45°",
+      "rim_position": "top",
+      "temperature": "5500K",
+      "intensity_balance": "key 100%, fill 40%, rim 25%"
+    }
+  },
+  "objects": [
+    {
+      "id": "primary",
+      "label": "Labrador Retriever (Condition Score 1)",
+      "category": "animal_dog",
+      "position": "side-center",
+      "orientation": "left-facing, standing",
+      "materials": [
+        {
+          "part": "fur",
+          "material_type": "fur",
+          "finish": "matte",
+          "base_color": "#F6D89E"
+        }
+      ],
+      "accent_color": "#F6D89E"
+    }
+  ],
+  "composition": {
+    "grouping": "single subject",
+    "depth": "shallow",
+    "spacing_variation": "none"
+  },
+  "style_modifiers": {
+    "saturation": 0.85,
+    "contrast": "medium-high",
+    "surface_detail": "visible micro-texture, no noise",
+    "post_processing": "slight vignette 5%, exposure +0.2 EV"
+  }
+}
