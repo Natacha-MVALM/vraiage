@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Fond transparent -->
+  <defs>
+    <!-- Ombre douce -->
+    <filter id="softShadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+      <feOffset dx="0" dy="8" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.18"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Gradient pour le pelage -->
+    <linearGradient id="furGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FAE1A8;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#F6D89E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E8C882;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Labrador très maigre - Vue de profil -->
+  <g filter="url(#softShadow)">
+
+    <!-- Pattes arrière -->
+    <ellipse cx="280" cy="245" rx="8" ry="45" fill="url(#furGradient)"/>
+    <ellipse cx="295" cy="245" rx="8" ry="45" fill="url(#furGradient)" opacity="0.9"/>
+
+    <!-- Corps très maigre - côtes visibles -->
+    <ellipse cx="200" cy="150" rx="95" ry="55" fill="url(#furGradient)"/>
+
+    <!-- Ligne des côtes visible (très maigre) -->
+    <path d="M 140 135 Q 145 140, 150 135 Q 155 140, 160 135 Q 165 140, 170 135 Q 175 140, 180 135"
+          stroke="#D4B87A" stroke-width="1.5" fill="none" opacity="0.6"/>
+    <path d="M 140 150 Q 145 155, 150 150 Q 155 155, 160 150 Q 165 155, 170 150 Q 175 155, 180 150"
+          stroke="#D4B87A" stroke-width="1.5" fill="none" opacity="0.6"/>
+
+    <!-- Colonne vertébrale visible -->
+    <line x1="140" y1="120" x2="270" y2="130" stroke="#D4B87A" stroke-width="2" opacity="0.5"/>
+
+    <!-- Ventre rentré (taille très marquée) -->
+    <path d="M 150 185 Q 180 195, 220 185 Q 250 180, 280 185"
+          fill="url(#furGradient)" opacity="0.95"/>
+
+    <!-- Hanches saillantes -->
+    <ellipse cx="270" cy="155" rx="25" ry="30" fill="url(#furGradient)"/>
+    <circle cx="275" cy="145" r="8" fill="#E8C882" opacity="0.7"/>
+
+    <!-- Queue -->
+    <path d="M 290 155 Q 320 150, 340 165 Q 350 175, 345 185"
+          stroke="url(#furGradient)" stroke-width="10" fill="none" stroke-linecap="round"/>
+
+    <!-- Pattes avant -->
+    <ellipse cx="140" cy="235" rx="8" ry="50" fill="url(#furGradient)"/>
+    <ellipse cx="155" cy="235" rx="8" ry="50" fill="url(#furGradient)" opacity="0.9"/>
+
+    <!-- Poitrine étroite -->
+    <ellipse cx="130" cy="140" rx="30" ry="45" fill="url(#furGradient)"/>
+
+    <!-- Cou maigre -->
+    <path d="M 120 125 Q 100 115, 85 125"
+          fill="url(#furGradient)" stroke="url(#furGradient)" stroke-width="25"/>
+
+    <!-- Tête -->
+    <ellipse cx="60" cy="135" rx="35" ry="30" fill="url(#furGradient)"/>
+
+    <!-- Museau -->
+    <ellipse cx="35" cy="140" rx="20" ry="15" fill="url(#furGradient)"/>
+    <ellipse cx="28" cy="142" rx="8" ry="6" fill="#3D3D3D"/>
+
+    <!-- Oreille -->
+    <ellipse cx="75" cy="125" rx="18" ry="25" fill="#E8C882" transform="rotate(-20 75 125)"/>
+
+    <!-- Œil -->
+    <ellipse cx="55" cy="125" rx="5" ry="6" fill="#3D3D3D"/>
+    <circle cx="56" cy="124" r="2" fill="#FFFFFF" opacity="0.7"/>
+
+    <!-- Détails bouche -->
+    <path d="M 28 148 Q 32 150, 36 148" stroke="#3D3D3D" stroke-width="1" fill="none"/>
+  </g>
+
+  <!-- Annotation optionnelle -->
+  <text x="200" y="290" font-family="Arial, sans-serif" font-size="12" fill="#666" text-anchor="middle">
+    Condition corporelle : Très maigre (Score 1)
+  </text>
+</svg>
