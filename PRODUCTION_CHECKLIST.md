@@ -259,6 +259,67 @@ const withPWA = require('next-pwa')({
 
 ---
 
+## ✨ Fonctionnalités récemment ajoutées
+
+### 1. CTA "À l'écoute de Nala" pour animaux seniors ✅
+
+**Implémenté le 2025-11-12**
+
+Lorsqu'un animal est identifié comme senior (≥75% de son espérance de vie), un CTA empathique apparaît pour promouvoir l'app complémentaire "À l'écoute de Nala".
+
+**Caractéristiques:**
+- Design émeraude/teal gradient avec overlay décoratif
+- 4 nouvelles icônes Lucide : `HeartHandshake`, `Stethoscope`, `Activity`, `ExternalLink`
+- Section avec 3 bénéfices clairs (questionnaire scientifique, suivi évolution, aide décision)
+- Lien vers https://ecoutenala.ca
+- Micro-interactions : hover effects, scale animations
+- Message personnalisé incluant le % d'espérance de vie atteint
+
+**Emplacement:** `components/VraiAge.tsx` lignes 1569-1635
+
+**Impact UX:** Encourage proactivement les propriétaires d'animaux seniors à évaluer la qualité de vie avec un outil vétérinaire validé.
+
+---
+
+### 2. Partage réseaux sociaux avec capture d'écran ✅
+
+**Implémenté le 2025-11-12**
+
+Système complet de partage permettant aux utilisateurs de partager leurs résultats sous forme d'image sur les réseaux sociaux.
+
+**Technologies:**
+- `html2canvas` pour capture haute résolution (scale: 2)
+- Web Share API pour partage natif mobile
+- Fallback intelligent pour desktop
+
+**Fonctionnalités:**
+1. **Bouton principal "Télécharger l'image"** (émeraude/teal)
+   - Capture automatique de la section résultats
+   - Téléchargement PNG haute résolution
+   - États : loading, success avec checkmark
+   - Animation Download icon
+
+2. **Boutons Facebook/Instagram avec capture**
+   - **Mobile:** Web Share API natif (partage direct avec image)
+   - **Desktop:** Téléchargement auto + instructions + redirection plateforme
+
+3. **Bouton "Copier le lien"** (secondaire)
+   - Partage simple du lien sans image
+
+**Emplacement:**
+- Fonctions : `components/VraiAge.tsx` lignes 592-694
+- UI : lignes 1637-1698
+
+**Impact engagement:** Permet aux utilisateurs de partager visuellement leurs résultats, augmentant potentiellement la viralité de l'app.
+
+**Tests recommandés:**
+- [ ] Tester capture screenshot sur différents appareils
+- [ ] Vérifier Web Share API sur iOS Safari
+- [ ] Tester qualité image générée (résolution, couleurs)
+- [ ] Valider fallback desktop sur Chrome/Firefox
+
+---
+
 ## 🚀 Plan d'action immédiat
 
 ### Minimum viable pour production:

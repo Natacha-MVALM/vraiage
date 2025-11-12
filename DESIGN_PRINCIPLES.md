@@ -258,7 +258,22 @@ Ce document détaille comment les **fondements théoriques du design magnifique*
 | 👑 | `<Crown />` | Phrase 100 ans |
 | 🏆 | `<Trophy />` | Records |
 
-**Total: 24 types d'icônes Lucide** pour une cohérence parfaite.
+### Nouvelles icônes ajoutées (2025-11-12)
+
+| Icône | Contexte | Usage |
+|-------|----------|-------|
+| `<HeartHandshake />` | CTA seniors | Empathie et accompagnement |
+| `<Stethoscope />` | CTA seniors | Outil vétérinaire professionnel |
+| `<Activity />` | CTA seniors | Suivi et évolution dans le temps |
+| `<ExternalLink />` | CTA seniors | Lien externe vers ecoutenala.ca |
+| `<Download />` | Partage social | Téléchargement image résultat |
+| `<Share2 />` | Partage social | Section partage titre |
+| `<Facebook />` | Partage social | Bouton partage Facebook |
+| `<Instagram />` | Partage social | Bouton partage Instagram |
+| `<Copy />` | Partage social | Copier lien application |
+| `<Check />` | Partage social | Feedback téléchargement réussi |
+
+**Total: 34 types d'icônes Lucide** pour une cohérence parfaite à travers toute l'application.
 
 ---
 
@@ -288,6 +303,85 @@ Ce document détaille comment les **fondements théoriques du design magnifique*
 
 ---
 
+## 🆕 9. Nouvelles fonctionnalités et design appliqué (2025-11-12)
+
+### CTA seniors "À l'écoute de Nala"
+
+**Principes appliqués:**
+
+**1. Design émotionnel - Niveau réflexif**
+- Couleur émeraude/teal distincte du reste (purple/pink/orange) pour signaler importance
+- Message empathique personnalisé : "{name} a atteint {%} de son espérance de vie"
+- Tone caring sans être alarmiste
+
+**2. Hiérarchie visuelle claire**
+```tsx
+Overlay gradient 10% opacity
+  ↓
+Header avec HeartHandshake (icône primaire)
+  ↓
+Encadré blanc 15% opacity (focus)
+    ↓
+    Stethoscope + Description
+    ↓
+    3 bénéfices avec icônes (CheckCircle, Activity, HeartHandshake)
+  ↓
+Bouton CTA blanc contrasté
+  ↓
+Footer crédits discret
+```
+
+**3. Micro-interactions cohérentes**
+- Hover : `bg-teal-50` (background subtil)
+- Scale : `hover:scale-[1.02]` / `active:scale-[0.98]`
+- ExternalLink icon : `translate-x-1` + `translate-y-1` (direction diagonale = "aller ailleurs")
+
+### Partage réseaux sociaux avec screenshot
+
+**Principes appliqués:**
+
+**1. Progressive Enhancement**
+- Fonctionnalité de base : Copier lien (fonctionne partout)
+- Niveau 1 : Téléchargement image (desktop)
+- Niveau 2 : Web Share API natif (mobile moderne)
+
+**2. Feedback immédiat (Loi de Doherty < 400ms)**
+```tsx
+État 1: "Télécharger l'image" (Download icon avec bounce)
+  ↓ Click
+État 2: Loading (spinner 200ms)
+  ↓ Capture terminée
+État 3: "Image téléchargée !" (Check icon, 3s)
+  ↓ Auto-reset
+État 1: Retour état initial
+```
+
+**3. Affordance claire**
+- Download icon avec animation `translate-y-1` = mouvement vers le bas = téléchargement
+- Boutons Facebook/Instagram avec icônes officielles = reconnaissance immédiate
+- Couleurs brand : Blue (#1877f2), Purple→Pink gradient
+
+**4. États de chargement**
+- `disabled:opacity-50` + `disabled:cursor-not-allowed`
+- Spinner animé pendant capture (feedback visuel continu)
+- Prévient double-click accidentel
+
+### Palette émeraude/teal pour CTA seniors
+
+**Psychologie de la couleur:**
+- **Émeraude** : Harmonie, équilibre, sérénité
+- **Teal** : Calme, professionnalisme médical
+- **Contraste** : Se distingue visuellement du reste (purple/pink/orange)
+- **Symbolisme** : Associé au secteur santé/médical
+
+**Différent de:**
+- Purple/Pink (chats) = Douceur, affection
+- Blue/Orange (chiens) = Énergie, fidélité
+
+→ Crée une **3ème catégorie visuelle** pour signaler un message important sans être intrusif.
+
+---
+
 ## 🚀 Prochaines améliorations possibles
 
 1. **Animations de confettis** avec particules Lucide
@@ -295,6 +389,8 @@ Ce document détaille comment les **fondements théoriques du design magnifique*
 3. **Haptic feedback** sur mobile
 4. **Sound design** optionnel (micro-sons UI)
 5. **Progressive Web App** complète
+6. **Tests A/B** pour optimiser taux de clic CTA seniors
+7. **Analytics** pour tracker téléchargements et partages
 
 ---
 
