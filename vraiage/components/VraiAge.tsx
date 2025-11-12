@@ -6,46 +6,54 @@ import ContactModal from '@/components/ContactModal';
 import CookieBanner from '@/components/CookieBanner';
 import Link from 'next/link';
 import Image from 'next/image';
+import {
+  Paw, Sparkles, Cat, Dog, Baby, PartyPopper, Heart, Car,
+  GraduationCap, Home, Briefcase, Smile, Radio, Palmtree,
+  User, Coins, Flag, BookOpen, Circle, Pill, Newspaper,
+  Library, Users, Crown, Trophy, CheckCircle, AlertCircle,
+  HelpCircle, ArrowLeft, Mail, ChevronDown, Info, Share2,
+  Facebook, Instagram, Copy, Check, Smartphone, MessageCircle
+} from 'lucide-react';
 
 // Constantes déplacées hors du composant pour éviter les re-créations
 const LOADING_MESSAGES: Record<string, string[]> = {
     cat: [
-      "Ton chat fait ses griffes pendant qu'on analyse son ADN félin... 🐾",
-      "Consultation de l'oracle des moustaches en cours... 🔮",
-      "Traduction du langage ronron vers l'humain... 😸"
+      "Ton chat fait ses griffes pendant qu'on analyse son ADN félin...",
+      "Consultation de l'oracle des moustaches en cours...",
+      "Traduction du langage ronron vers l'humain..."
     ],
     dog: [
-      "Ton chien remue la queue pendant qu'on calcule son âge exact... 🐕",
-      "Analyse des pattes et de la truffe en cours... 🐾",
-      "Décodage du langage canin vers l'humain... 🐶"
+      "Ton chien remue la queue pendant qu'on calcule son âge exact...",
+      "Analyse des pattes et de la truffe en cours...",
+      "Décodage du langage canin vers l'humain..."
     ]
 };
 
 const FUN_PHRASES = [
-    { max: 3, text: "serait à la garderie en train de faire des siestes", icon: "🍼" },
-    { max: 6, text: "apprendrait à compter jusqu'à 10", icon: "🎈" },
-    { max: 10, text: "jouerait aux billes dans la cour d'école", icon: "⚽" },
-    { max: 13, text: "découvrirait les joies de TikTok", icon: "📱" },
-    { max: 16, text: "aurait son premier crush au secondaire", icon: "💕" },
-    { max: 18, text: "étudierait pour son permis de conduire", icon: "🚗" },
-    { max: 21, text: "fêterait sa majorité dans tous les pays", icon: "🎉" },
-    { max: 25, text: "terminerait ses études universitaires", icon: "🎓" },
-    { max: 30, text: "penserait à s'acheter un condo", icon: "🏠" },
-    { max: 35, text: "jonglerait entre carrière et vie de famille", icon: "💼" },
-    { max: 40, text: "commencerait à avoir mal au dos", icon: "😅" },
-    { max: 45, text: "dirait 'c'était mieux dans mon temps'", icon: "📻" },
-    { max: 50, text: "planifierait déjà sa retraite anticipée", icon: "🏖️" },
-    { max: 55, text: "serait grand-parent gâteau", icon: "👴" },
-    { max: 60, text: "profiterait de ses REER bien mérités", icon: "💰" },
-    { max: 65, text: "jouerait au golf tous les matins", icon: "⛳" },
-    { max: 70, text: "raconterait ses histoires pour la 100e fois", icon: "📖" },
-    { max: 75, text: "serait la vedette du bingo du jeudi", icon: "🎱" },
-    { max: 80, text: "aurait une collection impressionnante de piluliers", icon: "💊" },
-    { max: 85, text: "ferait des marathons de mots croisés", icon: "📰" },
-    { max: 90, text: "serait une encyclopédie vivante", icon: "📚" },
-    { max: 95, text: "aurait vu passer trois générations", icon: "👨‍👩‍👧‍👦" },
-    { max: 100, text: "recevrait une lettre de la Reine", icon: "👑" },
-    { max: 999, text: "entrerait dans le livre des records", icon: "🏆" }
+    { max: 3, text: "serait à la garderie en train de faire des siestes", Icon: Baby },
+    { max: 6, text: "apprendrait à compter jusqu'à 10", Icon: PartyPopper },
+    { max: 10, text: "jouerait aux billes dans la cour d'école", Icon: Circle },
+    { max: 13, text: "découvrirait les joies de TikTok", Icon: Smartphone },
+    { max: 16, text: "aurait son premier crush au secondaire", Icon: Heart },
+    { max: 18, text: "étudierait pour son permis de conduire", Icon: Car },
+    { max: 21, text: "fêterait sa majorité dans tous les pays", Icon: PartyPopper },
+    { max: 25, text: "terminerait ses études universitaires", Icon: GraduationCap },
+    { max: 30, text: "penserait à s'acheter un condo", Icon: Home },
+    { max: 35, text: "jonglerait entre carrière et vie de famille", Icon: Briefcase },
+    { max: 40, text: "commencerait à avoir mal au dos", Icon: Smile },
+    { max: 45, text: "dirait 'c'était mieux dans mon temps'", Icon: Radio },
+    { max: 50, text: "planifierait déjà sa retraite anticipée", Icon: Palmtree },
+    { max: 55, text: "serait grand-parent gâteau", Icon: User },
+    { max: 60, text: "profiterait de ses REER bien mérités", Icon: Coins },
+    { max: 65, text: "jouerait au golf tous les matins", Icon: Flag },
+    { max: 70, text: "raconterait ses histoires pour la 100e fois", Icon: BookOpen },
+    { max: 75, text: "serait la vedette du bingo du jeudi", Icon: Trophy },
+    { max: 80, text: "aurait une collection impressionnante de piluliers", Icon: Pill },
+    { max: 85, text: "ferait des marathons de mots croisés", Icon: Newspaper },
+    { max: 90, text: "serait une encyclopédie vivante", Icon: Library },
+    { max: 95, text: "aurait vu passer trois générations", Icon: Users },
+    { max: 100, text: "recevrait une lettre de la Reine", Icon: Crown },
+    { max: 999, text: "entrerait dans le livre des records", Icon: Trophy }
 ];
 
 const CAT_BREEDS = [
@@ -104,19 +112,19 @@ const BODY_SCORES = [
       value: 'ideal',
       label: 'Idéal',
       description: 'Côtes palpables, taille visible de dessus',
-      emoji: '✅'
+      Icon: CheckCircle
     },
     {
       value: 'overweight',
       label: 'Surpoids',
       description: 'Côtes difficiles à palper, taille peu visible',
-      emoji: '🎈'
+      Icon: AlertCircle
     },
     {
       value: 'obese',
       label: 'Obèse',
       description: 'Côtes non palpables, abdomen distendu',
-      emoji: '🔴'
+      Icon: AlertCircle
     }
 ];
 
@@ -659,21 +667,17 @@ const VraiAge = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
               <button
                 onClick={() => {setCurrentPet('cat'); setCurrentPage('catForm');}}
-                className="group p-6 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-purple-400 hover:shadow-2xl text-center"
+                className="group p-8 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-purple-400 hover:shadow-2xl text-center relative overflow-hidden"
                 aria-label="Calculer l'âge de mon chat"
               >
-                <div className="mb-3 group-hover:scale-110 transition-transform duration-300 flex justify-center items-center" style={{ animation: 'float 3s ease-in-out infinite' }}>
-                  <Image
-                    src="/images/cat-emoji.png"
-                    alt="Illustration d'un chat"
-                    width={192}
-                    height={192}
-                    className="w-48 h-48 object-contain"
-                    priority
-                  />
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-100/30 to-pink-100/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="relative mb-4 group-hover:scale-110 transition-transform duration-300 flex justify-center items-center" style={{ animation: 'float 3s ease-in-out infinite' }}>
+                  <div className="p-6 bg-white rounded-full shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                    <Cat className="w-24 h-24 text-purple-500 group-hover:text-purple-600 transition-colors duration-300" strokeWidth={1.5} />
+                  </div>
                 </div>
-                <div className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent text-center">Chat</div>
-                <div className="text-sm text-gray-600 mt-2 text-center">Calculer l'âge de mon chat</div>
+                <div className="relative text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent text-center mb-2">Chat</div>
+                <div className="relative text-sm text-gray-600 text-center">Calculer l'âge de mon chat</div>
               </button>
 
               <button
@@ -684,21 +688,17 @@ const VraiAge = () => {
                     setFormData({...formData, dogMuzzle: 'mesocephalic'});
                   }
                 }}
-                className="group p-6 bg-gradient-to-br from-blue-50 to-orange-50 rounded-xl hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-orange-400 hover:shadow-2xl text-center"
+                className="group p-8 bg-gradient-to-br from-blue-50 to-orange-50 rounded-2xl hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-orange-400 hover:shadow-2xl text-center relative overflow-hidden"
                 aria-label="Calculer l'âge de mon chien"
               >
-                <div className="mb-3 group-hover:scale-110 transition-transform duration-300 flex justify-center items-center" style={{ animation: 'float 3s ease-in-out infinite' }}>
-                  <Image
-                    src="/images/dog-emoji.png"
-                    alt="Illustration d'un chien"
-                    width={192}
-                    height={192}
-                    className="w-48 h-48 object-contain"
-                    priority
-                  />
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 to-orange-100/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="relative mb-4 group-hover:scale-110 transition-transform duration-300 flex justify-center items-center" style={{ animation: 'float 3s ease-in-out infinite' }}>
+                  <div className="p-6 bg-white rounded-full shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                    <Dog className="w-24 h-24 text-orange-500 group-hover:text-orange-600 transition-colors duration-300" strokeWidth={1.5} />
+                  </div>
                 </div>
-                <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-orange-600 bg-clip-text text-transparent text-center">Chien</div>
-                <div className="text-sm text-gray-600 mt-2 text-center">Calculer l'âge de mon chien</div>
+                <div className="relative text-2xl font-bold bg-gradient-to-r from-blue-600 to-orange-600 bg-clip-text text-transparent text-center mb-2">Chien</div>
+                <div className="relative text-sm text-gray-600 text-center">Calculer l'âge de mon chien</div>
               </button>
             </div>
 
@@ -843,14 +843,15 @@ const VraiAge = () => {
           <div className="space-y-6">
             <button
               onClick={() => setCurrentPage('home')}
-              className="text-purple-600 hover:text-purple-800 mb-4"
+              className="group inline-flex items-center gap-2 text-gray-600 hover:text-purple-600 transition-all duration-200 mb-6 px-4 py-2 rounded-lg hover:bg-purple-50"
             >
-              ← Retour
+              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-200" />
+              <span className="font-medium">Retour</span>
             </button>
 
             <h2 className="text-2xl font-bold text-center mb-6 flex items-center justify-center gap-3">
               Mon Chat
-              <Image src="/images/cat-emoji.png" alt="Chat" width={40} height={40} className="w-10 h-10 object-contain" />
+              <Cat className="w-10 h-10 text-purple-500" strokeWidth={1.5} />
             </h2>
 
             <div>
@@ -985,7 +986,9 @@ const VraiAge = () => {
                     onClick={() => setFormData({...formData, catBody: score.value})}
                     className={`p-3 rounded-lg border-2 transition-all text-center flex flex-col items-center ${formData.catBody === score.value ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white border-transparent' : 'border-gray-300 hover:border-purple-300'}`}
                   >
-                    <div className="text-3xl mb-2">{score.emoji}</div>
+                    <div className="mb-2 flex justify-center">
+                      <score.Icon className="w-8 h-8 text-current" />
+                    </div>
                     <div className="font-semibold mb-1 text-sm">{score.label}</div>
                     <div className={`text-xs ${formData.catBody === score.value ? 'text-white/90' : 'text-gray-600'}`}>
                       {score.description}
@@ -1008,9 +1011,10 @@ const VraiAge = () => {
 
             <button
               onClick={handleCalculate}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-lg font-bold text-lg hover:from-purple-700 hover:to-pink-700 transition-all shadow-lg"
+              className="group w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-5 rounded-xl font-bold text-lg hover:from-purple-700 hover:to-pink-700 transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3"
             >
-              Calculer l'âge 🎉
+              <span>Calculer l'âge</span>
+              <Sparkles className="w-5 h-5 group-hover:rotate-12 group-hover:scale-110 transition-all duration-200" />
             </button>
           </div>
         )}
@@ -1026,7 +1030,7 @@ const VraiAge = () => {
 
             <h2 className="text-2xl font-bold text-center mb-6 flex items-center justify-center gap-3">
               Mon Chien
-              <Image src="/images/dog-emoji.png" alt="Chien" width={40} height={40} className="w-10 h-10 object-contain" />
+              <Dog className="w-10 h-10 text-orange-500" strokeWidth={1.5} />
             </h2>
 
             <div>
@@ -1226,7 +1230,9 @@ const VraiAge = () => {
                     onClick={() => setFormData({...formData, dogBody: score.value})}
                     className={`p-3 rounded-lg border-2 transition-all text-center flex flex-col items-center ${formData.dogBody === score.value ? 'bg-gradient-to-r from-blue-500 to-orange-500 text-white border-transparent' : 'border-gray-300 hover:border-blue-300'}`}
                   >
-                    <div className="text-3xl mb-2">{score.emoji}</div>
+                    <div className="mb-2 flex justify-center">
+                      <score.Icon className="w-8 h-8 text-current" />
+                    </div>
                     <div className="font-semibold mb-1 text-sm">{score.label}</div>
                     <div className={`text-xs ${formData.dogBody === score.value ? 'text-white/90' : 'text-gray-600'}`}>
                       {score.description}
@@ -1251,7 +1257,8 @@ const VraiAge = () => {
               onClick={handleCalculate}
               className="w-full bg-gradient-to-r from-blue-600 to-orange-600 text-white py-4 rounded-lg font-bold text-lg hover:from-blue-700 hover:to-orange-700 transition-all shadow-lg"
             >
-              Calculer l'âge 🎉
+              <span>Calculer l'âge</span>
+              <Sparkles className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
             </button>
           </div>
         )}
@@ -1270,13 +1277,13 @@ const VraiAge = () => {
             `}</style>
 
             <div className="mb-6 flex justify-center" style={{ animation: 'gentle-float 2s ease-in-out infinite' }}>
-              <Image
-                src={currentPet === 'cat' ? '/images/cat-emoji.png' : '/images/dog-emoji.png'}
-                alt={currentPet === 'cat' ? 'Chat' : 'Chien'}
-                width={112}
-                height={112}
-                className="w-28 h-28 object-contain"
-              />
+              <div className={`p-8 bg-white rounded-full shadow-lg ${currentPet === 'cat' ? 'shadow-purple-200' : 'shadow-orange-200'}`}>
+                {currentPet === 'cat' ? (
+                  <Cat className="w-20 h-20 text-purple-500" strokeWidth={1.5} />
+                ) : (
+                  <Dog className="w-20 h-20 text-orange-500" strokeWidth={1.5} />
+                )}
+              </div>
             </div>
 
             <div className="text-xl text-gray-700 mb-4 font-medium">
@@ -1303,13 +1310,13 @@ const VraiAge = () => {
             {showDelayedContent && (
               <div className="text-center">
                 <div className="mb-4 flex justify-center">
-                  <Image
-                    src={currentPet === 'cat' ? '/images/cat-emoji.png' : '/images/dog-emoji.png'}
-                    alt={currentPet === 'cat' ? 'Chat' : 'Chien'}
-                    width={96}
-                    height={96}
-                    className="w-24 h-24 object-contain"
-                  />
+                  <div className={`p-6 bg-white rounded-full shadow-lg ${currentPet === 'cat' ? 'shadow-purple-200' : 'shadow-orange-200'}`}>
+                    {currentPet === 'cat' ? (
+                      <Cat className="w-16 h-16 text-purple-500" strokeWidth={1.5} />
+                    ) : (
+                      <Dog className="w-16 h-16 text-orange-500" strokeWidth={1.5} />
+                    )}
+                  </div>
                 </div>
                 <h2 className="text-3xl font-bold text-gray-800 mb-2">{result.name}</h2>
               </div>
@@ -1321,8 +1328,17 @@ const VraiAge = () => {
                 {ageCounter < 2 ? 'an' : 'ans'} en âge humain
               </div>
               {showDelayedContent && (
-                <div className="mt-4 text-lg">
-                  {getFunPhrase(result.humanAge).icon} Si {result.name} était un humain, {result.isFemale ? 'elle' : 'il'} {getFunPhrase(result.humanAge).text}
+                <div className="mt-4 text-lg flex items-center justify-center gap-2">
+                  {(() => {
+                    const phrase = getFunPhrase(result.humanAge);
+                    const IconComponent = phrase.Icon;
+                    return (
+                      <>
+                        <IconComponent className="w-6 h-6 flex-shrink-0" />
+                        <span>Si {result.name} était un humain, {result.isFemale ? 'elle' : 'il'} {phrase.text}</span>
+                      </>
+                    );
+                  })()}
                 </div>
               )}
             </div>
