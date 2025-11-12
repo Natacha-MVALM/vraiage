@@ -1,78 +1,64 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import ContactModal from '@/components/ContactModal';
 import CookieBanner from '@/components/CookieBanner';
 import Link from 'next/link';
 import Image from 'next/image';
+import html2canvas from 'html2canvas';
+import {
+  Paw, Sparkles, Cat, Dog, Baby, PartyPopper, Heart, Car,
+  GraduationCap, Home, Briefcase, Smile, Radio, Palmtree,
+  User, Coins, Flag, BookOpen, Circle, Pill, Newspaper,
+  Library, Users, Crown, Trophy, CheckCircle, AlertCircle,
+  HelpCircle, ArrowLeft, Mail, ChevronDown, Info, Share2,
+  Facebook, Instagram, Copy, Check, Smartphone, MessageCircle,
+  HeartHandshake, ExternalLink, Stethoscope, Activity, Download
+} from 'lucide-react';
 
-const VraiAge = () => {
-  const [currentPage, setCurrentPage] = useState('home');
-  const [currentPet, setCurrentPet] = useState<string | null>(null);
-  const [formData, setFormData] = useState<Record<string, any>>({});
-  const [loadingMessage, setLoadingMessage] = useState('');
-  const [result, setResult] = useState<any>(null);
-  const [showLifeExpectancy, setShowLifeExpectancy] = useState(false);
-  const [ageCounter, setAgeCounter] = useState(0);
-  const [showConfetti, setShowConfetti] = useState(false);
-  const [showDelayedContent, setShowDelayedContent] = useState(false);
-  const [showWeightHelper, setShowWeightHelper] = useState(false);
-  const [showBodyScoreHelper, setShowBodyScoreHelper] = useState(false);
-  const [weightUnit, setWeightUnit] = useState('kg');
-  const [showAgeError, setShowAgeError] = useState(false);
-  const [showLifeExpectancyInfo, setShowLifeExpectancyInfo] = useState(false);
-  const [validationErrors, setValidationErrors] = useState<string[]>([]);
-  const [showContactModal, setShowContactModal] = useState(false);
-  const [isAboutMeOpen, setIsAboutMeOpen] = useState(false);
-  const [isAboutVraiAgeOpen, setIsAboutVraiAgeOpen] = useState(false);
-  const [autoFilledDogMuzzle, setAutoFilledDogMuzzle] = useState(false);
-  const [autoFilledDogWeight, setAutoFilledDogWeight] = useState(false);
-
-  // Messages de chargement
-  const loadingMessages: Record<string, string[]> = {
+// Constantes déplacées hors du composant pour éviter les re-créations
+const LOADING_MESSAGES: Record<string, string[]> = {
     cat: [
-      "Ton chat fait ses griffes pendant qu'on analyse son ADN félin... 🐾",
-      "Consultation de l'oracle des moustaches en cours... 🔮",
-      "Traduction du langage ronron vers l'humain... 😸"
+      "Ton chat fait ses griffes pendant qu'on analyse son ADN félin...",
+      "Consultation de l'oracle des moustaches en cours...",
+      "Traduction du langage ronron vers l'humain..."
     ],
     dog: [
-      "Ton chien remue la queue pendant qu'on calcule son âge exact... 🐕",
-      "Analyse des pattes et de la truffe en cours... 🐾",
-      "Décodage du langage canin vers l'humain... 🐶"
+      "Ton chien remue la queue pendant qu'on calcule son âge exact...",
+      "Analyse des pattes et de la truffe en cours...",
+      "Décodage du langage canin vers l'humain..."
     ]
-  };
+};
 
-  // Phrases humoristiques originales de VraiÂge
-  const funPhrases = [
-    { max: 3, text: "serait à la garderie en train de faire des siestes", icon: "🍼" },
-    { max: 6, text: "apprendrait à compter jusqu'à 10", icon: "🎈" },
-    { max: 10, text: "jouerait aux billes dans la cour d'école", icon: "⚽" },
-    { max: 13, text: "découvrirait les joies de TikTok", icon: "📱" },
-    { max: 16, text: "aurait son premier crush au secondaire", icon: "💕" },
-    { max: 18, text: "étudierait pour son permis de conduire", icon: "🚗" },
-    { max: 21, text: "fêterait sa majorité dans tous les pays", icon: "🎉" },
-    { max: 25, text: "terminerait ses études universitaires", icon: "🎓" },
-    { max: 30, text: "penserait à s'acheter un condo", icon: "🏠" },
-    { max: 35, text: "jonglerait entre carrière et vie de famille", icon: "💼" },
-    { max: 40, text: "commencerait à avoir mal au dos", icon: "😅" },
-    { max: 45, text: "dirait 'c'était mieux dans mon temps'", icon: "📻" },
-    { max: 50, text: "planifierait déjà sa retraite anticipée", icon: "🏖️" },
-    { max: 55, text: "serait grand-parent gâteau", icon: "👴" },
-    { max: 60, text: "profiterait de ses REER bien mérités", icon: "💰" },
-    { max: 65, text: "jouerait au golf tous les matins", icon: "⛳" },
-    { max: 70, text: "raconterait ses histoires pour la 100e fois", icon: "📖" },
-    { max: 75, text: "serait la vedette du bingo du jeudi", icon: "🎱" },
-    { max: 80, text: "aurait une collection impressionnante de piluliers", icon: "💊" },
-    { max: 85, text: "ferait des marathons de mots croisés", icon: "📰" },
-    { max: 90, text: "serait une encyclopédie vivante", icon: "📚" },
-    { max: 95, text: "aurait vu passer trois générations", icon: "👨‍👩‍👧‍👦" },
-    { max: 100, text: "recevrait une lettre de la Reine", icon: "👑" },
-    { max: 999, text: "entrerait dans le livre des records", icon: "🏆" }
-  ];
+const FUN_PHRASES = [
+    { max: 3, text: "serait à la garderie en train de faire des siestes", Icon: Baby },
+    { max: 6, text: "apprendrait à compter jusqu'à 10", Icon: PartyPopper },
+    { max: 10, text: "jouerait aux billes dans la cour d'école", Icon: Circle },
+    { max: 13, text: "découvrirait les joies de TikTok", Icon: Smartphone },
+    { max: 16, text: "aurait son premier crush au secondaire", Icon: Heart },
+    { max: 18, text: "étudierait pour son permis de conduire", Icon: Car },
+    { max: 21, text: "fêterait sa majorité dans tous les pays", Icon: PartyPopper },
+    { max: 25, text: "terminerait ses études universitaires", Icon: GraduationCap },
+    { max: 30, text: "penserait à s'acheter un condo", Icon: Home },
+    { max: 35, text: "jonglerait entre carrière et vie de famille", Icon: Briefcase },
+    { max: 40, text: "commencerait à avoir mal au dos", Icon: Smile },
+    { max: 45, text: "dirait 'c'était mieux dans mon temps'", Icon: Radio },
+    { max: 50, text: "planifierait déjà sa retraite anticipée", Icon: Palmtree },
+    { max: 55, text: "serait grand-parent gâteau", Icon: User },
+    { max: 60, text: "profiterait de ses REER bien mérités", Icon: Coins },
+    { max: 65, text: "jouerait au golf tous les matins", Icon: Flag },
+    { max: 70, text: "raconterait ses histoires pour la 100e fois", Icon: BookOpen },
+    { max: 75, text: "serait la vedette du bingo du jeudi", Icon: Trophy },
+    { max: 80, text: "aurait une collection impressionnante de piluliers", Icon: Pill },
+    { max: 85, text: "ferait des marathons de mots croisés", Icon: Newspaper },
+    { max: 90, text: "serait une encyclopédie vivante", Icon: Library },
+    { max: 95, text: "aurait vu passer trois générations", Icon: Users },
+    { max: 100, text: "recevrait une lettre de la Reine", Icon: Crown },
+    { max: 999, text: "entrerait dans le livre des records", Icon: Trophy }
+];
 
-  // Données races chats avec espérance de vie
-  const catBreeds = [
+const CAT_BREEDS = [
     { value: 'mixed', name: 'Autre race ou croisé (domestique, gouttière)', lifespan: 15 },
     { value: 'birman', name: 'Birman', lifespan: 16.1 },
     { value: 'burmese', name: 'Burmese', lifespan: 14.3 },
@@ -86,10 +72,9 @@ const VraiAge = () => {
     { value: 'sphynx', name: 'Sphynx', lifespan: 7 },
     { value: 'russian-blue', name: 'Bleu Russe', lifespan: 16 },
     { value: 'scottish-fold', name: 'Scottish Fold', lifespan: 13 }
-  ];
+];
 
-  // Données races chiens avec espérance de vie
-  const dogBreeds = [
+const DOG_BREEDS = [
     { value: 'mixed', name: 'Croisé/Autre race', lifespan: 12.71, size: 'medium', muzzle: 'mesocephalic', weightRange: null },
     { value: 'teckel', name: 'Teckel', lifespan: 15.2, size: 'small', muzzle: 'dolichocephalic', weightRange: '5-10' },
     { value: 'chihuahua', name: 'Chihuahua', lifespan: 15.01, size: 'small', muzzle: 'mesocephalic', weightRange: 'under-5' },
@@ -108,10 +93,9 @@ const VraiAge = () => {
     { value: 'dogue-allemand', name: 'Dogue Allemand', lifespan: 9.63, size: 'giant', muzzle: 'mesocephalic', weightRange: 'over-60' },
     { value: 'saint-bernard', name: 'Saint-Bernard', lifespan: 9, size: 'giant', muzzle: 'mesocephalic', weightRange: 'over-60' },
     { value: 'dogue-bordeaux', name: 'Dogue de Bordeaux', lifespan: 5.5, size: 'giant', muzzle: 'brachycephalic', weightRange: 'over-60' }
-  ];
+];
 
-  // Intervalles de poids pour chiens
-  const dogWeightRanges = [
+const DOG_WEIGHT_RANGES = [
     { range: 'under-5', label: 'Moins de 11 lbs (5 kg)', visual: '🐕 Très petit (Chihuahua, Yorkshire)', avgWeight: 3, size: 'small' },
     { range: '5-10', label: '11-22 lbs (5-10 kg)', visual: '🐕 Petit (Jack Russell, Teckel)', avgWeight: 7.5, size: 'small' },
     { range: '10-15', label: '22-33 lbs (10-15 kg)', visual: '🐕 Petit-Moyen (Cocker, Beagle)', avgWeight: 12.5, size: 'medium' },
@@ -119,35 +103,35 @@ const VraiAge = () => {
     { range: '25-40', label: '55-88 lbs (25-40 kg)', visual: '🐕 Grand (Labrador, Golden)', avgWeight: 32.5, size: 'large' },
     { range: '40-60', label: '88-132 lbs (40-60 kg)', visual: '🐕 Très Grand (Berger Allemand, Boxer)', avgWeight: 50, size: 'large' },
     { range: 'over-60', label: 'Plus de 132 lbs (60 kg)', visual: '🐕 Géant (Dogue Allemand, St-Bernard)', avgWeight: 70, size: 'giant' }
-  ];
+];
 
-  // Score corporel avec visuels
-  // Note: Seuls les scores "positifs" (idéal à obèse) sont inclus
-  // La maigreur n'est pas prise en compte car elle peut être un symptôme de vieillissement
-  // naturel ou de maladie, rendant l'interprétation ambiguë sans examen vétérinaire
-  const bodyScores = [
+// Score corporel avec visuels
+// Note: Seuls les scores "positifs" (idéal à obèse) sont inclus
+// La maigreur n'est pas prise en compte car elle peut être un symptôme de vieillissement
+// naturel ou de maladie, rendant l'interprétation ambiguë sans examen vétérinaire
+const BODY_SCORES = [
     {
       value: 'ideal',
       label: 'Idéal',
       description: 'Côtes palpables, taille visible de dessus',
-      emoji: '✅'
+      Icon: CheckCircle
     },
     {
       value: 'overweight',
       label: 'Surpoids',
       description: 'Côtes difficiles à palper, taille peu visible',
-      emoji: '🎈'
+      Icon: AlertCircle
     },
     {
       value: 'obese',
       label: 'Obèse',
       description: 'Côtes non palpables, abdomen distendu',
-      emoji: '🔴'
+      Icon: AlertCircle
     }
-  ];
+];
 
-  // Types de museau (chiens uniquement)
-  const muzzleTypes = [
+// Types de museau (chiens uniquement)
+const MUZZLE_TYPES = [
     {
       value: 'dolichocephalic',
       label: 'Dolichocéphale',
@@ -173,28 +157,57 @@ const VraiAge = () => {
       multiplier: 0.85,
       image: '/images/muzzle-brachycephalic.png'
     }
-  ];
+];
 
-  const getFunPhrase = (age: number) => {
-    return funPhrases.find(p => age <= p.max) || funPhrases[funPhrases.length - 1];
-  };
+// Fonctions utilitaires déplacées hors du composant
+const getFunPhrase = (age: number) => {
+  return FUN_PHRASES.find(p => age <= p.max) || FUN_PHRASES[FUN_PHRASES.length - 1];
+};
 
-  const formatAgeWithMonths = (ageInYears: number) => {
-    const years = Math.floor(ageInYears);
-    const months = Math.round((ageInYears - years) * 12);
+const formatAgeWithMonths = (ageInYears: number) => {
+  const years = Math.floor(ageInYears);
+  const months = Math.round((ageInYears - years) * 12);
 
-    if (months === 0) {
-      return `${years} ${years < 2 ? 'an' : 'ans'}`;
-    } else if (months === 12) {
-      return `${years + 1} ${years + 1 < 2 ? 'an' : 'ans'}`;
-    } else {
-      return `${years} ${years < 2 ? 'an' : 'ans'} ${months} mois`;
-    }
-  };
+  if (months === 0) {
+    return `${years} ${years < 2 ? 'an' : 'ans'}`;
+  } else if (months === 12) {
+    return `${years + 1} ${years + 1 < 2 ? 'an' : 'ans'}`;
+  } else {
+    return `${years} ${years < 2 ? 'an' : 'ans'} ${months} mois`;
+  }
+};
+
+// Composant principal
+const VraiAge = () => {
+  const [currentPage, setCurrentPage] = useState('home');
+  const [currentPet, setCurrentPet] = useState<string | null>(null);
+  const [formData, setFormData] = useState<Record<string, any>>({});
+  const [loadingMessage, setLoadingMessage] = useState('');
+  const [result, setResult] = useState<any>(null);
+  const [showLifeExpectancy, setShowLifeExpectancy] = useState(false);
+  const [ageCounter, setAgeCounter] = useState(0);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [showDelayedContent, setShowDelayedContent] = useState(false);
+  const [showWeightHelper, setShowWeightHelper] = useState(false);
+  const [showBodyScoreHelper, setShowBodyScoreHelper] = useState(false);
+  const [weightUnit, setWeightUnit] = useState('kg');
+  const [showAgeError, setShowAgeError] = useState(false);
+  const [showLifeExpectancyInfo, setShowLifeExpectancyInfo] = useState(false);
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
+  const [showContactModal, setShowContactModal] = useState(false);
+  const [isAboutMeOpen, setIsAboutMeOpen] = useState(false);
+  const [isAboutVraiAgeOpen, setIsAboutVraiAgeOpen] = useState(false);
+  const [autoFilledDogMuzzle, setAutoFilledDogMuzzle] = useState(false);
+  const [autoFilledDogWeight, setAutoFilledDogWeight] = useState(false);
+
+  // Screenshot functionality
+  const resultsRef = useRef<HTMLDivElement>(null);
+  const [isCapturingScreenshot, setIsCapturingScreenshot] = useState(false);
+  const [screenshotCopied, setScreenshotCopied] = useState(false);
 
   const getWeightRangeLabel = () => {
     if (!formData.dogWeightRange) return '';
-    const range = dogWeightRanges.find(r => r.range === formData.dogWeightRange);
+    const range = DOG_WEIGHT_RANGES.find(r => r.range === formData.dogWeightRange);
     return range ? range.label : '';
   };
 
@@ -207,7 +220,7 @@ const VraiAge = () => {
 
   // Gestion de la sélection de race de chien avec auto-complétion
   const handleDogBreedChange = (breedValue: string) => {
-    const selectedBreed = dogBreeds.find(b => b.value === breedValue);
+    const selectedBreed = DOG_BREEDS.find(b => b.value === breedValue);
 
     if (selectedBreed) {
       const newFormData: any = { ...formData, dogBreed: breedValue };
@@ -288,7 +301,7 @@ const VraiAge = () => {
 
     humanAge = humanAge * lifestyleMultipliers[lifestyle];
 
-    const breedData = catBreeds.find(b => b.value === breed);
+    const breedData = CAT_BREEDS.find(b => b.value === breed);
     let lifeExpectancy = breedData ? breedData.lifespan : 15;
 
     if (lifestyle === 'outdoor') lifeExpectancy -= 4;
@@ -351,7 +364,7 @@ const VraiAge = () => {
 
     let weight;
     if (formData.dogWeightRange) {
-      const range = dogWeightRanges.find(r => r.range === formData.dogWeightRange);
+      const range = DOG_WEIGHT_RANGES.find(r => r.range === formData.dogWeightRange);
       weight = range ? range.avgWeight : 20;
     } else if (formData.dogWeight) {
       weight = convertWeight(parseFloat(formData.dogWeight), weightUnit);
@@ -396,7 +409,7 @@ const VraiAge = () => {
     else if (age <= 10) lifeStage = '🧘 Senior';
     else lifeStage = '👑 Doyen';
 
-    const breedData = dogBreeds.find(b => b.value === breed);
+    const breedData = DOG_BREEDS.find(b => b.value === breed);
     let lifeExpectancy = breedData ? breedData.lifespan : 12;
 
     // Seul le surpoids/obésité est pris en compte (facteurs modifiables et documentés)
@@ -418,7 +431,7 @@ const VraiAge = () => {
 
     // Appliquer le coefficient de type de museau
     const muzzleType = formData.dogMuzzle || 'mesocephalic';
-    const muzzleData = muzzleTypes.find(m => m.value === muzzleType);
+    const muzzleData = MUZZLE_TYPES.find(m => m.value === muzzleType);
     if (muzzleData) {
       lifeExpectancy = lifeExpectancy * muzzleData.multiplier;
     }
@@ -517,7 +530,7 @@ const VraiAge = () => {
     setCurrentPage('loading');
     setShowDelayedContent(false);
 
-    const messages = loadingMessages[currentPet!];
+    const messages = LOADING_MESSAGES[currentPet!];
     let messageIndex = 0;
     setLoadingMessage(messages[0]);
 
@@ -574,6 +587,110 @@ const VraiAge = () => {
         alert('Lien copié ! 📋');
         break;
     }
+  };
+
+  // Capture screenshot of results
+  const captureResultsScreenshot = async (): Promise<Blob | null> => {
+    if (!resultsRef.current) return null;
+
+    try {
+      setIsCapturingScreenshot(true);
+
+      // Capture avec html2canvas
+      const canvas = await html2canvas(resultsRef.current, {
+        backgroundColor: '#ffffff',
+        scale: 2, // Haute résolution
+        logging: false,
+        useCORS: true,
+        allowTaint: true
+      });
+
+      // Convertir en blob
+      return new Promise((resolve) => {
+        canvas.toBlob((blob) => {
+          resolve(blob);
+        }, 'image/png');
+      });
+    } catch (error) {
+      console.error('Erreur capture screenshot:', error);
+      alert('❌ Erreur lors de la capture de l\'image. Veuillez réessayer.');
+      return null;
+    } finally {
+      setIsCapturingScreenshot(false);
+    }
+  };
+
+  // Download screenshot
+  const handleDownloadScreenshot = async () => {
+    const blob = await captureResultsScreenshot();
+    if (!blob) return;
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `vraiage-${result?.name || 'resultat'}-${Date.now()}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    // Feedback visuel
+    setScreenshotCopied(true);
+    setTimeout(() => setScreenshotCopied(false), 3000);
+  };
+
+  // Share with screenshot
+  const handleShareWithScreenshot = async (platform: string) => {
+    if (!result) return;
+
+    const blob = await captureResultsScreenshot();
+    if (!blob) return;
+
+    let text = `${result.name} a ${result.humanAge} ${result.humanAge < 2 ? 'an' : 'ans'} en âge humain ! 🎉 Découvrez l'âge de votre animal sur VraiÂge !`;
+    const url = typeof window !== 'undefined' ? window.location.href : '';
+
+    // Vérifier si Web Share API est disponible (mobile)
+    if (navigator.share && navigator.canShare) {
+      try {
+        const file = new File([blob], `vraiage-${result.name}.png`, { type: 'image/png' });
+
+        if (navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            title: 'VraiÂge - Résultat',
+            text: text,
+            files: [file]
+          });
+          return;
+        }
+      } catch (error) {
+        console.log('Web Share API non disponible, fallback vers téléchargement');
+      }
+    }
+
+    // Fallback: Télécharger + ouvrir plateforme
+    const blobUrl = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.download = `vraiage-${result.name}-${Date.now()}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(blobUrl);
+
+    // Ouvrir la plateforme après téléchargement
+    setTimeout(() => {
+      switch(platform) {
+        case 'facebook':
+          alert('📸 Image téléchargée ! Ouvrez Facebook pour créer votre publication et ajoutez l\'image téléchargée.');
+          window.open('https://www.facebook.com/', '_blank');
+          break;
+        case 'instagram':
+          alert('📸 Image téléchargée ! Ouvrez Instagram sur votre téléphone pour créer un post et ajoutez l\'image de votre galerie.');
+          break;
+        default:
+          alert('📸 Image téléchargée avec succès !');
+      }
+    }, 500);
   };
 
   // Composant Confetti
@@ -661,19 +778,17 @@ const VraiAge = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
               <button
                 onClick={() => {setCurrentPet('cat'); setCurrentPage('catForm');}}
-                className="group p-6 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-purple-400 hover:shadow-2xl text-center"
+                className="group p-8 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-purple-400 hover:shadow-2xl text-center relative overflow-hidden"
+                aria-label="Calculer l'âge de mon chat"
               >
-                <div className="mb-3 group-hover:scale-110 transition-transform duration-300 flex justify-center items-center" style={{ animation: 'float 3s ease-in-out infinite' }}>
-                  <Image
-                    src="/images/cat-emoji.png"
-                    alt="Chat"
-                    width={192}
-                    height={192}
-                    className="w-48 h-48 object-contain"
-                  />
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-100/30 to-pink-100/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="relative mb-4 group-hover:scale-110 transition-transform duration-300 flex justify-center items-center" style={{ animation: 'float 3s ease-in-out infinite' }}>
+                  <div className="p-6 bg-white rounded-full shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                    <Cat className="w-24 h-24 text-purple-500 group-hover:text-purple-600 transition-colors duration-300" strokeWidth={1.5} />
+                  </div>
                 </div>
-                <div className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent text-center">Chat</div>
-                <div className="text-sm text-gray-600 mt-2 text-center">Calculer l'âge de mon chat</div>
+                <div className="relative text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent text-center mb-2">Chat</div>
+                <div className="relative text-sm text-gray-600 text-center">Calculer l'âge de mon chat</div>
               </button>
 
               <button
@@ -684,19 +799,17 @@ const VraiAge = () => {
                     setFormData({...formData, dogMuzzle: 'mesocephalic'});
                   }
                 }}
-                className="group p-6 bg-gradient-to-br from-blue-50 to-orange-50 rounded-xl hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-orange-400 hover:shadow-2xl text-center"
+                className="group p-8 bg-gradient-to-br from-blue-50 to-orange-50 rounded-2xl hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-orange-400 hover:shadow-2xl text-center relative overflow-hidden"
+                aria-label="Calculer l'âge de mon chien"
               >
-                <div className="mb-3 group-hover:scale-110 transition-transform duration-300 flex justify-center items-center" style={{ animation: 'float 3s ease-in-out infinite' }}>
-                  <Image
-                    src="/images/dog-emoji.png"
-                    alt="Chien"
-                    width={192}
-                    height={192}
-                    className="w-48 h-48 object-contain"
-                  />
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 to-orange-100/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="relative mb-4 group-hover:scale-110 transition-transform duration-300 flex justify-center items-center" style={{ animation: 'float 3s ease-in-out infinite' }}>
+                  <div className="p-6 bg-white rounded-full shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                    <Dog className="w-24 h-24 text-orange-500 group-hover:text-orange-600 transition-colors duration-300" strokeWidth={1.5} />
+                  </div>
                 </div>
-                <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-orange-600 bg-clip-text text-transparent text-center">Chien</div>
-                <div className="text-sm text-gray-600 mt-2 text-center">Calculer l'âge de mon chien</div>
+                <div className="relative text-2xl font-bold bg-gradient-to-r from-blue-600 to-orange-600 bg-clip-text text-transparent text-center mb-2">Chien</div>
+                <div className="relative text-sm text-gray-600 text-center">Calculer l'âge de mon chien</div>
               </button>
             </div>
 
@@ -705,9 +818,12 @@ const VraiAge = () => {
               <button
                 onClick={() => setIsAboutMeOpen(!isAboutMeOpen)}
                 className="w-full p-6 text-left hover:bg-white/50 transition-colors"
+                aria-expanded={isAboutMeOpen}
+                aria-controls="about-me-content"
+                aria-label="À propos de Dr. Natacha Barrette"
               >
                 <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-3">
-                  <span className="text-purple-600 transition-transform duration-300" style={{ transform: isAboutMeOpen ? 'rotate(0deg)' : 'rotate(-90deg)' }}>▼</span>
+                  <span className="text-purple-600 transition-transform duration-300" style={{ transform: isAboutMeOpen ? 'rotate(0deg)' : 'rotate(-90deg)' }} aria-hidden="true">▼</span>
                   À propos de moi
                 </h2>
                 {!isAboutMeOpen && (
@@ -717,7 +833,12 @@ const VraiAge = () => {
                 )}
               </button>
 
-              <div className={`transition-all duration-500 ease-in-out ${isAboutMeOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+              <div
+                id="about-me-content"
+                className={`transition-all duration-500 ease-in-out ${isAboutMeOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}
+                role="region"
+                aria-labelledby="about-me-heading"
+              >
                 <div className="px-8 pb-8">
                   <div className="flex items-start gap-6">
                     <div className="flex-shrink-0">
@@ -756,10 +877,13 @@ const VraiAge = () => {
               <button
                 onClick={() => setIsAboutVraiAgeOpen(!isAboutVraiAgeOpen)}
                 className="w-full p-6 text-left hover:bg-white/50 transition-colors"
+                aria-expanded={isAboutVraiAgeOpen}
+                aria-controls="about-vraiage-content"
+                aria-label="À propos de VraiÂge"
               >
                 <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-3">
-                  <span className="text-blue-600 transition-transform duration-300" style={{ transform: isAboutVraiAgeOpen ? 'rotate(0deg)' : 'rotate(-90deg)' }}>▼</span>
-                  🐾 À propos de VraiÂge
+                  <span className="text-blue-600 transition-transform duration-300" style={{ transform: isAboutVraiAgeOpen ? 'rotate(0deg)' : 'rotate(-90deg)' }} aria-hidden="true">▼</span>
+                  <span aria-hidden="true">🐾</span> À propos de VraiÂge
                 </h2>
                 {!isAboutVraiAgeOpen && (
                   <p className="text-gray-600 mt-2 text-sm italic">
@@ -830,14 +954,15 @@ const VraiAge = () => {
           <div className="space-y-6">
             <button
               onClick={() => setCurrentPage('home')}
-              className="text-purple-600 hover:text-purple-800 mb-4"
+              className="group inline-flex items-center gap-2 text-gray-600 hover:text-purple-600 transition-all duration-200 mb-6 px-4 py-2 rounded-lg hover:bg-purple-50"
             >
-              ← Retour
+              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-200" />
+              <span className="font-medium">Retour</span>
             </button>
 
             <h2 className="text-2xl font-bold text-center mb-6 flex items-center justify-center gap-3">
               Mon Chat
-              <Image src="/images/cat-emoji.png" alt="Chat" width={40} height={40} className="w-10 h-10 object-contain" />
+              <Cat className="w-10 h-10 text-purple-500" strokeWidth={1.5} />
             </h2>
 
             <div>
@@ -894,7 +1019,7 @@ const VraiAge = () => {
                 defaultValue=""
               >
                 <option value="">Choisir une race</option>
-                {catBreeds.map(breed => (
+                {CAT_BREEDS.map(breed => (
                   <option key={breed.value} value={breed.value}>{breed.name}</option>
                 ))}
               </select>
@@ -966,13 +1091,15 @@ const VraiAge = () => {
                 💡 Si ton chat est très maigre, consulte un vétérinaire pour écarter toute condition médicale.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {bodyScores.map(score => (
+                {BODY_SCORES.map(score => (
                   <button
                     key={score.value}
                     onClick={() => setFormData({...formData, catBody: score.value})}
                     className={`p-3 rounded-lg border-2 transition-all text-center flex flex-col items-center ${formData.catBody === score.value ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white border-transparent' : 'border-gray-300 hover:border-purple-300'}`}
                   >
-                    <div className="text-3xl mb-2">{score.emoji}</div>
+                    <div className="mb-2 flex justify-center">
+                      <score.Icon className="w-8 h-8 text-current" />
+                    </div>
                     <div className="font-semibold mb-1 text-sm">{score.label}</div>
                     <div className={`text-xs ${formData.catBody === score.value ? 'text-white/90' : 'text-gray-600'}`}>
                       {score.description}
@@ -995,9 +1122,10 @@ const VraiAge = () => {
 
             <button
               onClick={handleCalculate}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-lg font-bold text-lg hover:from-purple-700 hover:to-pink-700 transition-all shadow-lg"
+              className="group w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-5 rounded-xl font-bold text-lg hover:from-purple-700 hover:to-pink-700 transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3"
             >
-              Calculer l'âge 🎉
+              <span>Calculer l'âge</span>
+              <Sparkles className="w-5 h-5 group-hover:rotate-12 group-hover:scale-110 transition-all duration-200" />
             </button>
           </div>
         )}
@@ -1013,7 +1141,7 @@ const VraiAge = () => {
 
             <h2 className="text-2xl font-bold text-center mb-6 flex items-center justify-center gap-3">
               Mon Chien
-              <Image src="/images/dog-emoji.png" alt="Chien" width={40} height={40} className="w-10 h-10 object-contain" />
+              <Dog className="w-10 h-10 text-orange-500" strokeWidth={1.5} />
             </h2>
 
             <div>
@@ -1070,7 +1198,7 @@ const VraiAge = () => {
                 value={formData.dogBreed || ""}
               >
                 <option value="">Choisir une race</option>
-                {dogBreeds.map(breed => (
+                {DOG_BREEDS.map(breed => (
                   <option key={breed.value} value={breed.value}>{breed.name}</option>
                 ))}
               </select>
@@ -1084,7 +1212,7 @@ const VraiAge = () => {
                 <p className="mt-1 text-blue-700">⚠️ La forme du museau influence l'espérance de vie (les museaux courts peuvent causer des problèmes respiratoires)</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {muzzleTypes.map(muzzle => (
+                {MUZZLE_TYPES.map(muzzle => (
                   <button
                     key={muzzle.value}
                     onClick={() => handleDogMuzzleChange(muzzle.value)}
@@ -1117,7 +1245,7 @@ const VraiAge = () => {
               <div className="space-y-2">
                 {/* Première ligne : 3 options */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  {dogWeightRanges.slice(0, 3).map(range => (
+                  {DOG_WEIGHT_RANGES.slice(0, 3).map(range => (
                     <button
                       key={range.range}
                       onClick={() => handleDogWeightChange(range.range)}
@@ -1132,7 +1260,7 @@ const VraiAge = () => {
                 </div>
                 {/* Deuxième ligne : 3 options */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  {dogWeightRanges.slice(3, 6).map(range => (
+                  {DOG_WEIGHT_RANGES.slice(3, 6).map(range => (
                     <button
                       key={range.range}
                       onClick={() => handleDogWeightChange(range.range)}
@@ -1148,7 +1276,7 @@ const VraiAge = () => {
                 {/* Troisième ligne : 1 option centrée */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   <div></div>
-                  {dogWeightRanges.slice(6).map(range => (
+                  {DOG_WEIGHT_RANGES.slice(6).map(range => (
                     <button
                       key={range.range}
                       onClick={() => handleDogWeightChange(range.range)}
@@ -1207,13 +1335,15 @@ const VraiAge = () => {
                 💡 Si ton chien est très maigre, consulte un vétérinaire pour écarter toute condition médicale.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {bodyScores.map(score => (
+                {BODY_SCORES.map(score => (
                   <button
                     key={score.value}
                     onClick={() => setFormData({...formData, dogBody: score.value})}
                     className={`p-3 rounded-lg border-2 transition-all text-center flex flex-col items-center ${formData.dogBody === score.value ? 'bg-gradient-to-r from-blue-500 to-orange-500 text-white border-transparent' : 'border-gray-300 hover:border-blue-300'}`}
                   >
-                    <div className="text-3xl mb-2">{score.emoji}</div>
+                    <div className="mb-2 flex justify-center">
+                      <score.Icon className="w-8 h-8 text-current" />
+                    </div>
                     <div className="font-semibold mb-1 text-sm">{score.label}</div>
                     <div className={`text-xs ${formData.dogBody === score.value ? 'text-white/90' : 'text-gray-600'}`}>
                       {score.description}
@@ -1238,7 +1368,8 @@ const VraiAge = () => {
               onClick={handleCalculate}
               className="w-full bg-gradient-to-r from-blue-600 to-orange-600 text-white py-4 rounded-lg font-bold text-lg hover:from-blue-700 hover:to-orange-700 transition-all shadow-lg"
             >
-              Calculer l'âge 🎉
+              <span>Calculer l'âge</span>
+              <Sparkles className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
             </button>
           </div>
         )}
@@ -1257,13 +1388,13 @@ const VraiAge = () => {
             `}</style>
 
             <div className="mb-6 flex justify-center" style={{ animation: 'gentle-float 2s ease-in-out infinite' }}>
-              <Image
-                src={currentPet === 'cat' ? '/images/cat-emoji.png' : '/images/dog-emoji.png'}
-                alt={currentPet === 'cat' ? 'Chat' : 'Chien'}
-                width={112}
-                height={112}
-                className="w-28 h-28 object-contain"
-              />
+              <div className={`p-8 bg-white rounded-full shadow-lg ${currentPet === 'cat' ? 'shadow-purple-200' : 'shadow-orange-200'}`}>
+                {currentPet === 'cat' ? (
+                  <Cat className="w-20 h-20 text-purple-500" strokeWidth={1.5} />
+                ) : (
+                  <Dog className="w-20 h-20 text-orange-500" strokeWidth={1.5} />
+                )}
+              </div>
             </div>
 
             <div className="text-xl text-gray-700 mb-4 font-medium">
@@ -1286,17 +1417,17 @@ const VraiAge = () => {
         )}
 
         {currentPage === 'result' && result && (
-          <div className="space-y-6">
+          <div ref={resultsRef} className="space-y-6">
             {showDelayedContent && (
               <div className="text-center">
                 <div className="mb-4 flex justify-center">
-                  <Image
-                    src={currentPet === 'cat' ? '/images/cat-emoji.png' : '/images/dog-emoji.png'}
-                    alt={currentPet === 'cat' ? 'Chat' : 'Chien'}
-                    width={96}
-                    height={96}
-                    className="w-24 h-24 object-contain"
-                  />
+                  <div className={`p-6 bg-white rounded-full shadow-lg ${currentPet === 'cat' ? 'shadow-purple-200' : 'shadow-orange-200'}`}>
+                    {currentPet === 'cat' ? (
+                      <Cat className="w-16 h-16 text-purple-500" strokeWidth={1.5} />
+                    ) : (
+                      <Dog className="w-16 h-16 text-orange-500" strokeWidth={1.5} />
+                    )}
+                  </div>
                 </div>
                 <h2 className="text-3xl font-bold text-gray-800 mb-2">{result.name}</h2>
               </div>
@@ -1308,8 +1439,17 @@ const VraiAge = () => {
                 {ageCounter < 2 ? 'an' : 'ans'} en âge humain
               </div>
               {showDelayedContent && (
-                <div className="mt-4 text-lg">
-                  {getFunPhrase(result.humanAge).icon} Si {result.name} était un humain, {result.isFemale ? 'elle' : 'il'} {getFunPhrase(result.humanAge).text}
+                <div className="mt-4 text-lg flex items-center justify-center gap-2">
+                  {(() => {
+                    const phrase = getFunPhrase(result.humanAge);
+                    const IconComponent = phrase.Icon;
+                    return (
+                      <>
+                        <IconComponent className="w-6 h-6 flex-shrink-0" />
+                        <span>Si {result.name} était un humain, {result.isFemale ? 'elle' : 'il'} {phrase.text}</span>
+                      </>
+                    );
+                  })()}
                 </div>
               )}
             </div>
@@ -1427,47 +1567,127 @@ const VraiAge = () => {
                 )}
 
                 {result.isSenior && (
-                  <div className="bg-gradient-to-r from-blue-400 to-blue-600 rounded-xl p-6 text-white">
-                    <h3 className="font-bold text-xl mb-3">🧘 Accompagnement senior</h3>
-                    <p className="mb-3">
-                      {result.name} entre dans une phase de vie qui mérite une attention particulière.
-                    </p>
-                    <p className="text-sm mb-4 bg-white/20 rounded-lg p-3">
-                      💝 <strong>Écoute Nala</strong> te permet de vérifier la qualité de vie de ton senior.
-                    </p>
-                    <a
-                      href="https://www.ecoutenala.ca"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block w-full bg-white text-blue-600 py-3 rounded-lg font-semibold text-center hover:bg-blue-50 transition-all"
-                    >
-                      Découvrir Écoute Nala →
-                    </a>
+                  <div className="relative bg-gradient-to-br from-indigo-600 via-blue-600 to-indigo-700 rounded-2xl p-6 text-white shadow-xl overflow-hidden">
+                    {/* Overlay décoratif */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50"></div>
+
+                    <div className="relative">
+                      {/* Header avec icône */}
+                      <div className="flex items-start gap-4 mb-4">
+                        <div className="flex-shrink-0 p-3 bg-white/20 rounded-xl backdrop-blur-sm">
+                          <HeartHandshake className="w-8 h-8 text-white" strokeWidth={1.5} />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-bold text-2xl mb-2">
+                            Accompagnement senior
+                          </h3>
+                        </div>
+                      </div>
+
+                      {/* Encadré À l'écoute de Nala */}
+                      <div className="bg-white/15 backdrop-blur-sm border border-white/20 rounded-xl p-4 mb-4">
+                        <div className="flex items-start gap-3 mb-3">
+                          <Stethoscope className="w-5 h-5 text-white flex-shrink-0 mt-0.5" strokeWidth={2} />
+                          <div>
+                            <p className="font-bold text-lg mb-1">À l'Écoute de Nala</p>
+                            <p className="text-sm text-white/95 leading-relaxed">
+                              Outil vétérinaire pour évaluer la qualité de vie des animaux seniors et prendre des décisions éclairées au bon moment.
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Bénéfices */}
+                        <div className="space-y-2 text-sm">
+                          <div className="flex items-center gap-2">
+                            <CheckCircle className="w-4 h-4 text-blue-200 flex-shrink-0" />
+                            <span className="text-white/90">Questionnaire inspiré par les données scientifiques</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Activity className="w-4 h-4 text-blue-200 flex-shrink-0" />
+                            <span className="text-white/90">Suivi de l'évolution dans le temps</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <HeartHandshake className="w-4 h-4 text-blue-200 flex-shrink-0" />
+                            <span className="text-white/90">Aide à la prise de décision</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Bouton CTA */}
+                      <a
+                        href="https://ecoutenala.ca"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center justify-center gap-3 w-full bg-white text-indigo-700 py-4 rounded-xl font-bold text-lg hover:bg-indigo-50 transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+                      >
+                        <span>Évaluer la qualité de vie</span>
+                        <ExternalLink className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
+                      </a>
+                    </div>
                   </div>
                 )}
 
-                <div className="border-t pt-6">
-                  <h3 className="font-bold text-lg mb-3 text-center">Partager le résultat</h3>
-                  <div className="grid grid-cols-3 gap-3">
-                    <button
-                      onClick={() => handleShare('facebook')}
-                      className="p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all"
-                    >
-                      Facebook
-                    </button>
-                    <button
-                      onClick={() => handleShare('instagram')}
-                      className="p-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all"
-                    >
-                      Instagram
-                    </button>
-                    <button
-                      onClick={() => handleShare('copy')}
-                      className="p-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all"
-                    >
-                      Copier lien
-                    </button>
+                <div className="border-t pt-6 space-y-4">
+                  <h3 className="font-bold text-lg mb-3 text-center flex items-center justify-center gap-2">
+                    <Share2 className="w-5 h-5" />
+                    <span>Partager le résultat</span>
+                  </h3>
+
+                  {/* Bouton de téléchargement principal */}
+                  <button
+                    onClick={handleDownloadScreenshot}
+                    disabled={isCapturingScreenshot}
+                    className="group w-full flex items-center justify-center gap-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-4 rounded-xl font-bold text-lg hover:from-emerald-600 hover:to-teal-700 transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isCapturingScreenshot ? (
+                      <>
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                        <span>Création de l'image...</span>
+                      </>
+                    ) : screenshotCopied ? (
+                      <>
+                        <Check className="w-5 h-5" />
+                        <span>Image téléchargée !</span>
+                      </>
+                    ) : (
+                      <>
+                        <Download className="w-5 h-5 group-hover:translate-y-1 transition-transform duration-200" />
+                        <span>Télécharger l'image du résultat</span>
+                      </>
+                    )}
+                  </button>
+
+                  {/* Boutons de partage avec capture */}
+                  <div className="space-y-2">
+                    <p className="text-sm text-gray-600 text-center">Ou partager directement sur :</p>
+                    <div className="grid grid-cols-2 gap-3">
+                      <button
+                        onClick={() => handleShareWithScreenshot('facebook')}
+                        disabled={isCapturingScreenshot}
+                        className="group flex items-center justify-center gap-2 p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50"
+                      >
+                        <Facebook className="w-5 h-5" />
+                        <span className="font-medium">Facebook</span>
+                      </button>
+                      <button
+                        onClick={() => handleShareWithScreenshot('instagram')}
+                        disabled={isCapturingScreenshot}
+                        className="group flex items-center justify-center gap-2 p-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50"
+                      >
+                        <Instagram className="w-5 h-5" />
+                        <span className="font-medium">Instagram</span>
+                      </button>
+                    </div>
                   </div>
+
+                  {/* Bouton copier lien classique */}
+                  <button
+                    onClick={() => handleShare('copy')}
+                    className="group w-full flex items-center justify-center gap-2 p-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all border border-gray-300"
+                  >
+                    <Copy className="w-4 h-4" />
+                    <span className="text-sm font-medium">Copier le lien de l'application</span>
+                  </button>
                 </div>
 
                 <button
