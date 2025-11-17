@@ -65,7 +65,6 @@ export default function FAQPage() {
                     <li>L'espèce (chat ou chien)</li>
                     <li>La race et la longévité moyenne</li>
                     <li>Le poids et la taille</li>
-                    <li>Le niveau d'activité physique</li>
                     <li>L'environnement de vie</li>
                     <li>Le statut de stérilisation</li>
                   </ul>
@@ -79,24 +78,16 @@ export default function FAQPage() {
               question="Les résultats sont-ils fiables ?"
               answer={
                 <>
-                  <p>Les résultats dépendent principalement de la qualité et l'exactitude des informations que tu fournis. Plus tu es précis dans tes réponses, plus le calcul sera juste !</p>
-                  <p className="mt-3">Nos calculs sont basés sur des recherches scientifiques validées. Toutefois, <strong>l'outil lui-même n'a pas été formellement testé</strong> - ce sont les données et formules sous-jacentes qui proviennent de sources vétérinaires reconnues, notamment :</p>
-                  <div className="bg-gray-50 rounded-lg p-4 mt-3">
-                    <p className="font-semibold mb-2">Sources scientifiques :</p>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>American Veterinary Medical Association (AVMA) - Lignes directrices sur le vieillissement animal</li>
-                      <li>American Animal Hospital Association (AAHA) - Études sur l'espérance de vie selon les races</li>
-                      <li>Journal of Small Animal Practice - Recherches sur les facteurs influençant la longévité</li>
-                      <li>UC Davis School of Veterinary Medicine - Données sur le vieillissement canin et félin</li>
-                      <li>Royal Veterinary College (UK) - Études épidémiologiques sur la santé animale</li>
-                      <li>Banfield Pet Hospital - Recherches basées sur des millions d'animaux</li>
-                    </ul>
+                  <p className="mb-3">Les résultats dépendent de la qualité des informations que tu fournis. Plus tu es précis dans tes réponses, plus le calcul sera juste !</p>
+
+                  <p className="mb-3">Nos calculs sont basés sur des recherches scientifiques vétérinaires reconnues (AVMA, AAHA, UC Davis, Royal Veterinary College, et autres institutions de référence).</p>
+
+                  <div className="bg-blue-50 border-l-4 border-blue-500 p-3 rounded mb-3">
+                    <p className="font-semibold mb-2">Important :</p>
+                    <p>Si tu n'es pas certain d'une information (poids exact, race), fais de ton mieux pour estimer : le résultat restera une bonne approximation.</p>
                   </div>
-                  <p className="mt-3 font-semibold">Important :</p>
-                  <p className="bg-blue-50 border-l-4 border-blue-500 p-3 rounded">
-                    Si tu n'es pas certain d'une information comme le poids exact ou la race, fais de ton mieux pour "estimer" : le résultat restera une bonne approximation, mais pourrait varier légèrement avec des données plus précises.
-                  </p>
-                  <p className="mt-3 bg-yellow-50 border-l-4 border-yellow-500 p-3 rounded">
+
+                  <p className="bg-yellow-50 border-l-4 border-yellow-500 p-3 rounded text-sm">
                     <strong>Note :</strong> Ces calculs sont basés sur des moyennes statistiques et ne remplacent pas l'avis d'un vétérinaire pour la santé de ton animal.
                   </p>
                 </>
@@ -108,52 +99,21 @@ export default function FAQPage() {
               question="Mon animal a dépassé son espérance de vie moyenne. Est-ce inquiétant ?"
               answer={
                 <>
-                  <p className="font-semibold">Pas du tout ! Au contraire, c'est une excellente nouvelle 🎉</p>
-                  <p className="mt-2">L'espérance de vie affichée est une moyenne statistique, pas une limite fixe ou une prédiction exacte. Voici ce que ça signifie :</p>
+                  <p className="font-semibold text-lg">Pas du tout ! Au contraire, bravo 🎉</p>
+                  <p className="mt-3">L'espérance de vie affichée est une moyenne statistique basée sur des milliers d'animaux - ce n'est pas une date d'expiration ni une limite fixe.</p>
 
-                  <div className="bg-gray-50 rounded-lg p-4 mt-3">
-                    <p className="font-semibold mb-2">Ce que c'est :</p>
-                    <ul className="list-disc list-inside space-y-1">
-                      <li>Une moyenne basée sur des milliers d'animaux du même race/type</li>
-                      <li>Un indicateur général, pas un compte à rebours</li>
-                      <li>Une statistique qui n'inclut pas les animaux avec des styles de vie très différents</li>
-                    </ul>
-                  </div>
-
-                  <div className="bg-red-50 rounded-lg p-4 mt-3">
-                    <p className="font-semibold mb-2">Ce que ce n'est PAS :</p>
-                    <ul className="list-disc list-inside space-y-1">
-                      <li>Une date d'expiration</li>
-                      <li>Une garantie de longévité</li>
-                      <li>Une prédiction individuelle pour ton animal</li>
-                    </ul>
-                  </div>
-
-                  <div className="bg-blue-50 rounded-lg p-4 mt-3">
+                  <div className="bg-green-50 border-l-4 border-green-500 p-4 rounded mt-3">
                     <p className="font-semibold mb-2">La réalité :</p>
-                    <ul className="list-disc list-inside space-y-1">
-                      <li>Environ 50% des animaux vivent au-delà de l'espérance moyenne</li>
-                      <li>Certains animaux vivent plusieurs années de plus que la moyenne</li>
-                      <li>Beaucoup de facteurs influencent la longévité : soins vétérinaires, alimentation, génétique individuelle, qualité de vie, chance</li>
+                    <ul className="space-y-1">
+                      <li>✅ Environ 50% des animaux vivent au-delà de l'espérance moyenne</li>
+                      <li>✅ Beaucoup de facteurs influencent la longévité (soins, alimentation, génétique, qualité de vie)</li>
+                      <li>✅ Chaque jour supplémentaire est un cadeau à célébrer</li>
                     </ul>
                   </div>
 
-                  <div className="bg-green-50 border-l-4 border-green-500 p-3 rounded mt-3">
-                    <p className="font-semibold mb-2">Si ton animal a dépassé son espérance moyenne :</p>
-                    <ul className="space-y-2">
-                      <li>✅ <strong>Bravo !</strong> Tu prends manifestement bien soin de lui</li>
-                      <li>✅ Chaque jour est un cadeau à célébrer</li>
-                      <li>✅ Continue les soins vétérinaires réguliers</li>
-                      <li>✅ Adapte son mode de vie à ses besoins de senior</li>
-                    </ul>
-                  </div>
-
-                  <p className="mt-3 italic">💡 Ton compagnon profite de ses "années bonus" - c'est magnifique!</p>
-
-                  <div className="bg-gray-50 border-l-4 border-gray-400 p-3 rounded mt-3">
-                    <p className="font-semibold mb-2">Note sur les calculs :</p>
-                    <p className="text-sm">Pour certaines races moins courantes, le calculateur doit extrapoler des données en se basant sur la taille, le poids, le style de vie et d'autres facteurs, car les études scientifiques spécifiques n'existent pas pour toutes les races. Cela permet de fournir une estimation fiable même sans données directes.</p>
-                  </div>
+                  <p className="mt-3 bg-blue-50 border-l-4 border-blue-500 p-3 rounded">
+                    💡 Si ton compagnon a dépassé son espérance moyenne, c'est que tu prends manifestement bien soin de lui. Continue les soins vétérinaires réguliers et adapte son mode de vie à ses besoins de senior.
+                  </p>
                 </>
               }
             />
@@ -229,11 +189,6 @@ export default function FAQPage() {
                       <p className="font-semibold">Le mode de vie :</p>
                       <p className="text-sm">Intérieur vs extérieur change radicalement les risques</p>
                     </div>
-
-                    <div className="bg-gray-50 rounded-lg p-3">
-                      <p className="font-semibold">Le niveau d'activité :</p>
-                      <p className="text-sm">L'exercice influence la santé et la longévité</p>
-                    </div>
                   </div>
 
                   <p className="mt-3 bg-blue-50 border-l-4 border-blue-500 p-3 rounded">
@@ -298,24 +253,14 @@ export default function FAQPage() {
                   <p>Pas de panique ! Voici comment estimer :</p>
 
                   <div className="bg-gray-50 rounded-lg p-4 mt-3">
-                    <p className="font-semibold mb-2">📐 Pour un chien :</p>
+                    <p className="font-semibold mb-2">Quelques astuces :</p>
                     <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>Compare-le avec des chiens de sa race que tu connais le poids (voisin, ami)</li>
+                      <li>Compare-le avec des animaux de sa race que tu connais le poids (voisin, ami)</li>
                       <li>Regarde le poids moyen de sa race en ligne</li>
                       <li>En clinique vétérinaire, la plupart ont une balance - demande lors de la prochaine visite !</li>
+                      <li>Une approximation fonctionne très bien ! Le résultat restera précis à quelques mois près.</li>
                     </ul>
                   </div>
-
-                  <div className="bg-blue-50 rounded-lg p-4 mt-3">
-                    <p className="font-semibold mb-2">📐 Pour un chat :</p>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>Le plupart des chats pèsent entre 3 à 5 kg (7-12 lbs ou 3,5-6 kg)</li>
-                      <li>Un chat de taille moyenne : environ 8-9 lbs (4-4.5 kg)</li>
-                      <li>Vérifie sur la balance avec lui dans tes bras, puis fais la différence !</li>
-                    </ul>
-                  </div>
-
-                  <p className="mt-3 text-sm italic">💡 Une approximation fonctionne très bien ! Le résultat restera précis à quelques mois près.</p>
                 </>
               }
             />
@@ -392,7 +337,7 @@ export default function FAQPage() {
                   <div className="bg-blue-50 rounded-lg p-4 mt-3">
                     <p className="font-semibold mb-2">🐶 Chiens :</p>
                     <ul className="list-disc list-inside space-y-1">
-                      <li>Plus de 200 races reconnues</li>
+                      <li>Plusieurs races reconnues ayant des données spécifiques</li>
                       <li>Catégories par taille (petite, moyenne, grande, géante)</li>
                       <li>Option "Race inconnue" ou "Croisé"</li>
                     </ul>
@@ -408,7 +353,7 @@ export default function FAQPage() {
                   </div>
 
                   <p className="mt-3 bg-gray-50 border-l-4 border-gray-400 p-3 rounded">
-                    Si ta race spécifique n'est pas listée, choisis la race la plus proche en termes de taille et morphologie, ou sélectionne "Race inconnue". Le calcul utilisera alors des catégories de poids pour estimer l'âge, ce qui reste très fiable ! 🐾
+                    Si ta race spécifique n'est pas listée, sélectionne "Race inconnue". Le calcul utilisera alors des catégories de poids pour estimer l'âge, ce qui reste très fiable ! 🐾
                   </p>
                   <div className="bg-blue-50 border-l-4 border-blue-500 p-3 rounded mt-3">
                     <p className="font-semibold mb-2">Note importante :</p>
@@ -489,24 +434,29 @@ export default function FAQPage() {
 
             <FAQItem
               icon="🚀"
-              question="D'autres outils sont prévus ?"
+              question="Y a-t-il d'autres outils pour accompagner mon animal ?"
               answer={
                 <>
-                  <p className="font-semibold text-lg mb-2">Oui ! Voici ce qui arrive :</p>
+                  <p className="font-semibold text-lg mb-3">Oui ! VraiÂge fait partie d'un écosystème d'outils pour mieux accompagner ton compagnon.</p>
 
                   <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-4 mt-3">
-                    <p className="font-semibold mb-2 text-blue-900">🎯 À l'Écoute de Nala - Évaluation de qualité de vie</p>
-                    <p className="mb-2 text-blue-800">Notre application principale pour évaluer le bien-être des animaux seniors et en développement final. Elle te permettra de :</p>
+                    <p className="font-semibold mb-2 text-blue-900">🎯 À l'Écoute de Nala</p>
+                    <p className="mb-2 text-blue-800">Une fois que tu connais l'âge de ton compagnon, tu peux aller plus loin avec notre application d'évaluation de qualité de vie pour animaux seniors :</p>
                     <ul className="space-y-2 text-blue-800">
                       <li>✅ Évaluer la qualité de vie de ton compagnon</li>
                       <li>✅ Suivre son évolution dans le temps</li>
-                      <li>✅ Obtenir des recommandations personnalisées</li>
-                      <li>✅ Identifier quand consulter un vétérinaire</li>
                     </ul>
-                    <p className="mt-3 font-semibold text-blue-900">Lancement prévu : Très bientôt ! (On règle les derniers détails techniques 🧡)</p>
+                    <a
+                      href="https://www.ecoutenala.ca"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block mt-3 bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-all"
+                    >
+                      Découvrir À l'Écoute de Nala →
+                    </a>
                   </div>
 
-                  <p className="mt-4 font-semibold">Suis-nous sur nos réseaux sociaux pour être informé du lancement ! 💙</p>
+                  <p className="mt-4 text-sm italic">Les deux outils se complètent pour t'accompagner tout au long du parcours de ton compagnon. 💙</p>
                 </>
               }
             />
@@ -522,7 +472,7 @@ export default function FAQPage() {
                     <div className="bg-gray-50 rounded-lg p-3">
                       <p className="font-semibold">📢 Gratuitement :</p>
                       <ul className="list-disc list-inside mt-1 text-sm space-y-1">
-                        <li>Partage l'application avec d'autres propriétaires d'animaux</li>
+                        <li>Partage l'application à ta famille et tes amis</li>
                         <li>Laisse-nous un commentaire ou avis</li>
                         <li>Partage tes résultats sur les réseaux sociaux</li>
                         <li>Signale les bugs ou suggère des améliorations</li>
@@ -541,39 +491,6 @@ export default function FAQPage() {
                   <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-l-4 border-pink-500 p-4 rounded mt-4">
                     <p className="font-semibold">Chaque partage nous aide énormément à faire la différence !</p>
                     <p className="mt-2">Merci de faire partie de l'aventure 🙏💝</p>
-                  </div>
-                </>
-              }
-            />
-
-            <FAQItem
-              icon="🏃"
-              question='Activité « modérée » vs « élevée »'
-              answer={
-                <>
-                  <p>Comment choisir entre "activité modérée" et "élevée" ?</p>
-
-                  <div className="space-y-3 mt-3">
-                    <div className="bg-gray-50 rounded-lg p-4">
-                      <p className="font-semibold mb-2">🐶 Chiens :</p>
-                      <p className="mb-2"><strong>Modérée :</strong></p>
-                      <p className="text-sm mb-2">20-60 minutes d'effort soutenu (marche vive, jeux de balle, randonnées faciles) 5-6 j/sem. Habituellement léger, pauses fréquentes.</p>
-                      <p className="mb-2"><strong>Élevée :</strong></p>
-                      <p className="text-sm">+60-90 minutes d'efforts intenses (course libre, rancourts agility, sports de traction, longues randonnées avec dénivelé) 5-7 j/sem. Habituellement minimale, récur. rapide, haute endurance.</p>
-                    </div>
-
-                    <div className="bg-blue-50 rounded-lg p-4">
-                      <p className="font-semibold mb-2">🐱 Chats (surtout indicatif) :</p>
-                      <p className="mb-2"><strong>Modérée :</strong></p>
-                      <p className="text-sm mb-2">1-3 sessions/jour de 5-10 min (jeu au plume, poursuite).</p>
-                      <p className="mb-2"><strong>Élevée :</strong></p>
-                      <p className="text-sm">3-6 sessions/jour, très actifs (chats accès extérieur, territoire, patrouiller fréquente zones à chat, parcours).</p>
-                    </div>
-                  </div>
-
-                  <div className="bg-blue-50 border-l-4 border-blue-500 p-3 rounded mt-3">
-                    <p className="font-semibold">⚠️ Astuce :</p>
-                    <p className="text-sm">Si ton compagnon soutenu au calme et ne recherche pas à bouger, coche "Élevée". S'il profite les siestes/relax courts, reste sur "Modérée".</p>
                   </div>
                 </>
               }

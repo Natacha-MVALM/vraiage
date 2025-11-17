@@ -22,7 +22,7 @@ export default function PolitiquePage() {
               <p className="mb-3">Le responsable de la protection des renseignements personnels pour notre calculateur d'âge animal est :</p>
               <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
                 <p className="font-semibold">Responsable : Natacha Barrette</p>
-                <p><strong>Contact :</strong> Utilisez notre formulaire de contact</p>
+                <p><strong>Contact :</strong> Utilisez le formulaire de contact disponible sur la page d'accueil</p>
               </div>
             </section>
 
@@ -76,34 +76,20 @@ export default function PolitiquePage() {
 
             {/* Section 6 */}
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-3">6. Vos droits (Loi 25 - Québec)</h2>
-              <p className="mb-2">Conformément à la Loi 25 sur la protection des renseignements personnels au Québec, vous avez les droits suivants :</p>
-              <ul className="list-disc list-inside space-y-1 ml-4">
-                <li><strong>Droit d'accès :</strong> Obtenir une copie de vos données personnelles</li>
-                <li><strong>Droit de rectification :</strong> Corriger des données inexactes</li>
-                <li><strong>Droit à l'effacement :</strong> Demander la suppression de vos données</li>
-                <li><strong>Droit de retrait du consentement :</strong> Retirer votre consentement à tout moment</li>
-                <li><strong>Droit de porter plainte :</strong> Auprès de la Commission d'accès à l'information du Québec</li>
-              </ul>
-              <p className="mt-3">Pour exercer ces droits, contactez-nous via notre <Link href="/contact" className="text-blue-600 hover:underline">formulaire de contact</Link>.</p>
-            </section>
-
-            {/* Section 7 */}
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-3">7. Cookies et technologies similaires</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-3">6. Cookies et technologies similaires</h2>
               <p className="mb-3">Nous utilisons deux catégories de cookies :</p>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">7.1 Cookies essentiels</h3>
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">6.1 Cookies essentiels</h3>
               <p className="mb-2">Nécessaires au fonctionnement du site. Ils ne peuvent pas être désactivés.</p>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-2 mt-4">7.2 Cookies analytiques (optionnels)</h3>
+              <h3 className="text-xl font-semibold text-gray-800 mb-2 mt-4">6.2 Cookies analytiques (optionnels)</h3>
               <p className="mb-2">Google Analytics nous aide à comprendre comment les visiteurs utilisent le site. Ces cookies nécessitent votre consentement explicite.</p>
               <p>Vous pouvez gérer vos préférences à tout moment via la bannière de cookies.</p>
             </section>
 
-            {/* Section 8 */}
+            {/* Section 7 */}
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-3">8. Sécurité</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-3">7. Sécurité</h2>
               <p className="mb-2">Nous mettons en œuvre des mesures de sécurité techniques et organisationnelles pour protéger vos données :</p>
               <ul className="list-disc list-inside space-y-1 ml-4">
                 <li>Chiffrement HTTPS/SSL sur toutes les pages</li>
@@ -113,22 +99,22 @@ export default function PolitiquePage() {
               </ul>
             </section>
 
+            {/* Section 8 */}
+            <section>
+              <h2 className="text-2xl font-bold text-gray-900 mb-3">8. Modifications de la politique</h2>
+              <p>Nous nous réservons le droit de modifier cette politique de confidentialité. Toute modification sera publiée sur cette page avec une nouvelle date de mise à jour.</p>
+            </section>
+
             {/* Section 9 */}
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-3">9. Modifications de la politique</h2>
-              <p>Nous nous réservons le droit de modifier cette politique de confidentialité. Toute modification sera publiée sur cette page avec une nouvelle date de mise à jour.</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-3">9. Contact</h2>
+              <p className="mb-3">Pour toute question concernant cette politique de confidentialité, utilisez le formulaire de contact disponible sur la <Link href="/" className="text-blue-600 hover:underline">page d'accueil</Link>.</p>
+              <p className="text-sm italic">Nous nous engageons à répondre dans un délai raisonnable conformément à la Loi 25.</p>
             </section>
 
             {/* Section 10 */}
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-3">10. Contact</h2>
-              <p className="mb-3">Pour toute question concernant cette politique de confidentialité ou pour exercer vos droits, vous pouvez nous contacter via notre <Link href="/contact" className="text-blue-600 hover:underline">formulaire de contact</Link>.</p>
-              <p className="text-sm italic">Nous nous engageons dans un délai raisonnable conformément à la Loi 25.</p>
-            </section>
-
-            {/* Section 11 */}
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-3">11. Commission d'accès à l'information du Québec</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-3">10. Commission d'accès à l'information du Québec</h2>
               <p className="mb-3">Si vous estimez que vos droits n'ont pas été respectés, vous pouvez déposer une plainte auprès de :</p>
               <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
                 <p className="font-semibold mb-1">Commission d'accès à l'information du Québec</p>

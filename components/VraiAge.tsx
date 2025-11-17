@@ -8,7 +8,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import html2canvas from 'html2canvas';
 import {
-  Paw, Sparkles, Cat, Dog, CheckCircle, AlertCircle,
+  Sparkles, Cat, Dog, CheckCircle, AlertCircle,
   HelpCircle, ArrowLeft, Mail, ChevronDown, Info, Share2,
   Facebook, Instagram, Copy, Check, MessageCircle,
   HeartHandshake, ExternalLink, Stethoscope, Activity, Download
@@ -905,12 +905,12 @@ const VraiAge = () => {
 
       <Card className="w-full max-w-2xl p-8 bg-white/95 backdrop-blur shadow-2xl">
         {currentPage === 'home' && (
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div className="text-center">
-              <h1 className="text-4xl font-bold text-gray-800 mb-2">
+              <h1 className="text-4xl font-bold text-gray-800 mb-1">
                 Quel est le <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">VRAI âge</span> de ton compagnon ?
               </h1>
-              <p className="text-gray-600">Calcul personnalisé basé sur les données scientifiques actuelles</p>
+              <p className="text-gray-600 mt-1">Calcul personnalisé basé sur les données scientifiques actuelles</p>
             </div>
 
             <style>{`
@@ -928,11 +928,11 @@ const VraiAge = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
               <button
                 onClick={() => {setCurrentPet('cat'); setCurrentPage('catForm');}}
-                className="group p-8 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-purple-400 hover:shadow-2xl text-center relative overflow-hidden"
+                className="group p-6 bg-white/95 backdrop-blur-sm rounded-2xl hover:scale-105 transition-all duration-300 border-2 border-white/50 hover:border-purple-400 shadow-xl hover:shadow-2xl text-center relative overflow-hidden"
                 aria-label="Calculer l'âge de mon chat"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-100/30 to-pink-100/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative mb-4 group-hover:scale-110 transition-transform duration-300 flex justify-center items-center" style={{ animation: 'float 3s ease-in-out infinite' }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-100/20 to-pink-100/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="relative mb-3 group-hover:scale-110 transition-transform duration-300 flex justify-center items-center" style={{ animation: 'float 3s ease-in-out infinite' }}>
                   <div className="p-6 bg-white rounded-full shadow-lg group-hover:shadow-xl transition-shadow duration-300">
                     <Cat className="w-24 h-24 text-purple-500 group-hover:text-purple-600 transition-colors duration-300" strokeWidth={1.5} />
                   </div>
@@ -949,11 +949,11 @@ const VraiAge = () => {
                     setFormData({...formData, dogMuzzle: 'mesocephalic'});
                   }
                 }}
-                className="group p-8 bg-gradient-to-br from-blue-50 to-orange-50 rounded-2xl hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-orange-400 hover:shadow-2xl text-center relative overflow-hidden"
+                className="group p-6 bg-white/95 backdrop-blur-sm rounded-2xl hover:scale-105 transition-all duration-300 border-2 border-white/50 hover:border-orange-400 shadow-xl hover:shadow-2xl text-center relative overflow-hidden"
                 aria-label="Calculer l'âge de mon chien"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 to-orange-100/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative mb-4 group-hover:scale-110 transition-transform duration-300 flex justify-center items-center" style={{ animation: 'float 3s ease-in-out infinite' }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-100/20 to-orange-100/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="relative mb-3 group-hover:scale-110 transition-transform duration-300 flex justify-center items-center" style={{ animation: 'float 3s ease-in-out infinite' }}>
                   <div className="p-6 bg-white rounded-full shadow-lg group-hover:shadow-xl transition-shadow duration-300">
                     <Dog className="w-24 h-24 text-orange-500 group-hover:text-orange-600 transition-colors duration-300" strokeWidth={1.5} />
                   </div>
@@ -974,7 +974,7 @@ const VraiAge = () => {
               >
                 <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-3">
                   <span className="text-purple-600 transition-transform duration-300" style={{ transform: isAboutMeOpen ? 'rotate(0deg)' : 'rotate(-90deg)' }} aria-hidden="true">▼</span>
-                  À propos de moi
+                  À propos de Dre Natacha Barrette
                 </h2>
                 {!isAboutMeOpen && (
                   <p className="text-gray-600 mt-2 text-sm italic">
@@ -990,7 +990,7 @@ const VraiAge = () => {
                 aria-labelledby="about-me-heading"
               >
                 <div className="px-8 pb-8">
-                  <div className="flex items-start gap-6">
+                  <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
                     <div className="flex-shrink-0">
                       <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-purple-200 shadow-lg">
                         <Image
@@ -1002,19 +1002,22 @@ const VraiAge = () => {
                         />
                       </div>
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 w-full">
                       <p className="text-gray-700 mb-3">
-                        Je suis médecin vétérinaire depuis plus de 30 ans et j'ai accompagné des centaines de familles confrontées au vieillissement de leur compagnon. Au fil des années, j'ai constaté un manque flagrant d'outils simples et fiables pour comprendre l'âge réel d'un animal et mieux anticiper les enjeux de fin de vie.
+                        Je suis médecin vétérinaire depuis plus de 30 ans, et j'ai accompagné des centaines de familles à travers le vieillissement de leur compagnon.
                       </p>
                       <p className="text-gray-700 mb-3">
-                        Installée à Québec, accompagnée de ma fidèle complice Babette, j'ai créé VraiÂge et deux gardiens d'animaux à repère clair, accessible et fondé sur la science.
+                        Trop souvent, j'ai vu des propriétaires découvrir tard — parfois trop tard — que leur animal était déjà senior. Cette réalité m'a poussée à créer des outils simples et accessibles pour aider les gens à mieux comprendre où se situe leur compagnon dans sa vie.
                       </p>
                       <p className="text-gray-700 mb-3">
-                        Parce que nos compagnons nous aiment sans condition, ils méritent qu'on prenne des décisions éclairées - au bon moment.
+                        Installée à Québec avec ma fidèle Babette, je mets mon expérience au service de ceux qui, comme toi, veulent prendre soin de leur animal avec justesse et bienveillance.
+                      </p>
+                      <p className="text-gray-700 mb-3">
+                        Parce qu'ils nous aiment sans condition, ils méritent qu'on les accompagne avec soin, au bon moment.
                       </p>
                       <p className="text-sm text-gray-600 italic">
                         Dre Natacha Barrette, médecin vétérinaire<br />
-                        Créatrice de VraiÂge • Fondatrice de Mon amie Nala et de l'Écoute de Nala
+                        Créatrice de VraiÂge • Fondatrice d'À l'écoute de Nala
                       </p>
                     </div>
                   </div>
@@ -1033,11 +1036,11 @@ const VraiAge = () => {
               >
                 <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-3">
                   <span className="text-blue-600 transition-transform duration-300" style={{ transform: isAboutVraiAgeOpen ? 'rotate(0deg)' : 'rotate(-90deg)' }} aria-hidden="true">▼</span>
-                  <span aria-hidden="true">🐾</span> À propos de VraiÂge
+                  C'est quoi, VraiÂge ?
                 </h2>
                 {!isAboutVraiAgeOpen && (
                   <p className="text-gray-600 mt-2 text-sm italic">
-                    Un outil ludique et éducatif, basé sur certaines données de la science...
+                    Un outil pour comprendre l'âge réel de ton compagnon...
                   </p>
                 )}
               </button>
@@ -1046,43 +1049,48 @@ const VraiAge = () => {
                 <div className="px-8 pb-8">
                   <div className="space-y-4 text-gray-700">
                     <div>
-                      <p className="font-semibold mb-2">Pourquoi VraiÂge existe :</p>
-                      <p>
-                        Trop souvent, j'ai vu des propriétaires découvrir trop tard que leur compagnon était déjà senior. La règle du "× 7" ou la simplification qu'on ne reflète pas la complexité du vieillissement animal. Un Chihuahua de 10 ans n'a pas le même âge biologique qu'un Berger Allemand du même âge.
+                      <p className="font-semibold mb-2">Un outil pour comprendre l'âge réel de ton compagnon</p>
+                      <p className="mb-3">
+                        Tu as sûrement déjà entendu la fameuse règle du "× 7" pour calculer l'âge de ton chien ou de ton chat. Sauf que cette règle est beaucoup trop simpliste. Un Chihuahua de 10 ans n'a pas du tout le même âge biologique qu'un Berger Allemand du même âge. Chaque animal vieillit différemment.
                       </p>
-                    </div>
-
-                    <div>
-                      <p className="font-semibold mb-2">L'approche scientifique :</p>
-                      <p>VraiÂge utilise des algorithmes basés sur des certaines recherches parmi les plus récentes, prenant en compte :</p>
+                      <p className="mb-2">
+                        VraiÂge est un calculateur gratuit, ludique et inspiré par la science qui prend en compte les facteurs qui influencent vraiment le vieillissement de ton animal :
+                      </p>
                       <ul className="list-disc list-inside mt-2 space-y-1 ml-4">
-                        <li>La race et sa longévité moyenne</li>
-                        <li>Le poids et la taille</li>
-                        <li>Le profil céphalique (chiens brachycéphales, mésocéphales, dolichocéphales)</li>
-                        <li>Le mode de vie et niveau d'activité physique</li>
-                        <li>L'environnement de vie</li>
-                        <li>Le sexe de l'animal</li>
-                        <li>Le statut de stérilisation</li>
+                        <li>Sa race et son espérance de vie moyenne (basée sur les études disponibles — certaines races ont plus de données que d'autres, alors on fait avec ce qu'on a !)</li>
+                        <li>Son poids et sa taille</li>
+                        <li>Sa morphologie (chiens brachycéphales, mésocéphales, dolichocéphales)</li>
+                        <li>Son mode de vie et son niveau d'activité</li>
+                        <li>Son environnement (intérieur, extérieur, mixte)</li>
+                        <li>Son sexe et son statut de stérilisation</li>
                       </ul>
+                      <p className="mt-3">
+                        En quelques clics, tu obtiens une estimation de son âge humain équivalent et de son espérance de vie. C'est un repère clair pour mieux comprendre où il en est dans son parcours.
+                      </p>
                     </div>
 
                     <div>
-                      <p className="font-semibold mb-2">Un outil ludique et éducatif, mais, surtout, pas une vérité absolue ni un diagnostic :</p>
-                      <p>
-                        VraiÂge te donne un aperçu général de l'âge biologique de ton compagnon. C'est un point de départ pour mieux comprendre où il en est dans sa vie. Pour un suivi personnalisé et des recommandations adaptées à SA situation, consulte toujours ton vétérinaire.
+                      <p className="font-semibold mb-2">Un outil éducatif, pas un diagnostic</p>
+                      <p className="mb-3">
+                        VraiÂge te donne un aperçu général de l'âge biologique de ton compagnon. C'est un point de départ pour mieux anticiper ses besoins — mais ce n'est pas une vérité absolue ni un diagnostic médical.
                       </p>
-                    </div>
-
-                    <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
-                      <p className="italic text-blue-900">
-                        VraiÂge + ton vétérinaire = le meilleure combinaison pour prendre soin de ton compagnon à chaque étape de sa vie.
+                      <p className="mb-3">
+                        Pour un suivi personnalisé et des recommandations adaptées à SA situation unique, consulte toujours ton vétérinaire.
                       </p>
+                      <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                        <p className="italic text-blue-900">
+                          VraiÂge + ton vétérinaire = la meilleure combinaison pour prendre soin de ton compagnon à chaque étape.
+                        </p>
+                      </div>
                     </div>
 
                     <div>
                       <p className="font-semibold mb-2">Et ensuite ?</p>
                       <p className="mb-2">
-                        Une fois que tu connais le vrai âge de ton compagnon, tu voudras peut-être évaluer sa qualité de vie au quotidien. C'est pourquoi j'ai créé <strong>À l'Écoute de Nala</strong>, une application qui t'aide à suivre le bien-être de ton animal senior.
+                        Si ton compagnon entre dans ses années senior, tu voudras peut-être aller plus loin et évaluer sa qualité de vie au quotidien. C'est pourquoi j'ai créé <strong>À l'écoute de Nala</strong>, une application gratuite qui t'aide à suivre le bien-être de ton animal de façon objective et bienveillante.
+                      </p>
+                      <p className="mb-3">
+                        Les deux outils se complètent pour t'accompagner tout au long du parcours.
                       </p>
                       <a
                         href="https://www.ecoutenala.ca"
@@ -1567,102 +1575,111 @@ const VraiAge = () => {
         )}
 
         {currentPage === 'result' && result && (
-          <div ref={resultsRef} className="space-y-6">
-            {showDelayedContent && (
-              <div className="text-center">
-                <div className="mb-4 flex justify-center">
-                  <div className={`p-6 bg-white rounded-full shadow-lg ${currentPet === 'cat' ? 'shadow-purple-200' : 'shadow-orange-200'}`}>
-                    {currentPet === 'cat' ? (
-                      <Cat className="w-16 h-16 text-purple-500" strokeWidth={1.5} />
-                    ) : (
-                      <Dog className="w-16 h-16 text-orange-500" strokeWidth={1.5} />
-                    )}
-                  </div>
-                </div>
-                <h2 className="text-3xl font-bold text-gray-800 mb-2">{result.name}</h2>
-              </div>
-            )}
-
-            <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl p-8 text-white text-center">
-              <div className="text-6xl font-bold mb-2">{ageCounter}</div>
-              <div className="text-2xl">
-                {ageCounter < 2 ? 'an' : 'ans'} en âge humain
-              </div>
-            </div>
-
-            {showDelayedContent && (
-              <div className="space-y-3">
-                <h3 className="text-xl font-bold text-center text-gray-800 mb-4">
-                  Si {result.name} était un{result.isFemale ? 'e' : ''} humain{result.isFemale ? 'e' : ''}...
-                </h3>
-
-                {(() => {
-                  const phrase = getFunPhrase(result.humanAge);
-                  const pronoun = result.isFemale ? 'elle' : 'il';
-
-                  return (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {/* Carte Québec */}
-                      <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-5 rounded-xl border-2 border-blue-300 shadow-md hover:shadow-lg transition-shadow">
-                        <div className="flex items-center gap-2 mb-3">
-                          <span className="text-3xl">🍁</span>
-                          <h4 className="font-bold text-lg text-blue-800">Au Québec</h4>
-                        </div>
-                        <div className="flex items-start gap-3">
-                          <span className="text-2xl flex-shrink-0">{phrase.quebec.icon}</span>
-                          <p className="text-gray-800 text-base leading-relaxed">
-                            {pronoun} {phrase.quebec.verb} {phrase.quebec.text}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Carte Europe */}
-                      <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-5 rounded-xl border-2 border-purple-300 shadow-md hover:shadow-lg transition-shadow">
-                        <div className="flex items-center gap-2 mb-3">
-                          <span className="text-3xl">🇪🇺</span>
-                          <h4 className="font-bold text-lg text-purple-800">En Europe</h4>
-                        </div>
-                        <div className="flex items-start gap-3">
-                          <span className="text-2xl flex-shrink-0">{phrase.europe.icon}</span>
-                          <p className="text-gray-800 text-base leading-relaxed">
-                            {pronoun} {phrase.europe.verb} {phrase.europe.text}
-                          </p>
-                        </div>
-                      </div>
+          <div className="space-y-6">
+            {/* Zone de capture pour réseaux sociaux */}
+            <div ref={resultsRef} className="mx-auto max-w-2xl bg-white p-6 rounded-xl space-y-6">
+              {showDelayedContent && (
+                <div className="text-center">
+                  <div className="mb-2 flex justify-center">
+                    <div className={`p-6 bg-white rounded-full shadow-lg ${currentPet === 'cat' ? 'shadow-purple-200' : 'shadow-orange-200'}`}>
+                      {currentPet === 'cat' ? (
+                        <Cat className="w-16 h-16 text-purple-500" strokeWidth={1.5} />
+                      ) : (
+                        <Dog className="w-16 h-16 text-orange-500" strokeWidth={1.5} />
+                      )}
                     </div>
-                  );
-                })()}
+                  </div>
+                  <h2 className="text-3xl font-bold text-gray-800 mb-2">{result.name}</h2>
+                </div>
+              )}
+
+              <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl p-8 text-white text-center">
+                <div className="text-6xl font-bold mb-2">{ageCounter}</div>
+                <div className="text-2xl">
+                  {ageCounter < 2 ? 'an' : 'ans'} en âge humain
+                </div>
               </div>
-            )}
+
+              {showDelayedContent && (
+                <div className="space-y-3">
+                  <h3 className="text-xl font-bold text-center text-gray-800 mb-4">
+                    Si {result.name} était un{result.isFemale ? 'e' : ''} humain{result.isFemale ? 'e' : ''}...
+                  </h3>
+
+                  {(() => {
+                    const phrase = getFunPhrase(result.humanAge);
+                    const pronoun = result.isFemale ? 'elle' : 'il';
+
+                    return (
+                      <div className="grid grid-cols-1 gap-4">
+                        {/* Carte Québec */}
+                        <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-5 rounded-xl border-2 border-blue-300 shadow-md hover:shadow-lg transition-shadow">
+                          <div className="flex items-center gap-2 mb-3">
+                            <span className="text-3xl">🍁</span>
+                            <h4 className="font-bold text-lg text-blue-800">Au Québec</h4>
+                          </div>
+                          <div className="flex items-start gap-3">
+                            <span className="text-2xl flex-shrink-0">{phrase.quebec.icon}</span>
+                            <p className="text-gray-800 text-base leading-relaxed">
+                              {pronoun} {phrase.quebec.verb} {phrase.quebec.text}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Carte Europe */}
+                        <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-5 rounded-xl border-2 border-purple-300 shadow-md hover:shadow-lg transition-shadow">
+                          <div className="flex items-center gap-2 mb-3">
+                            <span className="text-3xl">🇪🇺</span>
+                            <h4 className="font-bold text-lg text-purple-800">En Europe</h4>
+                          </div>
+                          <div className="flex items-start gap-3">
+                            <span className="text-2xl flex-shrink-0">{phrase.europe.icon}</span>
+                            <p className="text-gray-800 text-base leading-relaxed">
+                              {pronoun} {phrase.europe.verb} {phrase.europe.text}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })()}
+                </div>
+              )}
+
+              {showDelayedContent && (
+                <>
+                  <div className={`bg-gradient-to-r ${currentPet === 'cat' ? 'from-purple-400 to-pink-400' : 'from-blue-400 to-orange-400'} rounded-lg p-5 text-white text-center shadow-md`}>
+                    <div className="flex items-center justify-center gap-2 mb-2">
+                      <span className="text-2xl">{currentPet === 'cat' ? '🐱' : '🐶'}</span>
+                      <h3 className="text-xl font-bold">Stade de vie</h3>
+                    </div>
+                    <p className="text-lg">
+                      <span className="font-semibold">{result.name}</span> est dans le stade de vie
+                    </p>
+                    <p className="text-2xl font-bold mt-2">
+                      « {result.lifeStage.split(' ').slice(1).join(' ')} »
+                    </p>
+                    <p className="text-4xl mt-2">
+                      {result.lifeStage.split(' ')[0]}
+                    </p>
+                    <p className="text-base mt-3 italic text-white/90">
+                      {getLifeStageDescription(result.lifeStage, result.name)}
+                    </p>
+                  </div>
+
+                  <div className="bg-gray-50 rounded-lg p-6">
+                    <h3 className="font-bold text-lg mb-3">Détails du calcul</h3>
+                    <div className="space-y-2 text-gray-700">
+                      <p>• Âge réel: {formatAgeWithMonths(result.age)}</p>
+                      <p>• Fourchette d'âge humain: {result.interval[0]} - {result.interval[1]} ans</p>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+            {/* Fin de la zone de capture */}
 
             {showDelayedContent && (
               <>
-                <div className={`bg-gradient-to-r ${currentPet === 'cat' ? 'from-purple-400 to-pink-400' : 'from-blue-400 to-orange-400'} rounded-lg p-5 text-white text-center shadow-md`}>
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    <span className="text-2xl">{currentPet === 'cat' ? '🐱' : '🐶'}</span>
-                    <h3 className="text-xl font-bold">Stade de vie</h3>
-                  </div>
-                  <p className="text-lg">
-                    <span className="font-semibold">{result.name}</span> est dans le stade de vie
-                  </p>
-                  <p className="text-2xl font-bold mt-2">
-                    « {result.lifeStage.split(' ').slice(1).join(' ')} »
-                  </p>
-                  <p className="text-4xl mt-2">
-                    {result.lifeStage.split(' ')[0]}
-                  </p>
-                  <p className="text-base mt-3 italic text-white/90">
-                    {getLifeStageDescription(result.lifeStage, result.name)}
-                  </p>
-                </div>
-
-                <div className="bg-gray-50 rounded-lg p-6">
-                  <h3 className="font-bold text-lg mb-3">Détails du calcul</h3>
-                  <div className="space-y-2 text-gray-700">
-                    <p>• Âge réel: {formatAgeWithMonths(result.age)}</p>
-                    <p>• Fourchette d'âge humain: {result.interval[0]} - {result.interval[1]} ans</p>
-                  </div>
-                </div>
 
                 <div className="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-4">
                   <h3 className="font-bold text-blue-900 mb-2">📊 Qu'est-ce que l'espérance de vie?</h3>
@@ -1915,7 +1932,7 @@ const VraiAge = () => {
                 </button>
               </div>
               <p className="text-xs text-gray-500">
-                Calculateur d'âge animal • Les résultats sont basés sur des moyennes vétérinaires
+                Calculateur d'âge animal • Les résultats sont basés sur des moyennes
               </p>
               <p className="text-xs text-gray-500">
                 © 2025 Tous droits réservés • Conforme à la Loi 25 (Québec)
