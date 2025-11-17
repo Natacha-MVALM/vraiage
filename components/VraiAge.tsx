@@ -796,28 +796,7 @@ const VraiAge = () => {
     const blob = await captureResultsScreenshot();
     if (!blob) return;
 
-    let text = `${result.name} a ${result.humanAge} ${result.humanAge < 2 ? 'an' : 'ans'} en âge humain ! 🎉 Découvrez l'âge de votre animal sur VraiÂge !`;
-    const url = typeof window !== 'undefined' ? window.location.href : '';
-
-    // Vérifier si Web Share API est disponible (mobile)
-    if (navigator.share && navigator.canShare) {
-      try {
-        const file = new File([blob], `vraiage-${result.name}.png`, { type: 'image/png' });
-
-        if (navigator.canShare({ files: [file] })) {
-          await navigator.share({
-            title: 'VraiÂge - Résultat',
-            text: text,
-            files: [file]
-          });
-          return;
-        }
-      } catch (error) {
-        console.log('Web Share API non disponible, fallback vers téléchargement');
-      }
-    }
-
-    // Fallback: Télécharger + ouvrir plateforme
+    // Télécharger l'image automatiquement
     const blobUrl = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = blobUrl;
@@ -827,20 +806,44 @@ const VraiAge = () => {
     document.body.removeChild(link);
     URL.revokeObjectURL(blobUrl);
 
+    // Détection mobile/desktop
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
     // Ouvrir la plateforme après téléchargement
     setTimeout(() => {
       switch(platform) {
         case 'facebook':
-          alert('📸 Image téléchargée ! Ouvrez Facebook pour créer votre publication et ajoutez l\'image téléchargée.');
-          window.open('https://www.facebook.com/', '_blank');
+          if (isMobile) {
+            // Sur mobile, essayer d'ouvrir l'app Facebook
+            window.location.href = 'fb://facewebmodal/f?href=https://www.facebook.com/';
+            // Fallback vers le web si l'app n'est pas installée
+            setTimeout(() => {
+              window.open('https://www.facebook.com/', '_blank');
+            }, 500);
+          } else {
+            // Sur desktop, ouvrir Facebook directement
+            window.open('https://www.facebook.com/', '_blank');
+          }
+          alert('📸 Image enregistrée !\n\n✅ Sur Facebook : Créez un nouveau post et ajoutez l\'image que vous venez de télécharger.\n\nL\'image est dans votre dossier Téléchargements (ou Galerie sur mobile).');
           break;
         case 'instagram':
-          alert('📸 Image téléchargée ! Ouvrez Instagram sur votre téléphone pour créer un post et ajoutez l\'image de votre galerie.');
+          if (isMobile) {
+            alert('📸 Image enregistrée dans votre Galerie !\n\n✅ Ouvrez Instagram et créez un nouveau post.\n✅ Sélectionnez l\'image "vraiage" que vous venez de télécharger.\n\nBonne publication ! 📱✨');
+            // Essayer d'ouvrir l'app Instagram
+            window.location.href = 'instagram://camera';
+            // Fallback
+            setTimeout(() => {
+              window.open('https://www.instagram.com/', '_blank');
+            }, 500);
+          } else {
+            alert('📸 Image téléchargée !\n\n📱 Instagram ne permet pas de publier depuis un ordinateur.\n\n✅ Transférez l\'image sur votre téléphone ou ouvrez instagram.com pour créer un post.');
+            window.open('https://www.instagram.com/', '_blank');
+          }
           break;
         default:
           alert('📸 Image téléchargée avec succès !');
       }
-    }, 500);
+    }, 300);
   };
 
   // Composant Confetti
