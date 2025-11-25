@@ -911,10 +911,10 @@ const VraiAge = () => {
             <div className="text-center">
               <div className="flex justify-center mt-8 mb-8">
                 <Image
-                  src="/logo-horizontal.png"
+                  src="/logo-icon.png"
                   alt="VraiÂge Logo"
                   width={600}
-                  height={150}
+                  height={600}
                   className="object-contain w-full min-w-[50%]"
                   priority
                 />
