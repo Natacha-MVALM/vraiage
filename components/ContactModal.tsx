@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import emailjs from '@emailjs/browser';
+import { useState } from 'react';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -16,41 +15,32 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   });
   const [isSending, setIsSending] = useState(false);
 
-  // Initialiser EmailJS avec la clé publique
-  useEffect(() => {
-    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-    if (publicKey) {
-      emailjs.init(publicKey);
-    }
-  }, []);
-
   if (!isOpen) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSending(true);
 
-    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-
     try {
-      // Envoyer l'email via EmailJS
-      const result = await emailjs.send(
-        serviceId!,
-        templateId!,
-        {
-          from_name: formData.name,
-          user_email: formData.email,
-          message: formData.message,
-        }
-      );
+      // Envoyer l'email via l'API Resend
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-      if (result.status === 200) {
+      if (response.ok) {
         alert('Message envoyé ! Nous vous répondrons dans les plus brefs délais.');
         setFormData({ name: '', email: '', message: '' });
         onClose();
+      } else {
+        const error = await response.json();
+        alert(error.error || 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer plus tard.');
       }
     } catch (error) {
+      console.error('Erreur:', error);
       alert('Une erreur est survenue lors de l\'envoi. Veuillez réessayer plus tard.');
     } finally {
       setIsSending(false);
