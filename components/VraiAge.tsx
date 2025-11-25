@@ -909,13 +909,13 @@ const VraiAge = () => {
         {currentPage === 'home' && (
           <div className="space-y-6">
             <div className="text-center">
-              <div className="flex justify-center mb-2">
+              <div className="flex justify-center mt-8 mb-8">
                 <Image
                   src="/logo-horizontal.png"
                   alt="VraiÂge Logo"
                   width={600}
                   height={150}
-                  className="object-contain w-full max-w-md"
+                  className="object-contain w-full min-w-[50%]"
                   priority
                 />
               </div>
