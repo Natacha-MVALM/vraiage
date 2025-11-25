@@ -25,20 +25,11 @@ export const metadata: Metadata = {
     title: "VraiÂge - Calculateur d'âge pour chiens et chats",
     description: "Découvrez le vrai âge biologique de votre animal avec notre calculateur scientifique créé par une vétérinaire.",
     siteName: 'VraiÂge',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'VraiÂge - Calculateur d\'âge pour animaux',
-      },
-    ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: "VraiÂge - Calculateur d'âge pour animaux",
     description: "Découvrez le vrai âge biologique de votre chien ou chat",
-    images: ['/og-image.jpg'],
   },
   robots: {
     index: true,

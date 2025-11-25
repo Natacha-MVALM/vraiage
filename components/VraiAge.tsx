@@ -762,7 +762,6 @@ const VraiAge = () => {
         }, 'image/png');
       });
     } catch (error) {
-      console.error('Erreur capture screenshot:', error);
       alert('❌ Erreur lors de la capture de l\'image. Veuillez réessayer.');
       return null;
     } finally {

@@ -33,8 +33,6 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
     const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
 
-    console.log('Envoi du formulaire avec:', { serviceId, templateId });
-
     try {
       // Envoyer l'email via EmailJS
       const result = await emailjs.send(
@@ -47,16 +45,13 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         }
       );
 
-      console.log('Résultat EmailJS:', result);
-
       if (result.status === 200) {
         alert('Message envoyé ! Nous vous répondrons dans les plus brefs délais.');
         setFormData({ name: '', email: '', message: '' });
         onClose();
       }
     } catch (error) {
-      console.error('Erreur complète lors de l\'envoi:', error);
-      alert(`Une erreur est survenue lors de l'envoi. Veuillez réessayer.\n\nDétails: ${error}`);
+      alert('Une erreur est survenue lors de l\'envoi. Veuillez réessayer plus tard.');
     } finally {
       setIsSending(false);
     }
