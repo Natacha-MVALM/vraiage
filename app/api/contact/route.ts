@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: Request) {
   try {
     const { name, email, message } = await request.json();
@@ -14,6 +12,18 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
+
+    // Vérifier que les variables d'environnement sont définies
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY non définie');
+      return NextResponse.json(
+        { error: 'Configuration serveur incomplète' },
+        { status: 500 }
+      );
+    }
+
+    // Initialiser Resend ici pour éviter les erreurs au build
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     // Envoyer l'email via Resend
     const data = await resend.emails.send({
