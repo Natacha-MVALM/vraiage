@@ -19,8 +19,8 @@ export const metadata: Metadata = {
     telephone: false,
   },
   icons: {
-    icon: '/logo-vraiage.png',
-    apple: '/logo-vraiage.png',
+    icon: '/logo-icon.png',
+    apple: '/logo-icon.png',
   },
   openGraph: {
     type: 'website',
@@ -31,9 +31,9 @@ export const metadata: Metadata = {
     siteName: 'VraiÂge',
     images: [
       {
-        url: '/logo-vraiage.png',
+        url: '/logo-icon.png',
         width: 1200,
-        height: 630,
+        height: 1200,
         alt: 'VraiÂge Logo',
       },
     ],
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: 'summary',
     title: "VraiÂge - Calculateur d'âge pour animaux",
     description: "Découvrez le vrai âge biologique de votre chien ou chat",
-    images: ['/logo-vraiage.png'],
+    images: ['/logo-icon.png'],
   },
   robots: {
     index: true,
