@@ -911,7 +911,7 @@ const VraiAge = () => {
             <div className="text-center">
               <div className="flex justify-center mb-2">
                 <Image
-                  src="/logo-horizontal.png"
+                  src="/logo-horizontal.svg"
                   alt="VraiÂge Logo"
                   width={600}
                   height={150}
