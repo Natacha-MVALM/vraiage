@@ -11,7 +11,7 @@ import {
   Sparkles, Cat, Dog, CheckCircle, AlertCircle,
   HelpCircle, ArrowLeft, Mail, ChevronDown, Info, Share2,
   Facebook, Instagram, Copy, Check, MessageCircle,
-  HeartHandshake, ExternalLink, Stethoscope, Activity, Download
+  HeartHandshake, ExternalLink, Stethoscope, Activity, Download, Laugh
 } from 'lucide-react';
 
 // Constantes déplacées hors du composant pour éviter les re-créations
@@ -28,157 +28,168 @@ const LOADING_MESSAGES: Record<string, string[]> = {
     ]
 };
 
-// VraiÂge - Paires de Phrases Comparatives Optimisées
-// Québec 🍁 vs Europe 🇪🇺
-// Version 2.0 - Novembre 2025
+// VraiÂge - Expressions humoristiques
+// Version 3.0 - Novembre 2025
 
 interface FunPhrase {
   max: number;
-  quebec: {
-    verb: string;
-    text: string;
-    icon: string; // Emoji en string
-  };
-  europe: {
-    verb: string;
-    text: string;
-    icon: string; // Emoji en string
-  };
+  phrases: string[]; // Liste de phrases pour cet âge
 }
 
 const FUN_PHRASES: FunPhrase[] = [
-  // 🧒 Génération Alpha (2010+) → 0-15 ans
+  // 👶 BÉBÉ / JEUNE ENFANT (0-5 ans humains)
   {
-    max: 3,
-    quebec: { verb: "pleurerait", text: "parce que son iPad est déchargé", icon: "👶" },
-    europe: { verb: "pleurerait", text: "parce que sa tablette n'a plus de batterie", icon: "👶" }
-  },
-  {
-    max: 6,
-    quebec: { verb: "chanterait", text: "Passe-Partout à tue-tête dans l'auto", icon: "🎵" },
-    europe: { verb: "regarderait", text: "Peppa Pig en boucle sur YouTube", icon: "🎵" }
-  },
-  {
-    max: 10,
-    quebec: { verb: "jouerait", text: "à 4 coins carré en criant 'SERVEUSE!'", icon: "⚪" },
-    europe: { verb: "jouerait", text: "à l'épervier dans la cour de récré", icon: "⚪" }
-  },
-  {
-    max: 13,
-    quebec: { verb: "scrollerait", text: "sur TikTok pendant 6h par jour", icon: "📱" },
-    europe: { verb: "oublierait", text: "ses devoirs en regardant TikTok", icon: "📱" }
-  },
-  {
-    max: 16,
-    quebec: { verb: "stresserait", text: "pour son bal de finissants dans 3 ans", icon: "❤️" },
-    europe: { verb: "passerait", text: "son brevet des collèges en transpirant", icon: "❤️" }
+    max: 5,
+    phrases: [
+      "apprendrait tout juste à marcher et ferait des dégâts partout",
+      "serait dans sa phase 'je mets tout dans ma bouche'",
+      "passerait ses journées à dormir et à réclamer à manger",
+      "serait le boss absolu de la maison malgré sa petite taille",
+      "pleurerait pour un rien et ce serait normal",
+      "aurait des parents qui n'auraient pas dormi depuis des mois"
+    ]
   },
 
-  // 🎮 Génération Z (1997-2012) → 15-25 ans
+  // 🧒 ENFANT (6-12 ans humains)
   {
-    max: 18,
-    quebec: { verb: "échouerait", text: "son permis de conduire 2 fois (minimum)", icon: "🚗" },
-    europe: { verb: "calerait", text: "3 fois pendant l'examen de conduite", icon: "🚗" }
-  },
-  {
-    max: 21,
-    quebec: { verb: "boirait", text: "du Caribou cheap à la Saint-Jean", icon: "🎉" },
-    europe: { verb: "ferait", text: "la fête du 14 juillet sur les Champs-Élysées", icon: "🎉" }
-  },
-  {
-    max: 25,
-    quebec: { verb: "finirait", text: "son bac avec 60K$ de dettes étudiantes", icon: "🎓" },
-    europe: { verb: "chercherait", text: "désespérément un CDI après son master", icon: "🎓" }
+    max: 12,
+    phrases: [
+      "courrait partout en criant et refuserait de faire ses devoirs",
+      "perdrait une dent par semaine",
+      "demanderait 'pourquoi?' toutes les 30 secondes",
+      "négocierait 20 minutes pour avoir 5 minutes de plus de tablette",
+      "aurait une collection de roches 'spéciales' dans ses poches",
+      "mangerait juste des pâtes au beurre et des céréales sucrées",
+      "jurerait que son frère ou sa sœur a commencé",
+      "connaîtrait par cœur tous les Pokémon mais pas ses tables de multiplication",
+      "aurait une énergie infinie sauf quand il faut ranger sa chambre",
+      "dirait 'c'est pas juste!' au moins 10 fois par jour"
+    ]
   },
 
-  // 💼 Millennials (1981-1996) → 25-40 ans
+  // 🎒 ADO (13-17 ans humains)
+  {
+    max: 17,
+    phrases: [
+      "serait un jeune ado boutonneux qui change de voix",
+      "vivrait scotché à son téléphone",
+      "dormirait jusqu'à midi chaque week-end",
+      "répondrait par des grognements plutôt que des mots",
+      "trouverait ses parents vraiment gênants",
+      "changerait de personnalité selon son groupe d'amis",
+      "viderait le frigo en rentrant de l'école",
+      "hésiterait encore entre son programme au cégep",
+      "porterait un hoodie même en pleine canicule",
+      "aurait une crise existentielle par semaine (minimum)",
+      "passerait 2 heures dans la salle de bain sans explication",
+      "saurait tout mieux que ses parents (évidemment)",
+      "aurait honte d'être vu en public avec sa famille"
+    ]
+  },
+
+  // 🎓 JEUNE ADULTE (18-22 ans humains)
+  {
+    max: 22,
+    phrases: [
+      "partirait en appart et appellerait sa mère pour savoir comment faire bouillir de l'eau",
+      "penserait savoir tout sur la vie (spoiler: non)",
+      "passerait sa vie sur Instagram et TikTok",
+      "aurait 2000 amis sur les réseaux et 3 vrais amis",
+      "sortirait 4 soirs par semaine et se demanderait pourquoi est fatigué",
+      "vivrait pour les vendredis soirs"
+    ]
+  },
+
+  // 💼 DÉBUT CARRIÈRE (23-30 ans humains)
   {
     max: 30,
-    quebec: { verb: "pleurerait", text: "en voyant le prix des condos à Montréal", icon: "🏠" },
-    europe: { verb: "abandonnerait", text: "l'idée d'acheter à Paris (1M€ le 30m²)", icon: "🏠" }
+    phrases: [
+      "commencerait sa carrière en buvant trop de café",
+      "se demanderait encore ce qu'il veut faire de sa vie",
+      "réaliserait que les impôts, c'est compliqué",
+      "mangerait des avocado toasts et rêverait d'acheter une maison",
+      "aurait 3 side hustles et un podcast",
+      "commanderait UberEats 5 fois par semaine",
+      "jonglerait entre Tinder et 'je veux m'installer'",
+      "assisterait à 12 mariages par été",
+      "s'inscrirait au gym en janvier et abandonnerait en février",
+      "découvrirait que son métabolisme ralentit (oups)"
+    ]
   },
-  {
-    max: 33,
-    quebec: { verb: "attendrait", text: "3 ans pour une place en CPE", icon: "👶" },
-    europe: { verb: "mettrait", text: "son enfant sur liste d'attente avant sa naissance", icon: "👶" }
-  },
-  {
-    max: 35,
-    quebec: { verb: "commanderait", text: "sur Uber Eats 4 soirs par semaine", icon: "🍕" },
-    europe: { verb: "paierait", text: "12€ de frais Deliveroo pour une pizza", icon: "🍕" }
-  },
+
+  // 🏠 ADULTE ÉTABLI (31-40 ans humains)
   {
     max: 40,
-    quebec: { verb: "aurait", text: "mal au dos en déneigant l'entrée", icon: "😊" },
-    europe: { verb: "gémirait", text: "en montant 3 étages sans ascenseur", icon: "😊" }
+    phrases: [
+      "s'inquiéterait de son REER et de son hypothèque",
+      "trouverait les ados bruyants et incompréhensibles",
+      "se coucherait à 21h et trouverait ça cool",
+      "conduirait un minivan et assumerait pleinement",
+      "regarderait des émissions de réno et dirait 'on pourrait faire ça'",
+      "connaîtrait tous les mots de la Reine des Neiges par cœur",
+      "commencerait ses phrases par 'De mon temps...'",
+      "ne comprendrait plus les nouveaux trends TikTok",
+      "réaliserait que la musique de son époque passe maintenant sur les radios 'oldies'",
+      "parlerait beaucoup de fibres et d'étirements",
+      "dirait 'j'ai mal au dos' au moins une fois par jour"
+    ]
   },
 
-  // 📻 Génération X (1965-1980) → 40-55 ans
-  {
-    max: 45,
-    quebec: { verb: "scrollerait", text: "sur Facebook en critiquant TikTok", icon: "📱" },
-    europe: { verb: "regarderait", text: "BFM TV en disant 'c'était mieux avant'", icon: "📺" }
-  },
-  {
-    max: 50,
-    quebec: { verb: "calculerait", text: "combien d'années avant la retraite (23... soupir)", icon: "🌴" },
-    europe: { verb: "rêverait", text: "de sa retraite à 64 ans (si elle existe encore)", icon: "🌴" }
-  },
+  // 🧘 MI-CARRIÈRE (41-55 ans humains)
   {
     max: 55,
-    quebec: { verb: "déneigrait", text: "l'entrée des enfants ET des petits-enfants", icon: "👤" },
-    europe: { verb: "garderait", text: "les petits-enfants tous les mercredis", icon: "👤" }
+    phrases: [
+      "s'achèterait peut-être une moto ou une décapotable",
+      "hésiterait entre teindre ses cheveux gris ou les assumer",
+      "se demanderait où sont passées les 20 dernières années",
+      "donnerait des conseils non-sollicités (mais bons!)",
+      "maîtriserait l'art de la sieste de 20 minutes",
+      "prendrait enfin le temps de lire ces livres empilés",
+      "demanderait à ses enfants comment fonctionne son téléphone",
+      "écrirait ses textos avec ponctuation et majuscules",
+      "investirait dans un BBQ de luxe et des outils électriques",
+      "commencerait à jardiner et trouverait ça relaxant"
+    ]
   },
 
-  // 🏡 Baby-Boomers (1946-1964) → 55-75 ans
-  {
-    max: 60,
-    quebec: { verb: "vendrait", text: "sa maison 10x le prix payé en 1985", icon: "💰" },
-    europe: { verb: "revendrait", text: "son appartement parisien une fortune", icon: "💰" }
-  },
-  {
-    max: 65,
-    quebec: { verb: "irait", text: "au Tim Hortons à 5h du matin jaser", icon: "☕" },
-    europe: { verb: "lirait", text: "Le Figaro au café du coin chaque matin", icon: "☕" }
-  },
+  // 🏌️ PRÉ-RETRAITE / JEUNE SENIOR (56-70 ans humains)
   {
     max: 70,
-    quebec: { verb: "raconterait", text: "ENCORE la tempête de verglas de '98", icon: "📖" },
-    europe: { verb: "parlerait", text: "de Mai 68 comme si c'était hier", icon: "📖" }
-  },
-  {
-    max: 75,
-    quebec: { verb: "gagnerait", text: "au bingo de la paroisse (5e fois cette année)", icon: "🏆" },
-    europe: { verb: "jouerait", text: "à la belote au club du 3e âge", icon: "🏆" }
-  },
-
-  // 🧓 Génération Silencieuse (1928-1945) → 75-95 ans
-  {
-    max: 80,
-    quebec: { verb: "aurait", text: "plus de piluliers que de verres dans l'armoire", icon: "💊" },
-    europe: { verb: "prendrait", text: "8 médicaments (en oubliant lequel)", icon: "💊" }
-  },
-  {
-    max: 85,
-    quebec: { verb: "finirait", text: "les mots croisés du JdeM en 10 minutes", icon: "📰" },
-    europe: { verb: "complèterait", text: "les mots fléchés du Figaro avant le café", icon: "📰" }
-  },
-  {
-    max: 90,
-    quebec: { verb: "refuserait", text: "d'utiliser un ordinateur (papier only)", icon: "📚" },
-    europe: { verb: "dirait", text: "'Internet? Non merci, j'ai mes livres'", icon: "📚" }
-  },
-  {
-    max: 95,
-    quebec: { verb: "se souviendrait", text: "de la crise d'Octobre 1970 comme si c'était hier", icon: "👥" },
-    europe: { verb: "se rappellerait", text: "la guerre avec une précision troublante", icon: "👥" }
+    phrases: [
+      "serait probablement en train de jouer au golf",
+      "planifierait son prochain voyage dans le Sud",
+      "marcherait 10 000 pas par jour et le dirait à tout le monde",
+      "prendrait sa retraite et ne saurait plus quoi faire de ses journées",
+      "se lèverait à 5h du matin sans réveil (pourquoi?!)",
+      "regarderait religieusement les nouvelles du matin",
+      "gâterait ses petits-enfants et dirait 'de mon temps...'",
+      "aurait 4000 photos de ses petits-enfants dans son téléphone",
+      "passerait ses journées dans son cabanon ou son jardin",
+      "aurait ENFIN le temps de faire tout ce qu'il remettait à plus tard",
+      "ferait partie de 3 clubs sociaux différents"
+    ]
   },
 
-  // 👑 Greatest Generation (1901-1927) → 95+ ans
+  // 👴 SENIOR (71 ans et plus)
   {
     max: 999,
-    quebec: { verb: "passerait", text: "à TVA pour révéler son secret (du gin)", icon: "👑" },
-    europe: { verb: "dévoilerait", text: "à France 2 son secret (un verre de rouge/jour)", icon: "👑" }
+    phrases: [
+      "aurait vu tellement de choses qu'il s'étonnerait de rien",
+      "raconterait les mêmes histoires 17 fois (mais elles sont bonnes!)",
+      "donnerait les meilleurs conseils de vie (basés sur l'expérience)",
+      "mangerait à 17h30 pile et se coucherait à 20h",
+      "aurait une routine quotidienne gravée dans le marbre",
+      "lirait le journal papier chaque matin avec son café",
+      "serait ce grand-parent que tout le monde adore",
+      "aurait toujours des bonbons dans ses poches",
+      "aurait des histoires incroyables à raconter",
+      "utiliserait encore un téléphone à clapet (et ça lui va bien)",
+      "enverrait des emails avec 'Cordialement' même à sa famille",
+      "serait une légende vivante de la famille",
+      "aurait traversé une époque fascinante et en serait fier",
+      "profiterait de chaque moment précieux",
+      "vivrait ses années bonus au max!"
+    ]
   }
 ];
 
@@ -293,8 +304,16 @@ const MUZZLE_TYPES = [
 ];
 
 // Fonctions utilitaires déplacées hors du composant
-const getFunPhrase = (age: number) => {
-  return FUN_PHRASES.find(p => age <= p.max) || FUN_PHRASES[FUN_PHRASES.length - 1];
+const getFunPhrase = (age: number, animalName: string, isFemale: boolean) => {
+  const ageGroup = FUN_PHRASES.find(p => age <= p.max) || FUN_PHRASES[FUN_PHRASES.length - 1];
+  const phrases = ageGroup.phrases;
+  const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+
+  // Construire la phrase complète avec le nom et le pronom
+  const pronoun = isFemale ? 'elle' : 'il';
+  const fullPhrase = `Si ${animalName} était humain et avait cet âge, ${pronoun} ${randomPhrase}`;
+
+  return fullPhrase;
 };
 
 const getLifeStageDescription = (lifeStage: string, animalName: string): string => {
@@ -1613,42 +1632,16 @@ const VraiAge = () => {
 
               {showDelayedContent && (
                 <div className="space-y-3">
-                  <h3 className="text-xl font-bold text-center text-gray-800 mb-4">
-                    Si {result.name} était un{result.isFemale ? 'e' : ''} humain{result.isFemale ? 'e' : ''}...
-                  </h3>
-
                   {(() => {
-                    const phrase = getFunPhrase(result.humanAge);
-                    const pronoun = result.isFemale ? 'elle' : 'il';
+                    const phrase = getFunPhrase(result.humanAge, result.name, result.isFemale);
 
                     return (
-                      <div className="grid grid-cols-1 gap-4">
-                        {/* Carte Québec */}
-                        <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-5 rounded-xl border-2 border-blue-300 shadow-md hover:shadow-lg transition-shadow">
-                          <div className="flex items-center gap-2 mb-3">
-                            <span className="text-3xl">🍁</span>
-                            <h4 className="font-bold text-lg text-blue-800">Au Québec</h4>
-                          </div>
-                          <div className="flex items-start gap-3">
-                            <span className="text-2xl flex-shrink-0">{phrase.quebec.icon}</span>
-                            <p className="text-gray-800 text-base leading-relaxed">
-                              {pronoun} {phrase.quebec.verb} {phrase.quebec.text}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Carte Europe */}
-                        <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-5 rounded-xl border-2 border-purple-300 shadow-md hover:shadow-lg transition-shadow">
-                          <div className="flex items-center gap-2 mb-3">
-                            <span className="text-3xl">🇪🇺</span>
-                            <h4 className="font-bold text-lg text-purple-800">En Europe</h4>
-                          </div>
-                          <div className="flex items-start gap-3">
-                            <span className="text-2xl flex-shrink-0">{phrase.europe.icon}</span>
-                            <p className="text-gray-800 text-base leading-relaxed">
-                              {pronoun} {phrase.europe.verb} {phrase.europe.text}
-                            </p>
-                          </div>
+                      <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl border-2 border-purple-300 shadow-md hover:shadow-lg transition-shadow">
+                        <div className="flex items-start gap-4">
+                          <Laugh className="w-8 h-8 text-purple-600 flex-shrink-0 mt-1" strokeWidth={1.5} />
+                          <p className="text-gray-800 text-lg leading-relaxed">
+                            {phrase}
+                          </p>
                         </div>
                       </div>
                     );
