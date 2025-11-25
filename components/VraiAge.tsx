@@ -909,10 +909,19 @@ const VraiAge = () => {
         {currentPage === 'home' && (
           <div className="space-y-6">
             <div className="text-center">
+              <div className="flex justify-center mb-4">
+                <Image
+                  src="/logo-vraiage.png"
+                  alt="VraiÂge Logo"
+                  width={200}
+                  height={200}
+                  className="object-contain"
+                  priority
+                />
+              </div>
               <h1 className="text-4xl font-bold text-gray-800 mb-1">
-                Quel est le <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">VRAI âge</span> de ton compagnon ?
+                Quel est le <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">VraiÂge</span> de ton compagnon ?
               </h1>
-              <p className="text-gray-600 mt-1">Calcul personnalisé basé sur les données scientifiques actuelles</p>
             </div>
 
             <style>{`
