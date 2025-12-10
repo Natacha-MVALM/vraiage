@@ -193,51 +193,63 @@ const FUN_PHRASES: FunPhrase[] = [
   }
 ];
 
+// Espérances de vie basées sur études scientifiques (PMC, UK 2024)
+// Base neutre : conditions moyennes (non stérilisé, mixte indoor/outdoor)
 const CAT_BREEDS = [
-    { value: 'mixed', name: 'Autre race ou croisé (domestique, gouttière)', lifespan: 15 },
-    { value: 'birman', name: 'Birman', lifespan: 16.1 },
-    { value: 'burmese', name: 'Burmese', lifespan: 14.3 },
-    { value: 'siamese', name: 'Siamois', lifespan: 14.2 },
-    { value: 'persian', name: 'Persan', lifespan: 14.1 },
-    { value: 'british-shorthair', name: 'British Shorthair', lifespan: 11.8 },
-    { value: 'maine-coon', name: 'Maine Coon', lifespan: 11 },
-    { value: 'ragdoll', name: 'Ragdoll', lifespan: 10.1 },
+    { value: 'mixed', name: 'Autre race ou croisé (domestique, gouttière)', lifespan: 12 },
+    { value: 'birman', name: 'Birman', lifespan: 14.4 },
+    { value: 'burmese', name: 'Burmese', lifespan: 14.4 },
+    { value: 'siamese', name: 'Siamois', lifespan: 12.5 },
+    { value: 'persian', name: 'Persan', lifespan: 12.5 },
+    { value: 'british-shorthair', name: 'British Shorthair', lifespan: 9.6 },
+    { value: 'maine-coon', name: 'Maine Coon', lifespan: 9.7 },
+    { value: 'ragdoll', name: 'Ragdoll', lifespan: 9.0 },
     { value: 'abyssinian', name: 'Abyssin', lifespan: 10 },
-    { value: 'bengal', name: 'Bengal', lifespan: 14 },
-    { value: 'sphynx', name: 'Sphynx', lifespan: 7 },
-    { value: 'russian-blue', name: 'Bleu Russe', lifespan: 16 },
-    { value: 'scottish-fold', name: 'Scottish Fold', lifespan: 13 }
+    { value: 'bengal', name: 'Bengal', lifespan: 10.3 },
+    { value: 'sphynx', name: 'Sphynx', lifespan: 6.7 },
+    { value: 'russian-blue', name: 'Bleu Russe', lifespan: 13 },
+    { value: 'scottish-fold', name: 'Scottish Fold', lifespan: 11.5 }
 ];
 
+// Espérances de vie basées sur VetCompass UK 2022 (PMC9050668)
+// Ces données reflètent la population réelle (majoritairement stérilisée, mix mâles/femelles)
 const DOG_BREEDS = [
-    { value: 'mixed', name: 'Croisé/Autre race', lifespan: 12.71, size: 'medium', muzzle: 'mesocephalic', weightRange: null },
-    { value: 'teckel', name: 'Teckel', lifespan: 15.2, size: 'small', muzzle: 'dolichocephalic', weightRange: '5-10' },
-    { value: 'chihuahua', name: 'Chihuahua', lifespan: 15.01, size: 'small', muzzle: 'mesocephalic', weightRange: 'under-5' },
-    { value: 'shih-tzu', name: 'Shih Tzu', lifespan: 15.08, size: 'small', muzzle: 'brachycephalic', weightRange: '5-10' },
-    { value: 'yorkshire', name: 'Yorkshire', lifespan: 15, size: 'small', muzzle: 'mesocephalic', weightRange: 'under-5' },
-    { value: 'jack-russell', name: 'Jack Russell', lifespan: 15, size: 'small', muzzle: 'mesocephalic', weightRange: '5-10' },
+    { value: 'mixed', name: 'Croisé/Autre race', lifespan: null, size: 'medium', muzzle: 'mesocephalic', weightRange: null }, // Calculé selon poids
+    { value: 'teckel', name: 'Teckel', lifespan: 12.0, size: 'small', muzzle: 'dolichocephalic', weightRange: '5-10' },
+    { value: 'chihuahua', name: 'Chihuahua', lifespan: 7.9, size: 'small', muzzle: 'mesocephalic', weightRange: 'under-5' },
+    { value: 'shih-tzu', name: 'Shih Tzu', lifespan: 11.0, size: 'small', muzzle: 'brachycephalic', weightRange: '5-10' },
+    { value: 'yorkshire', name: 'Yorkshire', lifespan: 12.5, size: 'small', muzzle: 'mesocephalic', weightRange: 'under-5' },
+    { value: 'jack-russell', name: 'Jack Russell', lifespan: 12.7, size: 'small', muzzle: 'mesocephalic', weightRange: '5-10' },
     { value: 'caniche', name: 'Caniche', lifespan: 14.2, size: 'medium', muzzle: 'mesocephalic', weightRange: '15-25' },
-    { value: 'beagle', name: 'Beagle', lifespan: 14, size: 'medium', muzzle: 'mesocephalic', weightRange: '10-15' },
-    { value: 'cocker', name: 'Cocker', lifespan: 13, size: 'medium', muzzle: 'mesocephalic', weightRange: '10-15' },
-    { value: 'labrador', name: 'Labrador', lifespan: 13.27, size: 'large', muzzle: 'mesocephalic', weightRange: '25-40' },
-    { value: 'golden-retriever', name: 'Golden Retriever', lifespan: 13.93, size: 'large', muzzle: 'mesocephalic', weightRange: '25-40' },
-    { value: 'berger-allemand', name: 'Berger Allemand', lifespan: 12.46, size: 'large', muzzle: 'dolichocephalic', weightRange: '40-60' },
-    { value: 'husky', name: 'Husky', lifespan: 13, size: 'large', muzzle: 'mesocephalic', weightRange: '40-60' },
-    { value: 'bulldog-francais', name: 'Bouledogue Français', lifespan: 10, size: 'medium', muzzle: 'brachycephalic', weightRange: '15-25' },
-    { value: 'boxer', name: 'Boxer', lifespan: 10, size: 'large', muzzle: 'brachycephalic', weightRange: '40-60' },
-    { value: 'dogue-allemand', name: 'Dogue Allemand', lifespan: 9.63, size: 'giant', muzzle: 'mesocephalic', weightRange: 'over-60' },
-    { value: 'saint-bernard', name: 'Saint-Bernard', lifespan: 9, size: 'giant', muzzle: 'mesocephalic', weightRange: 'over-60' },
-    { value: 'dogue-bordeaux', name: 'Dogue de Bordeaux', lifespan: 5.5, size: 'giant', muzzle: 'brachycephalic', weightRange: 'over-60' }
+    { value: 'beagle', name: 'Beagle', lifespan: 9.8, size: 'medium', muzzle: 'mesocephalic', weightRange: '10-15' },
+    { value: 'cocker', name: 'Cocker', lifespan: 11.3, size: 'medium', muzzle: 'mesocephalic', weightRange: '10-15' },
+    { value: 'labrador', name: 'Labrador', lifespan: 11.8, size: 'large', muzzle: 'mesocephalic', weightRange: '25-40' },
+    { value: 'golden-retriever', name: 'Golden Retriever', lifespan: 11.2, size: 'large', muzzle: 'mesocephalic', weightRange: '25-40' },
+    { value: 'berger-allemand', name: 'Berger Allemand', lifespan: 10.2, size: 'large', muzzle: 'dolichocephalic', weightRange: '40-60' },
+    { value: 'husky', name: 'Husky', lifespan: 9.5, size: 'large', muzzle: 'mesocephalic', weightRange: '40-60' },
+    { value: 'bulldog-francais', name: 'Bouledogue Français', lifespan: 4.5, size: 'medium', muzzle: 'brachycephalic', weightRange: '15-25' },
+    { value: 'boxer', name: 'Boxer', lifespan: 10.0, size: 'large', muzzle: 'brachycephalic', weightRange: '40-60' },
+    { value: 'dogue-allemand', name: 'Dogue Allemand', lifespan: 8.5, size: 'giant', muzzle: 'mesocephalic', weightRange: 'over-60' },
+    { value: 'saint-bernard', name: 'Saint-Bernard', lifespan: 8.0, size: 'giant', muzzle: 'mesocephalic', weightRange: 'over-60' },
+    { value: 'dogue-bordeaux', name: 'Dogue de Bordeaux', lifespan: 5.5, size: 'giant', muzzle: 'brachycephalic', weightRange: 'over-60' },
+    { value: 'bulldog-anglais', name: 'Bouledogue Anglais', lifespan: 7.4, size: 'medium', muzzle: 'brachycephalic', weightRange: '15-25' },
+    { value: 'carlin', name: 'Carlin (Pug)', lifespan: 7.6, size: 'small', muzzle: 'brachycephalic', weightRange: '5-10' },
+    { value: 'cavalier', name: 'Cavalier King Charles', lifespan: 10.4, size: 'small', muzzle: 'brachycephalic', weightRange: '5-10' },
+    { value: 'border-collie', name: 'Border Collie', lifespan: 12.1, size: 'medium', muzzle: 'dolichocephalic', weightRange: '15-25' },
+    { value: 'springer', name: 'Springer Spaniel', lifespan: 11.9, size: 'medium', muzzle: 'mesocephalic', weightRange: '15-25' },
+    { value: 'staffie', name: 'Staffordshire Bull Terrier', lifespan: 11.3, size: 'medium', muzzle: 'brachycephalic', weightRange: '10-15' }
 ];
 
+// Espérances de vie par poids basées sur PMC9989186 (2.3M chiens)
+// Utilisées uniquement pour les races inconnues/croisées
 const DOG_WEIGHT_RANGES = [
-    { range: 'under-5', label: 'Moins de 11 lbs (5 kg)', visual: '🐕 Très petit (Chihuahua, Yorkshire)', avgWeight: 3, size: 'small' },
-    { range: '5-10', label: '11-22 lbs (5-10 kg)', visual: '🐕 Petit (Jack Russell, Teckel)', avgWeight: 7.5, size: 'small' },
-    { range: '10-15', label: '22-33 lbs (10-15 kg)', visual: '🐕 Petit-Moyen (Cocker, Beagle)', avgWeight: 12.5, size: 'medium' },
-    { range: '15-25', label: '33-55 lbs (15-25 kg)', visual: '🐕 Moyen (Bulldog, Border Collie)', avgWeight: 20, size: 'medium' },
-    { range: '25-40', label: '55-88 lbs (25-40 kg)', visual: '🐕 Grand (Labrador, Golden)', avgWeight: 32.5, size: 'large' },
-    { range: '40-60', label: '88-132 lbs (40-60 kg)', visual: '🐕 Très Grand (Berger Allemand, Boxer)', avgWeight: 50, size: 'large' },
-    { range: 'over-60', label: 'Plus de 132 lbs (60 kg)', visual: '🐕 Géant (Dogue Allemand, St-Bernard)', avgWeight: 70, size: 'giant' }
+    { range: 'under-5', label: 'Moins de 11 lbs (5 kg)', visual: '🐕 Très petit (Chihuahua, Yorkshire)', avgWeight: 3, size: 'small', baseLifeExpectancy: 13.5 },
+    { range: '5-10', label: '11-22 lbs (5-10 kg)', visual: '🐕 Petit (Jack Russell, Teckel)', avgWeight: 7.5, size: 'small', baseLifeExpectancy: 13.5 },
+    { range: '10-15', label: '22-33 lbs (10-15 kg)', visual: '🐕 Petit-Moyen (Cocker, Beagle)', avgWeight: 12.5, size: 'medium', baseLifeExpectancy: 12.5 },
+    { range: '15-25', label: '33-55 lbs (15-25 kg)', visual: '🐕 Moyen (Bulldog, Border Collie)', avgWeight: 20, size: 'medium', baseLifeExpectancy: 12.5 },
+    { range: '25-40', label: '55-88 lbs (25-40 kg)', visual: '🐕 Grand (Labrador, Golden)', avgWeight: 32.5, size: 'large', baseLifeExpectancy: 11.5 },
+    { range: '40-60', label: '88-132 lbs (40-60 kg)', visual: '🐕 Très Grand (Berger Allemand, Boxer)', avgWeight: 50, size: 'large', baseLifeExpectancy: 10.5 },
+    { range: 'over-60', label: 'Plus de 132 lbs (60 kg)', visual: '🐕 Géant (Dogue Allemand, St-Bernard)', avgWeight: 70, size: 'giant', baseLifeExpectancy: 9.5 }
 ];
 
 // Score corporel avec visuels
@@ -471,30 +483,36 @@ const VraiAge = () => {
     humanAge = humanAge * lifestyleMultipliers[lifestyle];
 
     const breedData = CAT_BREEDS.find(b => b.value === breed);
-    let lifeExpectancy = breedData ? breedData.lifespan : 15;
+    let lifeExpectancy = breedData ? breedData.lifespan : 12;
 
-    if (lifestyle === 'outdoor') lifeExpectancy -= 4;
-    else if (lifestyle === 'mixed') lifeExpectancy -= 2;
+    // Mode de vie : indoor ajoute des années, outdoor en retire
+    // Basé sur études montrant ~2 ans de différence indoor vs outdoor
+    if (lifestyle === 'indoor') lifeExpectancy += 2;
+    else if (lifestyle === 'outdoor') lifeExpectancy -= 3;
+    // mixed = 0 (référence neutre)
 
     const bodyScoreMultipliers: Record<string, number> = {
-      'very_underweight': 0.90, // État critique nécessitant attention vétérinaire
-      'underweight': 0.95, // La maigreur peut indiquer une condition sous-jacente
+      'very_underweight': 0.90,
+      'underweight': 0.95,
       'ideal': 1.0,
-      'overweight': 0.90,
-      'obese': 0.80
+      'overweight': 0.95, // Chats en léger surpoids vivent parfois plus longtemps (études PMC)
+      'obese': 0.85
     };
     lifeExpectancy = lifeExpectancy * (bodyScoreMultipliers[bodyScore] || 1.0);
 
+    // Stérilisation : +1 an (études montrent ~1-1.5 ans de gain)
     if (neutered) {
-      lifeExpectancy += 2;
-    }
-
-    if (breed === 'mixed') {
-      lifeExpectancy += 1.5;
-    }
-
-    if (sex === 'female') {
       lifeExpectancy += 1;
+    }
+
+    // Bonus croisé : +0.5 an (vigueur hybride)
+    if (breed === 'mixed') {
+      lifeExpectancy += 0.5;
+    }
+
+    // Femelle : +0.5 an (études montrent ~0.5-1 an de différence)
+    if (sex === 'female') {
+      lifeExpectancy += 0.5;
     }
 
     lifeExpectancy = Math.round(lifeExpectancy * 10) / 10;
@@ -579,36 +597,47 @@ const VraiAge = () => {
     else lifeStage = '👑 Doyen';
 
     const breedData = DOG_BREEDS.find(b => b.value === breed);
-    let lifeExpectancy = breedData ? breedData.lifespan : 12;
+    const weightRangeData = DOG_WEIGHT_RANGES.find(r => r.range === formData.dogWeightRange);
 
+    let lifeExpectancy: number;
+    const isKnownBreed = breedData && breedData.lifespan !== null;
+
+    if (isKnownBreed) {
+      // Race connue : utiliser directement la donnée scientifique VetCompass
+      // Ces données incluent déjà l'effet moyen de la stérilisation, du sexe et du museau
+      lifeExpectancy = breedData.lifespan as number;
+    } else {
+      // Race inconnue/croisée : calculer selon le poids + modificateurs
+      lifeExpectancy = weightRangeData?.baseLifeExpectancy || 12;
+
+      // Modificateurs pour races inconnues uniquement
+      const muzzleType = formData.dogMuzzle || 'mesocephalic';
+      if (muzzleType === 'brachycephalic') {
+        lifeExpectancy -= 1.5; // Museau écrasé : -1.5 ans
+      } else if (muzzleType === 'dolichocephalic') {
+        lifeExpectancy += 0.5; // Museau long : +0.5 an
+      }
+
+      // Femelle : +0.3 an (études montrent ~0.3 an de différence)
+      if (sex === 'female') {
+        lifeExpectancy += 0.3;
+      }
+
+      // Stérilisé : +0.5 an (effet modeste car études incluent ~85% stérilisés)
+      if (neutered) {
+        lifeExpectancy += 0.5;
+      }
+    }
+
+    // Modificateur universel : score corporel (applicable à toutes les races)
     const bodyScoreMultipliers: Record<string, number> = {
-      'very_underweight': 0.90, // État critique nécessitant attention vétérinaire
-      'underweight': 0.98, // La maigreur peut indiquer une condition sous-jacente
-      'ideal': 1.05,
+      'very_underweight': 0.85,
+      'underweight': 0.95,
+      'ideal': 1.0,
       'overweight': 0.95,
-      'obese': 0.80
+      'obese': 0.85
     };
-    lifeExpectancy = lifeExpectancy * (bodyScoreMultipliers[bodyScore] || 1.05);
-
-    if (neutered) {
-      lifeExpectancy += 1.5;
-    }
-
-    if (breed === 'mixed') {
-      lifeExpectancy += 0.5;
-    }
-
-    // Appliquer le coefficient de type de museau
-    const muzzleType = formData.dogMuzzle || 'mesocephalic';
-    const muzzleData = MUZZLE_TYPES.find(m => m.value === muzzleType);
-    if (muzzleData) {
-      lifeExpectancy = lifeExpectancy * muzzleData.multiplier;
-    }
-
-    // Effet du sexe (femelles vivent ~5% plus longtemps)
-    if (sex === 'female') {
-      lifeExpectancy = lifeExpectancy * 1.05;
-    }
+    lifeExpectancy = lifeExpectancy * (bodyScoreMultipliers[bodyScore] || 1.0);
 
     lifeExpectancy = Math.round(lifeExpectancy * 10) / 10;
 
